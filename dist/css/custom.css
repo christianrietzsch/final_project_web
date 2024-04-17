@@ -37,7 +37,7 @@ body {
   text-align: center;
 }
 /* rtl:begin:ignore */
-.marketing .col-lg-4 p {
+.padded .col-lg-4 p {
   margin-right: .75rem;
   margin-left: .75rem;
 }
@@ -58,6 +58,7 @@ body {
 }
 
 /* rtl:end:remove */
+
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
