@@ -11,7 +11,7 @@
 
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="dist/css/custom.css" rel="stylesheet">
-   
+        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
   </head>
   <body>
     
@@ -43,17 +43,6 @@
             </nav>
  </header>
 <main>
-
-
-
-    <script>
-      coin0 = -10 + "%";
-      const element = document.getElementById("rate_coin0");
-      element.innerHTML = coin0;
-      const element2 = document.getElementById("rate_coin0_color");
-      element2.class = "text-danger";
-      console.log(element2.class);
-    </script>
 
   <div class="container padded">
   <section class="py-5 text-center container">
@@ -91,10 +80,12 @@
                   <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                 </div>
-                <div class="text-success" id="rate_coin0_color">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin0">{{rate_coin0}}</a>
-                  <big>&uarr;</big>
+                <div id="rate_coin0_color">
+                  <div class={{rate_coin0_color}}>
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
+                    <a id="rate_coin0">{{rate_coin0}}%</a>
+                    <big id="rate_coin0_arrow"></big>
+                  </div>
                 </div>
               </div>
             </div>
@@ -273,6 +264,36 @@
     </div>
   </div>
 </div>
+
+<script>
+
+  async function load() {
+  const response = await fetch("daten.json");
+  const data = await response.json();
+  return data;
+  }
+
+  const data = load();
+  //console.log(data)
+  const render = (id, objects) => {
+    template = document.getElementById(id);
+    const templateFunction = Handlebars.compile(template.innerHTML);
+    const html = templateFunction(objects);
+    template.innerHTML = html;
+
+
+  }
+  const json = JSON.parse('{"rate_coin0": 1, "rate_coin0_color": "text-success"}');
+  render("rate_coin0_color", json);
+  arrow = document.getElementById("rate_coin0_arrow");
+  if(json.rate_coin0 >= 0) {
+    arrow.innerHTML = "&uarr;"
+  } else {    
+  arrow.innerHTML = "&darr;";
+  }
+  
+</script>
+
 </main>
   <footer class="container">
     <hr class="featurette-divider">
