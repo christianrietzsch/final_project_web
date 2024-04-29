@@ -269,43 +269,31 @@
 </div>
 
 <script>
-
   async function load() {
-  const response = await fetch("daten.json", {cache: "no-store"}); // for debug purposes 
-  const data = await response.json();
-  return data;
-    }
+    const response = await fetch("daten.json", {cache: "no-store"}); // for debug purposes 
+    const data = await response.json();
+    return data;
+  }
 
-   
   const render = (id, objects) => {
     template = document.getElementById(id);
     const html = Handlebars.compile(template.innerHTML)(objects);
-    console.log(html)
     template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
   }
 
-  
-    function check_arrow(name, rate) {
-      arrow = document.getElementById(name)
-      if(rate >= 0) {
-        arrow.innerHTML = "&uarr;"
-      } else {    
-        arrow.innerHTML = "&darr;";
-      }   
-    }
-
+  function render_all_shop_elements() {
     const data = load()
     data.then(function(result) {
       for(let i = 0; i < result.length; i++) {
-      const parsed_json = JSON.parse(JSON.stringify(result[i]))
-      render("coin" + i , parsed_json)
-      check_arrow("coin" + i + "_arrow", parsed_json.rate)
+        const parsed_json = JSON.parse(JSON.stringify(result[i]))
+        render("coin" + i , parsed_json)     
+        arrow = document.getElementById("coin" +i + "_arrow")
+        arrow.innerHTML = parsed_json.rate >= 0 ? "&uarr;" : "&darr;"
       }
-
     })
+  }
 
-  
-  
+  render_all_shop_elements()
 </script>
 
 </main>
