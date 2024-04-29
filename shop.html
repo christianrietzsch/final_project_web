@@ -3,8 +3,7 @@
   <head>      
         <title>Coincidence</title>
         <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
+        <meta charset="utf-8" /> <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
@@ -73,19 +72,19 @@
           <div class="card shadow-sm">
             <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
             <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
+            <div id="coin0">
+              <h5 class="card-title">{{name}}</h5>
+              <p class="card-text">{{description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                 </div>
-                <div id="rate_coin0_color">
-                  <div class={{rate_coin0_color}}>
+                <div id="coin0_color">
                     <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                    <a id="rate_coin0">{{rate_coin0}}%</a>
-                    <big id="rate_coin0_arrow"></big>
-                  </div>
+                    <a>{{rate}}%</a>
+                    <big id="coin0_arrow"></big>
+                </div>
                 </div>
               </div>
             </div>
@@ -96,17 +95,19 @@
           <div class="card shadow-sm">
             <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
             <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
+            <div id="coin1">
+              <h5 class="card-title">{{name}}</h5>
+              <p class="card-text">{{description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
                   <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                 </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin1">100%</a>
-                  <big>&uarr;</big>
+                <div id="coin1_color">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
+                    <a>{{rate}}%</a>
+                    <big id="coin1_arrow"></big>
+                </div>
                 </div>
               </div>
             </div>
@@ -271,26 +272,39 @@
   const response = await fetch("daten.json");
   const data = await response.json();
   return data;
-  }
+    }
 
-  const data = load();
-  //console.log(data)
+   
   const render = (id, objects) => {
     template = document.getElementById(id);
     const templateFunction = Handlebars.compile(template.innerHTML);
     const html = templateFunction(objects);
     template.innerHTML = html;
-
-
   }
-  const json = JSON.parse('{"rate_coin0": 1, "rate_coin0_color": "text-success"}');
-  render("rate_coin0_color", json);
-  arrow = document.getElementById("rate_coin0_arrow");
-  if(json.rate_coin0 >= 0) {
-    arrow.innerHTML = "&uarr;"
-  } else {    
-  arrow.innerHTML = "&darr;";
-  }
+
+    function check_arrow(name, rate) {
+      arrow = document.getElementById(name)
+      if(rate >= 0) {
+        arrow.innerHTML = "&uarr;"
+      } else {    
+        arrow.innerHTML = "&darr;";
+  }   
+    }
+
+    const data = load()
+    data.then(function(result) {
+      for(let i = 0; i < result.length; i++) {
+      const parsed_json = JSON.parse(JSON.stringify(result[i]))
+      console.log(parsed_json)
+      render("coin" + i , parsed_json)
+      check_arrow("coin" + i + "_arrow", parsed_json.rate)
+      }
+
+    })
+
+   //const json = JSON.parse('{"rate_coin0": 1, "rate_coin0_color": "text-success"}');
+  //render("rate_coin0_color", json);
+  
   
 </script>
 
