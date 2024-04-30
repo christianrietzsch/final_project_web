@@ -54,13 +54,34 @@
   </section>
 
   <div class="offcanvas offcanvas-start" id="more">
-    <div class="offcanvas-header">
-      <h1 class="offcanvas-title">Coin</h1>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+    <div id="more">
+      <div class="offcanvas-header">
+        <h1 class="offcanvas-title">{{name}}</h1>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>{{description}}</p>
+      </div>
     </div>
-    <div class="offcanvas-body">
-      <p>Text</p>
-      <p>Text2</p>
+  </div>
+
+  <div class="modal fade" id="buyModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div id="modal">
+          <div class="modal-header">
+            <h5 class="modal-title">{{name}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p> {{description}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Buy</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -76,8 +97,7 @@
   </div>
 </div>
 
-
-<script id="template" type="text/x-handlebars-template">
+<script id="shop_item_template" type="text/x-handlebars-template">
 
         <div class="col">
           <div class="card shadow-sm">
@@ -87,8 +107,8 @@
               <p class="card-text">{{description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
+                  <button type="button" id="{{name}}-Buy" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
+                  <button type="button" id="{{name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                 </div>
                 <div style="{{color}}">
                     <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
@@ -103,19 +123,7 @@
  </script>
 
 <script>
-  buttons = document.querySelectorAll('[id=buy]')
-  //names = document.querySelectorAll('[id=name]') // later for template
-  //buttons.addEventListener("click", myFunction)
-  for(let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", myFunction)
-  }
-
-
-  function myFunction() {
-    console.log("Test")
-  }
-
-  async function load() {
+    async function load() {
     const response = await fetch("daten.json", {cache: "no-store"}); 
     // cache disabled for debugging purposes 
     const data = await response.json();
@@ -125,38 +133,59 @@
   const render = (id, objects) => {
     template = document.getElementById(id);
     const html = Handlebars.compile(template.innerHTML)(objects);
-
     template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
-
   }
 
-  const render_shop_items = (id, objects) => {
-    template = document.getElementById("template");
+   const render_template_item = (template_id, id, objects) => {
+    
+    template = document.getElementById(template_id);
     const html = Handlebars.compile(template.innerHTML)(objects);
-
-    document.getElementById("coin"+id).innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+    target = document.getElementById(id)
+    target.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
 
   }
 
-  function render_all_shop_elements() {
-    const data = load()
-    data.then(function(result) {
+    const register_listener = (id, function_call) => {
+      button = document.getElementById(id)
+      button.addEventListener("click", function_call)
+    }
+
+    const build_json_string = (data) => {
+      const str = JSON.stringify(data)
+      return str.substring(0, str.length-1) + ',"color": "' + 
+      (str[str.search('"rate":')+7] == "-" ? "color:red;" : "color:green;")
+       + '"}'
+    }
+
+    const init_shop_item = (i, parsed_json) => {
+      render_template_item("shop_item_template", "coin"+i, parsed_json)
+      arrow = document.getElementById(parsed_json.name + "-Arrow")
+      arrow.innerHTML = parsed_json.rate >= 0 ? "&uarr;" : "&darr;"
+      //register_listener(parsed_json.name + "-Buy", function() {render("modal", parsed_json)})
+      //register_listener(parsed_json.name + "-More", function() {render("more", parsed_json)})
+
+      buy_button = document.getElementById(parsed_json.name + "-Buy")
+      buy_button.addEventListener("click", function() {
+        render("modal", parsed_json)
+      })
+      more_button = document.getElementById(parsed_json.name + "-More")
+      more_button.addEventListener("click", function() {
+        console.log(parsed_json)
+        render("more", parsed_json)
+      })
+     }
+
+      //do every 10 sec and reload
+
+     const data = load()
+      data.then(function(result) {
       for(let i = 0; i < result.length; i++) {
-        const json_str = JSON.stringify(result[i])
-        const final_str = json_str.substring(0, json_str.length-1) + ',"color": "' + 
-        (json_str[json_str.search('"rate":')+7] == "-" ? "color:red;" : "color:green;") + '"}'
-        const parsed_json = JSON.parse(final_str)
-
-        //render("coin" + i , parsed_json)     
-        render_shop_items(i, parsed_json)
-
-        arrow = document.getElementById(parsed_json.name + "-Arrow")
-        arrow.innerHTML = parsed_json.rate >= 0 ? "&uarr;" : "&darr;"
+        const parsed_json = JSON.parse(build_json_string(result[i]))
+        init_shop_item(i, parsed_json)
       }
     })
-  }
 
-  render_all_shop_elements()
+  //cannot render template again
 </script>
 
 </main>
