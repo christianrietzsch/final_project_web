@@ -41,8 +41,15 @@
             </nav>
  </header>
 <main>
-  <div class="bg-image" style="backround-image: url('https://lorem.picsum/201'); background-size: cover;">
-  <!--Background does not work :(-->
+
+
+<div class="bg"
+     style="background-image: url('https://picsum.photos/200');
+                        background-size: cover;
+                        background-position: center;
+
+  <div class="bg-image" style="background-image: url('https://lorem.picsum/201'); background-size: cover;">
+
   <div class="container padded">
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -83,7 +90,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Buy</button>
+                    <button type="button" id="buy-btn" class="btn btn-primary">Buy</button>
                   </div>
         
         </script>
@@ -96,39 +103,38 @@
 
   <div class="album py-5 ">
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="items">
 
 
 <script id="shop_item_template" type="text/x-handlebars-template">
 
+    {{#each res}}
+    <div>
         <div class="col">
           <div class="card shadow-sm">
-            <img src="{{image}}" class="card-img-top" width="100%" height="100%" alt=""></img>
+            <img src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt=""></img>
             <div class="card-body">
-              <h5 class="card-title" id="name">{{name}}</h5>
-              <p class="card-text">{{description}}</p>
+              <h5 class="card-title" id="name">{{this.name}}</h5>
+              <p class="card-text">{{this.description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" id="{{name}}-Buy" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
-                  <button type="button" id="{{name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
+                  <button type="button" id="{{this.name}}-Buy" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
+                  <button type="button" id="{{this.name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                 </div>
-                <div style="{{color}}">
+                <div style="{{this.color}}">
                 <!--Make responsive; two cards will make the text look weird-->
                     <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                    <a>{{rate}}%</a>
-                    <big id="{{name}}-Arrow"></big>
+                    <a>{{this.rate}}%</a>
+                    <big id="{{this.name}}-Arrow"></big>
                 </div>
                 </div>
               </div>
           </div>
         </div>
+        </div>
+        {{/each}}
 
  </script>
-
-
-        <div id="coin0"></div>
-        <div id="coin1"></div>
-        <div id="coin2"></div>
 
     </div>
   </div>
@@ -144,33 +150,11 @@
     return data;
   }
 
-  const render = (id, objects) => {
-    template = document.getElementById(id);
-    const html = Handlebars.compile(template.innerHTML)(objects);
-    //template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
-    template.innerHTML = html
-  }
-
-   const render_template_item = (template_id, id, objects) => {
-    
+  const render_template_item = (template_id, id, objects) => { 
     template = document.getElementById(template_id);
     const html = Handlebars.compile(template.innerHTML)(objects);
-    //target = document.getElementById(id)
     target = template.nextElementSibling
-    //target.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
     target.innerHTML = html
-
-  }
-
-  
-const render_template_item_2 = (template_id, id, objects) => {
-    
-    template = document.getElementById(template_id);
-    const html = Handlebars.compile(template.innerHTML)(objects);
-    target = document.getElementById(id)
-    //target = template.nextElementSibling
-    target.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
-    //target.innerHTML = html
 
   }
 
@@ -186,27 +170,34 @@ const render_template_item_2 = (template_id, id, objects) => {
        + '"}'
     }
 
-    const init_shop_item = (i, json) => {
-    //do this like the example
-      render_template_item_2("shop_item_template", "coin"+i, json)
+    const init_shop_item = (json) => {
       const name = json.name
       arrow = document.getElementById(name + "-Arrow")
       arrow.innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;"
-      register_listener(name + "-Buy", function() {render_template_item("modal_template", "modal", json)})
-      register_listener(name + "-More", function() {render_template_item("more_template", "more", json)})
-     }
+      register_listener(name + "-Buy", 
+        function() {
+          render_template_item("modal_template", "modal", json);
+          document.getElementById("buy-btn").addEventListener("click", 
+            function() {
+              console.log("E")
+            })
+        })
+      register_listener(name + "-More", 
+        function() {
+          render_template_item("more_template", "more", json)
+      })
 
-      //do every 10 sec and reload
+    }
+
 
      const data = load()
-      data.then(function(result) {
-      for(let i = 0; i < result.length; i++) {
-        const parsed_json = JSON.parse(build_json_string(result[i]))
-        init_shop_item(i, parsed_json)
-      }
+      data.then(function(result) {      
+        json = []
+        result.forEach((object) => json.push(JSON.parse(build_json_string(object))))
+        items.innerHTML = Handlebars.compile(shop_item_template.innerHTML)({res: json})
+        json.forEach((object) => init_shop_item(object))
     })
 
-  //cannot render template again
 </script>
 
 </main>
