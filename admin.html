@@ -12,6 +12,7 @@
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="dist/css/custom.css" rel="stylesheet">
         <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+        <script src="dist/js/vanilla.js"></script>
     </head>
 
     <body>
@@ -56,7 +57,7 @@
         <script id="content_template" type="text/x-handlebars-template">
             <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
                 <span class="text-primary">All Items</span>
-                <span class="badge bg-primary rounded-pill">{{count}}</span>
+                <span class="badge bg-primary rounded-pill">{{coins.length}}</span>
             </h4>
             <ul class="list-group mb-3">
                 {{#each coins}}
@@ -86,45 +87,9 @@
             </div>
         </script>
 
-
         <script>
-            async function load() {
-                const response = await fetch("daten.json", {cache: "no-store"}); 
-                // cache disabled for debugging purposes 
-                const data = await response.json();
-                return data;
-            }
-
-            load().then(function(result) {
-                const template = Handlebars.compile(content_template.innerHTML);
-                hb.innerHTML = template({ count: result.length, coins: result })
-            })
+            load().then(function (result){render(content_template, hb, {coins: result})})
         </script>
-
-
-        <!-- <script>
-            async function load() {
-                const response = await fetch("daten.json", {cache: "no-store"}); 
-                // cache disabled for debugging purposes 
-                const data = await response.json();
-                return data;
-            }
-
-            const data = load()
-            data.then(function(result) {
-                const template = document.getElementById("coins_template");
-                const target = source.nextElementSibling;
-
-                // for(let i = 0; i < result.length; i++) {
-                //     console.log(result[i])
-                // }
-            })
-
-            // if (pizzen) {
-            //     const pizzenData = {pizzen: JSON.parse(pizzen)}
-            //     render(pizzenData)
-            // }
-        </script> -->
 
         <footer class="container">
             <hr class="featurette-divider">
