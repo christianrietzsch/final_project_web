@@ -12,7 +12,6 @@
         <link href="dist/css/custom.css" rel="stylesheet">
         <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
   </head>
-  <body>
     
   <header> 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -42,26 +41,54 @@
             </nav>
  </header>
 <main>
-
+  <div class="bg-image" style="backround-image: url('https://lorem.picsum/201'); background-size: cover;">
+  <!--Background does not work :(-->
   <div class="container padded">
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Shop</h1>
-        <p class="lead text-muted">Buy Crypto Scams <3</p>
+        <img src="images/logo.jpg" width="400" height="200"></img>
       </div>
     </div>
   </section>
 
   <div class="offcanvas offcanvas-start" id="more">
-    <div id="more"></div>
+
+    <script id="more_template" type="text/x-handlebars-template">
+        <div class="offcanvas-header">
+          <h1 class="offcanvas-title">{{name}}</h1>
+          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+          <p>{{description}}</p>
+          <img src="{{image}}" class="card-img-top" width="100%" height="100%" alt=""></img>
+        </div>
+    </script>
+
+    <div></div>
+
   </div>
 
   <div class="modal fade" id="buyModal" tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content" id="modal">
 
-        <div id="modal"></div>
+        <script id="modal_template" type="text/x-handlebars-template">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{name}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>RATE, FORM</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Buy</button>
+                  </div>
+        
+        </script>
+
+        <div></div>
 
       </div>
     </div>
@@ -71,45 +98,12 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-        <div id="coin0"></div>
-        <div id="coin1"></div>
-        <div id="coin2"></div>
-
-    </div>
-  </div>
-</div>
-
-<script id="more_template" type="text/x-handlebars-template">
-
-    <div class="offcanvas-header">
-        <h1 class="offcanvas-title">{{name}}</h1>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-      </div>
-      <div class="offcanvas-body">
-        <p>{{description}}</p>
-      </div>
-</script>
-
-<script id="modal_template" type="text/x-handlebars-template">
-          <div class="modal-header">
-            <h5 class="modal-title">{{name}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p> {{description}}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Buy</button>
-          </div>
-
-</script>
 
 <script id="shop_item_template" type="text/x-handlebars-template">
 
         <div class="col">
           <div class="card shadow-sm">
-            <img src="{{image}}" class="card-img-top" width="100%" height="225" alt=""></img>
+            <img src="{{image}}" class="card-img-top" width="100%" height="100%" alt=""></img>
             <div class="card-body">
               <h5 class="card-title" id="name">{{name}}</h5>
               <p class="card-text">{{description}}</p>
@@ -119,6 +113,7 @@
                   <button type="button" id="{{name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                 </div>
                 <div style="{{color}}">
+                <!--Make responsive; two cards will make the text look weird-->
                     <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
                     <a>{{rate}}%</a>
                     <big id="{{name}}-Arrow"></big>
@@ -130,6 +125,17 @@
 
  </script>
 
+
+        <div id="coin0"></div>
+        <div id="coin1"></div>
+        <div id="coin2"></div>
+
+    </div>
+  </div>
+</div>
+
+
+
 <script>
     async function load() {
     const response = await fetch("daten.json", {cache: "no-store"}); 
@@ -140,19 +146,31 @@
 
   const render = (id, objects) => {
     template = document.getElementById(id);
-    console.log(template.innerHTML)
-    console.log("-----------------")
     const html = Handlebars.compile(template.innerHTML)(objects);
-    console.log(html)
-    template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+    //template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+    template.innerHTML = html
   }
 
    const render_template_item = (template_id, id, objects) => {
     
     template = document.getElementById(template_id);
     const html = Handlebars.compile(template.innerHTML)(objects);
+    //target = document.getElementById(id)
+    target = template.nextElementSibling
+    //target.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+    target.innerHTML = html
+
+  }
+
+  
+const render_template_item_2 = (template_id, id, objects) => {
+    
+    template = document.getElementById(template_id);
+    const html = Handlebars.compile(template.innerHTML)(objects);
     target = document.getElementById(id)
+    //target = template.nextElementSibling
     target.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+    //target.innerHTML = html
 
   }
 
@@ -168,13 +186,14 @@
        + '"}'
     }
 
-    const init_shop_item = (i, parsed_json) => {
-      render_template_item("shop_item_template", "coin"+i, parsed_json)
-      arrow = document.getElementById(parsed_json.name + "-Arrow")
-      arrow.innerHTML = parsed_json.rate >= 0 ? "&uarr;" : "&darr;"
-      register_listener(parsed_json.name + "-Buy", function() {render_template_item("modal_template", "modal", parsed_json)})
-      register_listener(parsed_json.name + "-More", function() {render_template_item("more_template", "more", parsed_json)})
-
+    const init_shop_item = (i, json) => {
+    //do this like the example
+      render_template_item_2("shop_item_template", "coin"+i, json)
+      const name = json.name
+      arrow = document.getElementById(name + "-Arrow")
+      arrow.innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;"
+      register_listener(name + "-Buy", function() {render_template_item("modal_template", "modal", json)})
+      register_listener(name + "-More", function() {render_template_item("more_template", "more", json)})
      }
 
       //do every 10 sec and reload
