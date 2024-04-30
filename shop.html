@@ -55,7 +55,7 @@
 
   <div class="offcanvas offcanvas-start" id="more">
     <div class="offcanvas-header">
-      <h1 class="offcanvas-title">Heading</h1>
+      <h1 class="offcanvas-title">Coin</h1>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
     </div>
     <div class="offcanvas-body">
@@ -68,209 +68,56 @@
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-            <div id="coin0">
-              <h5 class="card-title">{{name}}</h5>
-              <p class="card-text">{{description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div style="{{color}}">
-                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                    <a>{{rate}}%</a>
-                    <big id="coin0_arrow"></big>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="coin0"></div>
+        <div id="coin1"></div>
+        <div id="coin2"></div>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-            <div id="coin1">
-              <h5 class="card-title">{{name}}</h5>
-              <p class="card-text">{{description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div style="{{color}}">
-                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                    <a>{{rate}}%</a>
-                    <big id="coin1_arrow"></big>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-            <div id="coin2">
-              <h5 class="card-title">{{name}}</h5>
-              <p class="card-text">{{description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div style={{color}}>
-                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                    <a>{{rate}}%</a>
-                    <big id="coin2_arrow"></big>
-                </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin3">100%</a>
-                  <big>&uarr;</big>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin4">100%</a>
-                  <big>&uarr;</big>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-               <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin5">100%</a>
-                  <big>&uarr;</big>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin6">100%</a>
-                  <big>&uarr;</big>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin7">100%</a>
-                  <big>&uarr;</big>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="images/test_img.png" class="card-img-top" width="100%" height="225" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title">Womp-Womp</h5>
-              <p class="card-text">Buy Womp-Womp-Coin!</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div class="text-success">
-                  <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                  <a id="rate_coin8">100%</a>
-                  <big>&uarr;</big>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
     </div>
   </div>
 </div>
 
+
+<script id="template" type="text/x-handlebars-template">
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{image}}" class="card-img-top" width="100%" height="225" alt=""></img>
+            <div class="card-body">
+              <h5 class="card-title" id="name">{{name}}</h5>
+              <p class="card-text">{{description}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
+                </div>
+                <div style="{{color}}">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
+                    <a>{{rate}}%</a>
+                    <big id="{{name}}-Arrow"></big>
+                </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+ </script>
+
 <script>
+  buttons = document.querySelectorAll('[id=buy]')
+  //names = document.querySelectorAll('[id=name]') // later for template
+  //buttons.addEventListener("click", myFunction)
+  for(let i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", myFunction)
+  }
+
+
+  function myFunction() {
+    console.log("Test")
+  }
+
   async function load() {
-    const response = await fetch("daten.json", {cache: "no-store"}); // for debug purposes 
+    const response = await fetch("daten.json", {cache: "no-store"}); 
+    // cache disabled for debugging purposes 
     const data = await response.json();
     return data;
   }
@@ -278,16 +125,32 @@
   const render = (id, objects) => {
     template = document.getElementById(id);
     const html = Handlebars.compile(template.innerHTML)(objects);
+
     template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+
+  }
+
+  const render_shop_items = (id, objects) => {
+    template = document.getElementById("template");
+    const html = Handlebars.compile(template.innerHTML)(objects);
+
+    document.getElementById("coin"+id).innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
+
   }
 
   function render_all_shop_elements() {
     const data = load()
     data.then(function(result) {
       for(let i = 0; i < result.length; i++) {
-        const parsed_json = JSON.parse(JSON.stringify(result[i]))
-        render("coin" + i , parsed_json)     
-        arrow = document.getElementById("coin" +i + "_arrow")
+        const json_str = JSON.stringify(result[i])
+        const final_str = json_str.substring(0, json_str.length-1) + ',"color": "' + 
+        (json_str[json_str.search('"rate":')+7] == "-" ? "color:red;" : "color:green;") + '"}'
+        const parsed_json = JSON.parse(final_str)
+
+        //render("coin" + i , parsed_json)     
+        render_shop_items(i, parsed_json)
+
+        arrow = document.getElementById(parsed_json.name + "-Arrow")
         arrow.innerHTML = parsed_json.rate >= 0 ? "&uarr;" : "&darr;"
       }
     })

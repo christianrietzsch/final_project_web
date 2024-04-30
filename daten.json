@@ -1,17 +1,14 @@
 [{ "name": "Dodgi-Coin",
    "description": "Eine sehr zuverlässige Coin",
    "rate": -0.50,
-   "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ORXdLp1-tsw4QwJJ882emw/l.jpg",
-   "color": "color:red;" },
+   "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ORXdLp1-tsw4QwJJ882emw/l.jpg" },
 
  { "name": "Botcoin",
    "description": "Eine sehr zuverlässige Coin",
    "rate": 0.69,
-   "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ORXdLp1-tsw4QwJJ882emw/l.jpg",
-   "color": "color:green;" },
+   "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ORXdLp1-tsw4QwJJ882emw/l.jpg" },
 
  { "name": "WOMP",
    "description": "Keine sehr zuverlässige Coin",
    "rate": 0.420,
-   "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ORXdLp1-tsw4QwJJ882emw/l.jpg",
-   "color": "color:green;" }]
+   "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ORXdLp1-tsw4QwJJ882emw/l.jpg" }]
