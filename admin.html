@@ -56,7 +56,7 @@
 
         <script id="content_template" type="text/x-handlebars-template">
             <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">All Items</span>
+                <span class="text-primary">Data Management</span>
                 <span class="badge bg-primary rounded-pill">{{coins.length}}</span>
             </h4>
             <ul class="list-group mb-3">
@@ -85,10 +85,31 @@
                     <button type="submit" class="btn btn-primary">Add new</button>
                 </div>
             </div>
+
+            <div class="pt-3">
+                <div class="card input-group p-2 mb-2">
+                    <h6 class="mb-2">JSON export</h6>
+                    <textarea>{{json}}</textarea>
+                </div>
+
+                <div class="card input-group p-2">
+                    <button type="submit" class="btn btn-success" id="json_load_btn">Load from JSON</button>
+                </div>
+            </div>
         </script>
 
         <script>
-            load().then(function (result){render(content_template, hb, {coins: result})})
+            const load_json = () => {
+                jsonData().then((result) => {
+                    localStorage.setItem("coins", JSON.stringify(result));
+                    window.location.reload();
+                })
+            };
+
+            getCoins().then((result)=>{
+                render(content_template, hb, {coins: result, json: JSON.stringify(result)});
+                json_load_btn.addEventListener("click", load_json);
+            })
         </script>
 
         <footer class="container">
