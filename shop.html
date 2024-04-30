@@ -176,8 +176,8 @@
        + '"}')
     }
 
-    const send_to_cart = (value, price) => {
-      alert("" + value + " | " +  price)
+    const send_to_cart = (amount, price, name) => {
+      localStorage.setItem(name, JSON.stringify({"amount": parseInt(amount), "price": price}))
     }
 
     const init_shop_item = (json) => {
@@ -191,7 +191,7 @@
             function() {
               let val = amount.value
               if(val && val > 0) {
-                send_to_cart(val, (val * json.value))
+                send_to_cart(val, json.value, json.name)
                 element = document.getElementById("more")
                 //ERROR:
                 element.hide()
