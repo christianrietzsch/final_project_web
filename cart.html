@@ -48,6 +48,14 @@
         </header>
 
         <main>
+        <script>
+          for(let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i)
+            const item = localStorage.getItem(key)
+            console.log(JSON.parse(item))
+          }
+          localStorage.clear()
+        </script>
             <div class="container padded">
                 <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Your cart</span>
@@ -67,7 +75,7 @@
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                     </svg>                                
                                 </button>
-                                <input type="number" class="form-control" aria-label="Amount" value="12" id="id_count_input">
+                                <input type="number" class="form-control" aria-label="Amount" value="9" id="id_count_input">
                                 <span class="text-muted m-2">x $10</span>
                             </div>
                         </div>
