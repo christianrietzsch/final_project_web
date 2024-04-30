@@ -54,33 +54,15 @@
   </section>
 
   <div class="offcanvas offcanvas-start" id="more">
-    <div id="more">
-      <div class="offcanvas-header">
-        <h1 class="offcanvas-title">{{name}}</h1>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-      </div>
-      <div class="offcanvas-body">
-        <p>{{description}}</p>
-      </div>
-    </div>
+    <div id="more"></div>
   </div>
 
   <div class="modal fade" id="buyModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div id="modal">
-          <div class="modal-header">
-            <h5 class="modal-title">{{name}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <p> {{description}}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary">Buy</button>
-          </div>
-        </div>
+
+        <div id="modal"></div>
+
       </div>
     </div>
   </div>
@@ -96,6 +78,32 @@
     </div>
   </div>
 </div>
+
+<script id="more_template" type="text/x-handlebars-template">
+
+    <div class="offcanvas-header">
+        <h1 class="offcanvas-title">{{name}}</h1>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <p>{{description}}</p>
+      </div>
+</script>
+
+<script id="modal_template" type="text/x-handlebars-template">
+          <div class="modal-header">
+            <h5 class="modal-title">{{name}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p> {{description}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary">Buy</button>
+          </div>
+
+</script>
 
 <script id="shop_item_template" type="text/x-handlebars-template">
 
@@ -132,7 +140,10 @@
 
   const render = (id, objects) => {
     template = document.getElementById(id);
+    console.log(template.innerHTML)
+    console.log("-----------------")
     const html = Handlebars.compile(template.innerHTML)(objects);
+    console.log(html)
     template.innerHTML = "<div id="+ id + "\">\n" +html + "\n</div>";
   }
 
@@ -161,18 +172,9 @@
       render_template_item("shop_item_template", "coin"+i, parsed_json)
       arrow = document.getElementById(parsed_json.name + "-Arrow")
       arrow.innerHTML = parsed_json.rate >= 0 ? "&uarr;" : "&darr;"
-      //register_listener(parsed_json.name + "-Buy", function() {render("modal", parsed_json)})
-      //register_listener(parsed_json.name + "-More", function() {render("more", parsed_json)})
+      register_listener(parsed_json.name + "-Buy", function() {render_template_item("modal_template", "modal", parsed_json)})
+      register_listener(parsed_json.name + "-More", function() {render_template_item("more_template", "more", parsed_json)})
 
-      buy_button = document.getElementById(parsed_json.name + "-Buy")
-      buy_button.addEventListener("click", function() {
-        render("modal", parsed_json)
-      })
-      more_button = document.getElementById(parsed_json.name + "-More")
-      more_button.addEventListener("click", function() {
-        console.log(parsed_json)
-        render("more", parsed_json)
-      })
      }
 
       //do every 10 sec and reload
