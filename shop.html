@@ -88,7 +88,7 @@
         <script id="modal_template" type="text/x-handlebars-template">
                   <div class="modal-header">
                     <h5 class="modal-title">{{name}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
                     <p>RATE, FORM</p>
@@ -192,9 +192,8 @@
               let val = amount.value
               if(val && val > 0) {
                 send_to_cart(val, json.value, json.name)
-                element = document.getElementById("more")
-                //ERROR:
-                element.hide()
+                close = document.getElementById("close")
+                close.click()
               } else {
                 console.log(val)
               }
