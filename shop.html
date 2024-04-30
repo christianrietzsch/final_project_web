@@ -163,11 +163,11 @@
       button.addEventListener("click", function_call)
     }
 
-    const build_json_string = (data) => {
+    const build_json = (data) => {
       const str = JSON.stringify(data)
-      return str.substring(0, str.length-1) + ',"color": "' + 
+      return JSON.parse(str.substring(0, str.length-1) + ',"color": "' + 
       (str[str.search('"rate":')+7] == "-" ? "color:red;" : "color:green;")
-       + '"}'
+       + '"}')
     }
 
     const init_shop_item = (json) => {
@@ -179,7 +179,7 @@
           render_template_item("modal_template", "modal", json);
           document.getElementById("buy-btn").addEventListener("click", 
             function() {
-              console.log("E")
+              console.log(json.rate)
             })
         })
       register_listener(name + "-More", 
@@ -190,10 +190,9 @@
     }
 
 
-     const data = load()
-      data.then(function(result) {      
+      load().then(function(result) {      
         json = []
-        result.forEach((object) => json.push(JSON.parse(build_json_string(object))))
+        result.forEach((object) => json.push(build_json(object)))
         items.innerHTML = Handlebars.compile(shop_item_template.innerHTML)({res: json})
         json.forEach((object) => init_shop_item(object))
     })
