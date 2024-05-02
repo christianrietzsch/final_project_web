@@ -50,74 +50,78 @@
         </header>
 
         <main>
-            <form class="container padded needs-validation" novalidate id="hb">
-                <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Dodgi-Coin</span>
-                </h4>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Name</span>
-                    <input required type="text" class="form-control" placeholder="Name" id="nam" value="Dodgi-Coin">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Description</span>
-                    <input required type="text" class="form-control" placeholder="Description" id="desc" value="Eine sehr zuverlässige Coin">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Value</span>
-                    <input required type="number" class="form-control" placeholder="Value" id="val" value="20">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Rate</span>
-                    <input required type="number" class="form-control" placeholder="Rate" id="rat" value="-0.50">
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Image URL</span>
-                    <input required type="text" class="form-control" placeholder="Image URL" id="url" value="images/img2.jpg">
-                </div>
-
-                <div class="py-3">
-                    <div class="card input-group p-2">
-                        <button type="submit" class="btn btn-primary" id="save_button">Save</button>
-                    </div>
-                </div>
-            </form>
+            <div id="hb"></div>
         </main>
 
+        <script id="content_template" type="text/x-handlebars-template">
+            <form class="container padded needs-validation" id="form_input" novalidate>
+                <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">{{name}}</span>
+                </h4>
+
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="nam">Name</span>
+                    <input type="text" class="form-control" placeholder="Name" id="nam" value="{{coin.name}}" required>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="desc">Description</span>
+                    <input type="text" class="form-control" placeholder="Description" id="desc" value="{{coin.description}}" required>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="val">Value</span>
+                    <input type="number" step="any" class="form-control" placeholder="Value" id="val" value="{{coin.value}}" required>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="rat">Rate</span>
+                    <input type="number" step="any" class="form-control" placeholder="Rate" id="rat" value="{{coin.rate}}" required>
+                </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="url">Image URL</span>
+                    <input type="text" class="form-control" placeholder="Image URL" id="url" value="{{coin.image}}" required>
+                </div>
+                <div class="py-3">
+                    <button class="btn btn-primary" type="submit">Save</button>
+                    <button class="btn btn-danger" type="submit" on-click="location.href='admin.html';">Cancel</button>
+                </div>
+            </form>
+        </script>
+
         <script>
-            (() => {
-            'use strict'
-
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            const forms = document.querySelectorAll('.needs-validation')
-
-                // Loop over them and prevent submission
-                Array.from(forms).forEach(form => {
-                    form.addEventListener('submit', event => {
-                    if (!form.checkValidity()) {
-                        event.preventDefault()
-                        event.stopPropagation()
-                    }
-
-                    form.classList.add('was-validated')
-                    }, false)
-                })
-            })()
-
             max = (v1, v2) => {return v1 > v2 ? v1 : v2;}
 
-            save = () => {
-                coin = {
+            async function save () {
+                const coin = {
                     name : nam.value,
                     description : desc.value,
-                    value : max(0.01, parseDouble(val.value)),
-                    rate : parseDouble(rat.value),
+                    value : max(0.01, parseFloat(val.value)),
+                    rate : parseFloat(rat.value),
                     image : url.value
                 }
-                console.log(coin);
+                var coins = await getCoins();
+                const id = getCurrentCoinID();
+
+                if (id < 0)
+                    coins.push(coin);
+                else
+                    coins[id] = coin;
+
+                setCoins(coins)
+                location.href="admin.html";
             }
 
-            save_button.addEventListener("click", save);
+            getCurrentCoin().then((result)=>{
+                render(content_template, hb, {coin: result, name: (!(result.name) ? "Unnamed" : result.name)});
+                document.getElementById("form_input").addEventListener("submit", function(event) {
+                    event.preventDefault();
+                    if (this.checkValidity() === false) {
+                        event.stopPropagation();
+                    }
+                    else{
+                        save()
+                    }
+                    this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
+                }, false);
+            });
         </script>
         
         <footer class="container">
