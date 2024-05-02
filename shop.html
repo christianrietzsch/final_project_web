@@ -11,6 +11,7 @@
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="dist/css/custom.css" rel="stylesheet">
         <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
+        <script src="dist/js/vanilla.js"></script>
   </head>
     
   <header> 
@@ -91,7 +92,7 @@
                     <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"></button>
                   </div>
                   <div class="modal-body">
-                    <p>RATE, FORM</p>
+                    <p>{{this.value}}</p>
                     <input id="amount"></input>
                   </div>
                   <div class="modal-footer">
@@ -120,7 +121,7 @@
           <div class="card shadow-sm">
             <img src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt=""></img>
             <div class="card-body">
-              <h5 class="card-title" id="name">{{this.name}}</h5>
+              <h5 class="card-title text-center" id="name">{{this.name}}</h5>
               <p class="card-text">{{this.description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -146,71 +147,13 @@
   </div>
 </div>
 
-
-
 <script>
-    async function load() {
-    const response = await fetch("daten.json", {cache: "no-store"}); 
-    // cache disabled for debugging purposes 
-    const data = await response.json();
-    return data;
-  }
-
-  const render_template_item = (template_id, id, objects) => { 
-    template = document.getElementById(template_id);
-    const html = Handlebars.compile(template.innerHTML)(objects);
-    target = template.nextElementSibling
-    target.innerHTML = html
-
-  }
-
-    const register_listener = (id, function_call) => {
-      button = document.getElementById(id)
-      button.addEventListener("click", function_call)
-    }
-
-    const build_json = (data) => {
-      const str = JSON.stringify(data)
-      return JSON.parse(str.substring(0, str.length-1) + ',"color": "' + 
-      (str[str.search('"rate":')+7] == "-" ? "color:red;" : "color:green;")
-       + '"}')
-    }
-
-    const send_to_cart = (amount, price, name) => {
-      localStorage.setItem(name, JSON.stringify({"amount": parseInt(amount), "price": price}))
-    }
-
-    const init_shop_item = (json) => {
-      const name = json.name
-      arrow = document.getElementById(name + "-Arrow")
-      arrow.innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;"
-      register_listener(name + "-Buy", 
-        function() {
-          render_template_item("modal_template", "modal", json);
-          document.getElementById("buy-btn").addEventListener("click", 
-            function() {
-              let val = amount.value
-              if(val && val > 0) {
-                send_to_cart(val, json.value, json.name)
-                close = document.getElementById("close")
-                close.click()
-              } else {
-                console.log(val)
-              }
-            })
-        })
-      register_listener(name + "-More", 
-        function() {
-          render_template_item("more_template", "more", json)
-      })
-
-    }
-      load().then(function(result) {      
-        json = []
-        result.forEach((object) => json.push(build_json(object)))
-        items.innerHTML = Handlebars.compile(shop_item_template.innerHTML)({res: json})
-        json.forEach((object) => init_shop_item(object))
-    })
+  jsonData().then(function(result) {      
+    json = []
+    result.forEach((object) => json.push(build_json(object)))
+    render($ID("shop_item_template"), $ID("items"), {res: json})
+    json.forEach((object) => init_shop_item(object))
+  })
 
 </script>
 
