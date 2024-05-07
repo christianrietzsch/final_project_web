@@ -148,13 +148,15 @@
 </div>
 
 <script>
-  jsonData().then(function(result) {      
-    json = []
-    result.forEach((object) => json.push(build_json(object)))
-    render($ID("shop_item_template"), $ID("items"), {res: json})
-    json.forEach((object) => init_shop_item(object))
+jsonData().then(function(result) {      
+  json = []
+  result.map(function(obj){
+    json.push({...obj, color: 
+    obj.rate > 0 ? "color:green;" : "color:red;"})
   })
-
+  render($ID("shop_item_template"), $ID("items"), {res: json})
+  json.map(init_shop_item)
+})
 </script>
 
 </main>

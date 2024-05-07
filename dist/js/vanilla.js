@@ -41,16 +41,12 @@ function render(template_obj, dest_obj, data){
 
 function register_listener(id, function_call) {
   $ID(id).addEventListener("click", function_call)
-}
-
-function build_json(data) {
-  const str = JSON.stringify(data)
-  const color = (str[str.search('"rate":')+7] == "-" ? "color:red;" : "color:green;")
-  return JSON.parse(str.substring(0, str.length-1) + ',"color": "' + color + '"}')
+  //remove / replace
 }
 
 function send_to_cart(amount, price, name) {
   localStorage.setItem(name, JSON.stringify({"amount": parseInt(amount), "price": price}))
+  //replace with crud functions
 }
 
 function init_shop_item(json) {
