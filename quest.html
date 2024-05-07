@@ -46,6 +46,7 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .styled {
             border: 0;
             line-height: 2.5;
@@ -62,9 +63,8 @@
                     rgba(0, 0, 0, 0.2) 30%,
                     rgba(0, 0, 0, 0)
             );
-            box-shadow:
-                    inset 2px 2px 3px rgba(255, 255, 255, 0.6),
-                    inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+            inset -2px -2px 3px rgba(0, 0, 0, 0.6);
         }
 
         .styled:hover {
@@ -72,9 +72,8 @@
         }
 
         .styled:active {
-            box-shadow:
-                    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-                    inset 2px 2px 3px rgba(0, 0, 0, 0.6);
+            box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+            inset 2px 2px 3px rgba(0, 0, 0, 0.6);
         }
 
         .space {
@@ -127,20 +126,33 @@
     <h1 class="space"> Welcome to the Crypto Quest!</h1>
     <div class="white-box-container">
         <div class="white-box">
-            <button class="styled" id="startButton" >Start</button>
+            <button class="styled" id="startButton">Start</button>
 
-            <button class="button" id="button1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">1</button>
-            <button class="button" id="button2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">2</button>
-            <button class="button" id="button3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">3</button>
-            <button class="button" id="button4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">4</button>
-            <button class="button" id="button5" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">5</button>
+            <button class="button" id="button1" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">1
+            </button>
+            <button class="button" id="button2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">2
+            </button>
+            <button class="button" id="button3" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">3
+            </button>
+            <button class="button" id="button4" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">4
+            </button>
+            <button class="button" id="button5" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">5
+            </button>
 
-            <button class="styled" id="endButton">Quiz!</button>
+            <button class="styled" id="endButton" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight1"
+                    aria-controls="offcanvasRight1">Quiz!
+            </button>
 
             <!-- Button 1 -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -153,8 +165,10 @@
                         </div>
                         <div class="modal-body">
                             Pizza Day: On May 22, 2010, a programmer named Laszlo Hanyecz made the first real-world
-                            transaction using Bitcoin. He famously purchased two pizzas for 10,000 BTC, which would be worth
-                            millions of dollars today. This event is commemorated in the crypto community as "Bitcoin Pizza
+                            transaction using Bitcoin. He famously purchased two pizzas for 10,000 BTC, which would be
+                            worth
+                            millions of dollars today. This event is commemorated in the crypto community as "Bitcoin
+                            Pizza
                             Day."
                         </div>
                         <div class="modal-footer">
@@ -166,36 +180,56 @@
             </div>
 
             <!-- Button 2 -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                 aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                             aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and operates
-                    independently of a central authority, such as a government or financial institution. The most well-known
-                    cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of people using the
+                    Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
+                    operates
+                    independently of a central authority, such as a government or financial institution. The most
+                    well-known
+                    cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of people using
+                    the
                     pseudonym Satoshi Nakamoto.
 
                     Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
                     immutability. Blockchain is a distributed ledger technology that records all transactions across a
-                    network of computers. This technology ensures that transactions are secure and cannot be tampered with
+                    network of computers. This technology ensures that transactions are secure and cannot be tampered
+                    with
                     once they are recorded.
 
-                    Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as "altcoins,"
+                    Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
+                    "altcoins,"
                     have been created. Each cryptocurrency typically operates on its own blockchain or a variation of an
                     existing one.
 
                     Cryptocurrencies have gained popularity due to their potential for financial inclusion, lower
                     transaction fees compared to traditional banking systems, and the ability to facilitate fast and
-                    borderless transactions. However, they also face challenges such as regulatory uncertainty, volatility,
+                    borderless transactions. However, they also face challenges such as regulatory uncertainty,
+                    volatility,
                     security concerns, and the potential for use in illicit activities.
 
-                    Investing in cryptocurrencies can be highly speculative and comes with risks. Prices can be extremely
+                    Investing in cryptocurrencies can be highly speculative and comes with risks. Prices can be
+                    extremely
                     volatile, with significant fluctuations occurring in short periods. It's essential for individuals
                     interested in investing in cryptocurrencies to conduct thorough research and understand the risks
                     involved.
+                </div>
+            </div>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1"
+                 aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel1">Starting off with Crypto</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    Find out if you are a Crypto Pro!
                 </div>
             </div>
 
@@ -211,40 +245,17 @@
                         </div>
                         <div class="modal-body">
                             Cryptocurrency Mining Energy Consumption: The process of mining cryptocurrencies, especially
-                            Bitcoin, requires substantial computational power, leading to significant energy consumption.
-                            Bitcoin mining alone consumes more electricity than many countries. This has led to debates about
-                            the environmental impact of cryptocurrencies and the need for more sustainable mining practices.
+                            Bitcoin, requires substantial computational power, leading to significant energy
+                            consumption.
+                            Bitcoin mining alone consumes more electricity than many countries. This has led to debates
+                            about
+                            the environmental impact of cryptocurrencies and the need for more sustainable mining
+                            practices.
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
 
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Button 5 -->
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-                 aria-labelledby="offcanvasExampleLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Quiz Time!</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <div>
-                        Answer these three questions and find out if you are a real pro at Crypto Trading
-                    </div>
-                    <div class="dropdown mt-3">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown">
-                            Dropdown button
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -289,7 +300,7 @@
             // Show the modal associated with the button
             const modalId = this.getAttribute('data-modal');
             const modal = new bootstrap.Modal(document.getElementById(modalId));
-            modal.show();
+            modal.show(button);
 
             modal.addEventListener('hidden.bs.modal', function () {
                 this.style.display = 'none'; // Hide the clicked button
