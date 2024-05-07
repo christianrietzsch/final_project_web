@@ -106,44 +106,63 @@
     </div>
   </div>
 
-  <div class="album py-5 ">
-    <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="items">
-
-
-<script id="shop_item_template" type="text/x-handlebars-template">
-
-    {{#each res}}
-    <div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt=""></img>
-            <div class="card-body">
-              <h5 class="card-title text-center" id="name">{{this.name}}</h5>
-              <p class="card-text">{{this.description}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" id="{{this.name}}-Buy" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
-                  <button type="button" id="{{this.name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                </div>
-                <div style="{{this.color}}">
-                <!--Make responsive; two cards will make the text look weird-->
-                    <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                    <a>{{this.rate}}%</a>
-                    <a style="font-size:25px;" id="{{this.name}}-Arrow"></a>
-                </div>
+  <ul class="list-group pb-3">
+    <li class="list-group-item d-flex justify-content-between lh-sm">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <div>
+          <div class="input-group">
+            <button type="button" class="btn btn-sm btn-outline-danger" id="sort_button">
+              <svg width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
+              </svg>
+            </button>
+          </div>
+      </div>
+    </li>
+    <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div class="album pb-4 pt-1">
+          <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="items">
+      
+      
+      <script id="shop_item_template" type="text/x-handlebars-template">
+      
+          {{#each res}}
+          <div>
+              <div class="col">
+                <div class="card shadow-sm">
+                  <img src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt="">
+                  <div class="card-body">
+                    <h5 class="card-title text-center" id="name">{{this.name}}</h5>
+                    <p class="card-text">{{this.description}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <button type="button" id="{{this.name}}-Buy" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
+                        <button type="button" id="{{this.name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
+                      </div>
+                      <div style="{{this.color}}">
+                      <!--Make responsive; two cards will make the text look weird-->
+                          <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
+                          <a>{{this.rate}}%</a>
+                          <a style="font-size:25px;" id="{{this.name}}-Arrow"></a>
+                      </div>
+                      </div>
+                    </div>
                 </div>
               </div>
+              </div>
+              {{/each}}
+      
+      </script>
+      
           </div>
         </div>
-        </div>
-        {{/each}}
-
- </script>
-
-    </div>
-  </div>
-</div>
+      </div>
+    </li>
+  </ul>
 
 <script>
 getCoins().then(function(result) {      
