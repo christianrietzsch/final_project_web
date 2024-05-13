@@ -100,8 +100,11 @@
 
         <script>
             const load_json = () => {
-                jsonData().then((result) => {
-                    localStorage.setItem("coins", JSON.stringify(result));
+                jsonData().then((coins) => {
+                    for(const i in coins){
+                        coins[i].id = parseInt(i)
+                    }
+                    localStorage.setItem("coins", JSON.stringify(coins));
                     window.location.reload();
                 })
             };
@@ -120,6 +123,9 @@
                 return () => {
                     getCoins().then((coins) => {
                         coins.splice(id, 1);
+                        for(const i in coins){
+                            coins[i].id = parseInt(i)
+                        }
                         setCoins(coins);
                         window.location.reload();
                     })
