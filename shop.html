@@ -182,9 +182,10 @@ const template = Handlebars.compile($ID("shop_item_template").innerHTML);
 
   const renderShop = (coins) => {
     json = []
+    let index = 0
     coins.map(function(obj){
       json.push({...obj, color: 
-      obj.rate > 0 ? "color:green;" : "color:red;"})
+      obj.rate > 0 ? "color:green;" : "color:red;", index: index++})
     })
     $ID("items").innerHTML = template({res: json});
     json.map(init_shop_item)
