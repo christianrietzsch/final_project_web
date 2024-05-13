@@ -11,6 +11,8 @@
 
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="dist/css/custom.css" rel="stylesheet">
+        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
+        <script src="dist/js/vanilla.js"></script>
     </head>
 
     <body>
@@ -54,6 +56,8 @@
                     <span class="text-primary">Your cart</span>
                     <span class="badge bg-primary rounded-pill">2</span>
                 </h4>
+
+                <div id="test_div"></div>
 
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-sm" id="id_elem">
@@ -111,6 +115,14 @@
             </div>
         </main>
 
+        <script id="cart_item_template" type="text/x-handlebars-template">
+         {{#each ord}}
+            <div>
+                <p>{{this.name}}</p>
+            </div>
+        {{/each}}
+        </script>
+
         <script>
             const remove = (id) => {
                 return function(){
@@ -132,6 +144,10 @@
 
             id_rm_button.addEventListener("click", remove("id"));
             id_count_input.addEventListener("change", changeCount(id_count_input, "id"));
+            
+        orders = getOrders()
+        render($ID("cart_item_template"), $ID("test_div"), orders)
+
             
         </script>
 

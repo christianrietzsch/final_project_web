@@ -47,6 +47,10 @@ function addOrder(order) {
   localStorage.setItem("orders", JSON.stringify(new_orders))
 }
 
+function getOrders() {
+  return {ord: JSON.parse(localStorage.getItem("orders"))}
+}
+
 function getCurrentCoinID(){
   return parseInt(localStorage.getItem("current"));
 }
