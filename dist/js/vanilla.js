@@ -20,6 +20,33 @@ function setCoins(coins){
   localStorage.setItem("coins", JSON.stringify(coins));
 }
 
+function contains_order(orders, name) {
+  for(let i = 0; i< orders.length; i++) {
+    index = orders[i].name === name
+    if(index) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function addOrder(order) {
+  orders = JSON.parse(localStorage.getItem("orders"))
+  if(orders) {
+    index = contains_order(orders, order.name)
+     if(index == -1) {
+     orders.push(order)
+     new_orders = orders
+   } else {
+     orders[index].amount += order.amount
+     new_orders = orders
+   }
+  } else {
+    new_orders = [order]
+  }
+  localStorage.setItem("orders", JSON.stringify(new_orders))
+}
+
 function getCurrentCoinID(){
   return parseInt(localStorage.getItem("current"));
 }
@@ -39,36 +66,28 @@ function render(template_obj, dest_obj, data){
   dest_obj.innerHTML = template(data)
 }
 
-function register_listener(id, function_call) {
-  $ID(id).addEventListener("click", function_call)
-  //remove / replace
-}
-
-function send_to_cart(amount, price, name) {
-  localStorage.setItem(name, JSON.stringify({"amount": parseInt(amount), "price": price}))
-  //replace with crud functions
-}
-
 function init_shop_item(json) {
   const name = json.name
   arrow = $ID(name + "-Arrow")
   arrow.innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;"
-  register_listener(name + "-Buy", 
+  $ID(name + "-Buy").addEventListener("click",
     function() {
       render(modal_template, modal_template.nextElementSibling, json)
       $ID("buy-btn").addEventListener("click", 
         function() {
           let val = amount.value
           if(val && val > 0) {
-            send_to_cart(val, json.value, json.name)
+            addOrder({"index": json.index, "name": json.name,
+              "amount": parseInt(val)})
             close = $ID("close")
             close.click()
           } else {
-            console.log(val)
+            console.log("NOT ALLOWED")
+            // add effect later
           }
         })
     })
-  register_listener(name + "-More", 
+  $ID(name + "-More").addEventListener("click", 
     function() {
       render($ID("more_template"), $ID("more_template").nextElementSibling, json)
   })

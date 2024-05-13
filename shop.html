@@ -167,9 +167,10 @@
 <script>
 getCoins().then(function(result) {      
   json = []
+  let index = 0;
   result.map(function(obj){
     json.push({...obj, color: 
-    obj.rate > 0 ? "color:green;" : "color:red;"})
+    obj.rate > 0 ? "color:green;" : "color:red;", index: index++})
   })
   render($ID("shop_item_template"), $ID("items"), {res: json})
   json.map(init_shop_item)
