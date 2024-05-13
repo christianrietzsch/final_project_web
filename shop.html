@@ -197,7 +197,7 @@ const template = Handlebars.compile($ID("shop_item_template").innerHTML);
     getCoins().then((result) => {
       coins = [];
       for(const coin of result)
-        if (coin.name.toLowerCase().includes(filter))
+        if (coin.name.toLowerCase().includes(filter.toLowerCase()))
           coins.push(coin);
 
       coins.sort((a, b) => (val(a) < val(b)) ^ asc ? -1 : 1);
