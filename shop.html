@@ -102,24 +102,27 @@
 
         <div></div>
 
-      </div>
+      </div>c:\Users\jonas\Downloads\bootstrap-5.2.3-examples\assets\dist\js\bootstrap.bundle.min.js.map c:\Users\jonas\Downloads\bootstrap-5.2.3-examples\assets\dist\js\bootstrap.bundle.min.js
     </div>
   </div>
 
   <ul class="list-group pb-3">
-    <li class="list-group-item d-flex justify-content-between lh-sm">
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <div>
-          <div class="input-group">
-            <button type="button" class="btn btn-sm btn-outline-danger" id="sort_button">
-              <svg width="16" height="16" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
-                <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/>
-              </svg>
-            </button>
-          </div>
+    <li class="list-group-item d-flex justify-content-between lh-sm pt-2">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_bar">
+      <button class="btn btn-outline-secondary me-2" id="search_button" type="submit">Search</button>
+      <div class="dropdown">
+        <button class="btn btn-outline-danger me-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><h6 class="dropdown-header">Sort by (asc):</h6></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.name);">Name</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.value);">Value</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.rate);">Rate</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><h6 class="dropdown-header">Sort by (desc):</h6></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.name);">Name</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.value);">Value</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.rate);">Rate</a></li>
+        </ul>
       </div>
     </li>
     <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -175,6 +178,39 @@ getCoins().then(function(result) {
   render($ID("shop_item_template"), $ID("items"), {res: json})
   json.map(init_shop_item)
 })
+const template = Handlebars.compile($ID("shop_item_template").innerHTML);
+
+  const renderShop = (coins) => {
+    json = []
+    coins.map(function(obj){
+      json.push({...obj, color: 
+      obj.rate > 0 ? "color:green;" : "color:red;"})
+    })
+    $ID("items").innerHTML = template({res: json});
+    json.map(init_shop_item)
+  };
+
+  const sortShop = (asc, val) => {
+    const filter = search_bar.value;
+
+    getCoins().then((result) => {
+      coins = [];
+      for(const coin of result)
+        if (coin.name.toLowerCase().includes(filter))
+          coins.push(coin);
+
+      coins.sort((a, b) => (val(a) < val(b)) ^ asc ? -1 : 1);
+      renderShop(coins);
+    });
+  };
+
+  search_button.addEventListener("click", () => sortShop(0,(c)=>c.name));
+  search_bar.addEventListener("keydown", (event) => {
+    if(event.key === 'Enter'){
+      sortShop(0,(c)=>c.name);
+    }
+  });
+  sortShop(0,(c)=>c.name);
 </script>
 
 </main>

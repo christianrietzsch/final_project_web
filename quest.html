@@ -13,15 +13,28 @@
     <link href="dist/css/custom.css" rel="stylesheet">
     <script src="dist/js/handlebars.min-v4.7.8.js"></script>
     <style>
-        .button-path {
+        .white-box-container {
+            position: relative;
+            height: 80vh; /* 80% of the viewport height */
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            margin-top: 50px;
+        }
+
+        .white-box {
+            background-color: white;
+            width: 95%;
+            height: 100%;
+            border-radius: 20px;
+
+            overflow: hidden;
         }
 
         .button {
-            background-color: #2c3034;
+            display: none; /* Initially hide the buttons */
+            position: absolute; /* Set position to absolute */
+            background-color: #4CAF50;
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -34,14 +47,33 @@
             transition: background-color 0.3s ease;
         }
 
-        .button:hover {
-            background-color: #0c4128;
+        .styled {
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 1rem;
+            margin-left: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            background-color: rgba(220, 0, 0, 1);
+            background-image: linear-gradient(
+                    to top left,
+                    rgba(0, 0, 0, 0.2),
+                    rgba(0, 0, 0, 0.2) 30%,
+                    rgba(0, 0, 0, 0)
+            );
+            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+            inset -2px -2px 3px rgba(0, 0, 0, 0.6);
         }
 
-        .connector {
-            width: 100px;
-            height: 4px;
-            background-color: #4CAF50;
+        .styled:hover {
+            background-color: rgba(255, 0, 0, 1);
+        }
+
+        .styled:active {
+            box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+            inset 2px 2px 3px rgba(0, 0, 0, 0.6);
         }
 
         .space {
@@ -49,12 +81,16 @@
             margin-top: 50px;
         }
 
-
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            background-color: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+        }
     </style>
-
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
@@ -85,146 +121,209 @@
 
 </header>
 
-
 <main>
+
     <h1 class="space"> Welcome to the Crypto Quest!</h1>
+    <div class="white-box-container">
+        <div class="white-box">
+            <button class="styled" id="startButton">Start</button>
 
-    <p class="space">Click on any button below to start your journey</p>
+            <button class="button" id="button1" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">1
+            </button>
+            <button class="button" id="button2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">2
+            </button>
+            <button class="button" id="button3" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">3
+            </button>
+            <button class="button" id="button4" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">4
+            </button>
+            <button class="button" id="button5" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">5
+            </button>
 
-    <div class="button-path">
-        <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            1
-        </button>
-        <div class="connector"></div>
-        <button class="button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                aria-controls="offcanvasRight">2
-        </button>
-        <div class="connector"></div>
-        <button type="button" class="button" data-bs-toggle="modal2" data-bs-target="#exampleModal2">3</button>
-        <div class="connector"></div>
-        <button class="button">4</button>
-        <div class="connector"></div>
-        <button class="button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
-                aria-controls="offcanvasExample">
-            5
-        </button>
-    </div>
+            <button class="styled" id="endButton" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight1"
+                    aria-controls="offcanvasRight1">Quiz!
+            </button>
 
-    <!-- Button 1 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Fun Fact!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- Button 1 -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Fun Fact!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Pizza Day: On May 22, 2010, a programmer named Laszlo Hanyecz made the first real-world
+                            transaction using Bitcoin. He famously purchased two pizzas for 10,000 BTC, which would be
+                            worth
+                            millions of dollars today. This event is commemorated in the crypto community as "Bitcoin
+                            Pizza
+                            Day."
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    Pizza Day: On May 22, 2010, a programmer named Laszlo Hanyecz made the first real-world
-                    transaction using Bitcoin. He famously purchased two pizzas for 10,000 BTC, which would be worth
-                    millions of dollars today. This event is commemorated in the crypto community as "Bitcoin Pizza
-                    Day."
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+            </div>
 
+            <!-- Button 2 -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                 aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
+                    operates
+                    independently of a central authority, such as a government or financial institution. The most
+                    well-known
+                    cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of people using
+                    the
+                    pseudonym Satoshi Nakamoto.
+
+                    Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
+                    immutability. Blockchain is a distributed ledger technology that records all transactions across a
+                    network of computers. This technology ensures that transactions are secure and cannot be tampered
+                    with
+                    once they are recorded.
+
+                    Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
+                    "altcoins,"
+                    have been created. Each cryptocurrency typically operates on its own blockchain or a variation of an
+                    existing one.
+
+                    Cryptocurrencies have gained popularity due to their potential for financial inclusion, lower
+                    transaction fees compared to traditional banking systems, and the ability to facilitate fast and
+                    borderless transactions. However, they also face challenges such as regulatory uncertainty,
+                    volatility,
+                    security concerns, and the potential for use in illicit activities.
+
+                    Investing in cryptocurrencies can be highly speculative and comes with risks. Prices can be
+                    extremely
+                    volatile, with significant fluctuations occurring in short periods. It's essential for individuals
+                    interested in investing in cryptocurrencies to conduct thorough research and understand the risks
+                    involved.
+                </div>
+            </div>
+
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1"
+                 aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel1">Starting off with Crypto</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    Find out if you are a Crypto Pro!
+                </div>
+            </div>
+
+            <!-- Button 3 -->
+            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel2">Fun Fact!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Cryptocurrency Mining Energy Consumption: The process of mining cryptocurrencies, especially
+                            Bitcoin, requires substantial computational power, leading to significant energy
+                            consumption.
+                            Bitcoin mining alone consumes more electricity than many countries. This has led to debates
+                            about
+                            the environmental impact of cryptocurrencies and the need for more sustainable mining
+                            practices.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Button 2 -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and operates
-            independently of a central authority, such as a government or financial institution. The most well-known
-            cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of people using the
-            pseudonym Satoshi Nakamoto.
-
-            Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
-            immutability. Blockchain is a distributed ledger technology that records all transactions across a
-            network of computers. This technology ensures that transactions are secure and cannot be tampered with
-            once they are recorded.
-
-            Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as "altcoins,"
-            have been created. Each cryptocurrency typically operates on its own blockchain or a variation of an
-            existing one.
-
-            Cryptocurrencies have gained popularity due to their potential for financial inclusion, lower
-            transaction fees compared to traditional banking systems, and the ability to facilitate fast and
-            borderless transactions. However, they also face challenges such as regulatory uncertainty, volatility,
-            security concerns, and the potential for use in illicit activities.
-
-            Investing in cryptocurrencies can be highly speculative and comes with risks. Prices can be extremely
-            volatile, with significant fluctuations occurring in short periods. It's essential for individuals
-            interested in investing in cryptocurrencies to conduct thorough research and understand the risks
-            involved.
-        </div>
-    </div>
-
-    <!-- Button 3 -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Fun Fact!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Cryptocurrency Mining Energy Consumption: The process of mining cryptocurrencies, especially
-                    Bitcoin, requires substantial computational power, leading to significant energy consumption.
-                    Bitcoin mining alone consumes more electricity than many countries. This has led to debates about
-                    the environmental impact of cryptocurrencies and the need for more sustainable mining practices.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Button 5 -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
-         aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Quiz Time!</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                Answer these three questions and find out if you are a real pro at Crypto Trading
-            </div>
-            <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
 </main>
-
 <footer class="container">
     <hr class="featurette-divider">
     <p class="float-end"><a href="#">Back to top</a></p>
     <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
         &middot; <a href="cookies.html">Cookies</a></p>
 </footer>
-
 <script src="dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const buttons = document.querySelectorAll('.button');
+    const startButton = document.getElementById('startButton');
 
+    function randomButtonPosition(button) {
+        const width = document.querySelector('.white-box').offsetWidth - button.offsetWidth;
+        const height = document.querySelector('.white-box').offsetHeight - button.offsetHeight;
+        const randomLeft = Math.floor(Math.random() * width);
+        const randomTop = Math.floor(Math.random() * height);
+        button.style.left = randomLeft + 'px';
+        button.style.top = randomTop + 'px';
+    }
+
+    function randomButton() {
+        const randomIndex = 0;
+        const randomButton = buttons[randomIndex];
+        randomButtonPosition(randomButton); // Set random position for the button
+        randomButton.style.display = 'block';
+        randomButton.disabled = false; // Enable the randomly selected button
+    }
+
+    startButton.addEventListener('click', function () {
+        randomButton(); // Show a random button when the start button is clicked
+        startButton.style.display = 'none'; // Hide the start button
+    });
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Show the modal associated with the button
+            const modalId = this.getAttribute('data-modal');
+            const modal = new bootstrap.Modal(document.getElementById(modalId));
+            modal.show(button);
+
+            modal.addEventListener('hidden.bs.modal', function () {
+                this.style.display = 'none'; // Hide the clicked button
+                const nextButton = document.querySelector('.button:not([style="display: block;"])');
+                if (nextButton) {
+                    randomButtonPosition(nextButton); // Set random position for the next button
+                    nextButton.style.display = 'block'; // Show the next button
+                } else {
+                    alert('Congratulations! You have pressed all the buttons.');
+                }
+            });
+        });
+    });
+
+    // Recalculate button positions on window resize
+    window.addEventListener('resize', function () {
+        buttons.forEach(button => {
+            if (button.style.display === 'block') {
+                randomButtonPosition(button);
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

@@ -81,7 +81,7 @@
                 </div>
                 <div class="py-3">
                     <button class="btn btn-primary" type="submit">Save</button>
-                    <button class="btn btn-danger" type="submit" on-click="location.href='admin.html';">Cancel</button>
+                    <button class="btn btn-danger" id="cancel_button">Cancel</button>
                 </div>
             </form>
         </script>
@@ -113,14 +113,15 @@
                 render(content_template, hb, {coin: result, name: (!(result.name) ? "Unnamed" : result.name)});
                 document.getElementById("form_input").addEventListener("submit", function(event) {
                     event.preventDefault();
-                    if (this.checkValidity() === false) {
-                        event.stopPropagation();
-                    }
-                    else{
+                    if (this.checkValidity() === true){
                         save()
                     }
                     this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
                 }, false);
+                cancel_button.addEventListener("click", (event) => {
+                    event.stopPropagation();
+                    location.href='admin.html';
+                })
             });
         </script>
         
