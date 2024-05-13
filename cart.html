@@ -54,31 +54,23 @@
             <div class="container padded">
                 <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Your cart</span>
-                    <span class="badge bg-primary rounded-pill">2</span>
+                    <span class="badge bg-primary rounded-pill" id="item_count">0</span>
                 </h4>
 
 
                 <ul class="list-group mb-3">
                     <div id="cart"></div>
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div>
-                            <h6 class="my-0">Product name2</h6>
-                            <small class="text-muted">Brief description2</small>
-                        </div>
-                        <span class="text-muted">$122</span>
-                    </li>
-
                     <li class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-success">
                             <h6 class="my-0">Promo code</h6>
-                            <small>EXAMPLECODE</small>
+                            <small id="discount_code"></small>
                         </div>
-                        <span class="text-success">−$5</span>
+                        <span class="text-success" id="discount">−$0</span>
                     </li>
 
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
-                        <strong>$20</strong>
+                        <strong id="total">$</strong>
                     </li>
                 </ul>
 
@@ -99,33 +91,67 @@
 
 <script id="cart_item_template" type="text/x-handlebars-template">
     {{#each ord}}
-        <li class="list-group-item d-flex justify-content-between lh-sm" id="id_elem">
+        <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.index}}">
             <div>
                 <h6 class="my-0">{{this.name}}</h6>
-                <small class="text-muted">Brief description</small>
+                <small class="text-muted">{{this.description}}</small>
             </div>
             <div>
                 <div class="input-group">
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="id_rm_button">
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.index}}_rm_button">
                         <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                         </svg>                                
                     </button>
-                    <input type="number" class="form-control" aria-label="Amount" value="9" id="id_count_input">
-                    <span class="text-muted m-2">x $10</span>
+                    <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.index}}_count_input">
+                    <span class="text-muted m-2" id="{{this.index}}_val">x ${{this.value}}</span>
                 </div>
             </div>
-            <span class="text-muted" id="id_total"></span>
+            <span class="item_total text-muted" id="{{this.index}}_total">{{this.end_price}}</span>
         </li>
     {{/each}}
 </script>
 
 <script>
-    render($ID("cart_item_template"), $ID("cart"), getOrders())
+
+    function addCartListeners(id) {
+        $ID(id+"_rm_button").addEventListener("click", remove(id))
+        $ID(id+"_count_input").addEventListener("change", changeCount($ID(id+"_count_input"), id))
+    }
+
+    function init_cart_items(orders) {
+        render($ID("cart_item_template"), $ID("cart"), orders)
+        let index_list = []
+        orders.ord.forEach((obj) => index_list.push(obj.index))
+        for(let i = 0; i < index_list.length; i++) {
+            addCartListeners(index_list[i]);
+        }
+        $ID("item_count").innerText = index_list.length
+    }
+    
     const remove = (id) => {
         return function(){
-            console.log("removed - " + id);
+            $ID(id+"").remove()
+            let count = $ID("item_count")
+            count.innerText = parseInt(count.innerText)-1
+            // does not find function?
+
+            
+            //discount code
+            //für prozent etc abfrage beim parsen / updaten machen
+            updateTotalPrice()
+            updateOrder(id, -1)
         }
+    }
+
+    function updateTotalPrice() {
+    const elements = document.getElementsByClassName("item_total")
+        let total = 0
+        for(let i = 0; i < elements.length; i++) {
+            total += parseInt(elements[i].innerText)
+        }
+        total -= parseInt($ID("discount").innerHTML.substring(2))
+        $ID("total").innerText = "$ " + total
     }
             
     const changeCount = (input_box, id) => {
@@ -136,15 +162,15 @@
                         input_box.value = "1";
                     }
 
-                    console.log("test");
-                    total = document.getElementById("id_total").textContent = "$" + (amount*10);
+                    const price = parseInt($ID(id+ "_val").innerText.substring(3))
+                    $ID(id+"_total").innerText = amount*price
+            updateTotalPrice()
+            updateOrder(id, amount)
                 }
             }
 
-            id_rm_button.addEventListener("click", remove("id"));
-            id_count_input.addEventListener("change", changeCount(id_count_input, "id"));
-            
-            
+    init_cart_items(getOrders())
+    updateTotalPrice()
 </script>
 
         <footer class="container">

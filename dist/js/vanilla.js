@@ -20,6 +20,27 @@ function setCoins(coins){
   localStorage.setItem("coins", JSON.stringify(coins));
 }
 
+function removeFromOrdersByID(id) {
+  const orders = getOrders().ord
+  let new_orders = []
+  for(let i = 0; i < orders.length; i++) {
+    if(orders[i].index != id) {
+      new_orders.push(orders[i])
+    }
+  }
+  localStorage.setItem("orders", JSON.stringify({ord: new_orders}))
+}
+
+function updateOrder(id, amount) {
+  if(amount === -1) {
+    //removeFromOrdersByID(id)
+    //does not work!!
+  } else {
+  //update item
+
+  }
+}
+
 function contains_order(orders, name) {
   for(let i = 0; i< orders.length; i++) {
     index = orders[i].name === name
@@ -48,7 +69,8 @@ function addOrder(order) {
 }
 
 function getOrders() {
-  return {ord: JSON.parse(localStorage.getItem("orders"))}
+  let orders = JSON.parse(localStorage.getItem("orders"))
+  return {ord: orders}
 }
 
 function getCurrentCoinID(){
@@ -81,8 +103,10 @@ function init_shop_item(json) {
         function() {
           let val = amount.value
           if(val && val > 0) {
-            addOrder({"index": json.index, "name": json.name,
-              "amount": parseInt(val)})
+            addOrder({"index": json.index, "name": json.name, 
+              "description": json.description, 
+              "value": json.value, "amount": parseInt(val), 
+              "end_price": parseInt(val)* parseInt(json.value)})
             close = $ID("close")
             close.click()
           } else {
