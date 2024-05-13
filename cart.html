@@ -57,27 +57,9 @@
                     <span class="badge bg-primary rounded-pill">2</span>
                 </h4>
 
-                <div id="test_div"></div>
 
                 <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-sm" id="id_elem">
-                        <div>
-                            <h6 class="my-0">Product name</h6>
-                            <small class="text-muted">Brief description</small>
-                        </div>
-                        <div>
-                            <div class="input-group">
-                                <button type="button" class="btn btn-sm btn-outline-danger" id="id_rm_button">
-                                    <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                                    </svg>                                
-                                </button>
-                                <input type="number" class="form-control" aria-label="Amount" value="9" id="id_count_input">
-                                <span class="text-muted m-2">x $10</span>
-                            </div>
-                        </div>
-                        <span class="text-muted" id="id_total">$12</span>
-                    </li>
+                    <div id="cart"></div>
                     <li class="list-group-item d-flex justify-content-between lh-sm">
                         <div>
                             <h6 class="my-0">Product name2</h6>
@@ -115,23 +97,40 @@
             </div>
         </main>
 
-        <script id="cart_item_template" type="text/x-handlebars-template">
-         {{#each ord}}
+<script id="cart_item_template" type="text/x-handlebars-template">
+    {{#each ord}}
+        <li class="list-group-item d-flex justify-content-between lh-sm" id="id_elem">
             <div>
-                <p>{{this.name}}</p>
+                <h6 class="my-0">{{this.name}}</h6>
+                <small class="text-muted">Brief description</small>
             </div>
-        {{/each}}
-        </script>
+            <div>
+                <div class="input-group">
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="id_rm_button">
+                        <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                        </svg>                                
+                    </button>
+                    <input type="number" class="form-control" aria-label="Amount" value="9" id="id_count_input">
+                    <span class="text-muted m-2">x $10</span>
+                </div>
+            </div>
+            <span class="text-muted" id="id_total"></span>
+        </li>
+    {{/each}}
+</script>
 
-        <script>
-            const remove = (id) => {
-                return function(){
-                    console.log("removed - " + id);
-                }
-            }
-            const changeCount = (input_box, id) => {
-                return function(){
-                    amount = parseInt(input_box.value)
+<script>
+    render($ID("cart_item_template"), $ID("cart"), getOrders())
+    const remove = (id) => {
+        return function(){
+            console.log("removed - " + id);
+        }
+    }
+            
+    const changeCount = (input_box, id) => {
+        return function(){
+            amount = parseInt(input_box.value)
                     if(amount <= 0){
                         amount = 1;
                         input_box.value = "1";
@@ -145,11 +144,8 @@
             id_rm_button.addEventListener("click", remove("id"));
             id_count_input.addEventListener("change", changeCount(id_count_input, "id"));
             
-        orders = getOrders()
-        render($ID("cart_item_template"), $ID("test_div"), orders)
-
             
-        </script>
+</script>
 
         <footer class="container">
             <hr class="featurette-divider">
