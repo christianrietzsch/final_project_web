@@ -132,15 +132,14 @@
                 };
             }
 
-            getCoins().then((result)=>{
-                render(content_template, hb, {coins: result, json: JSON.stringify(result)});
-                for (let i = 0; i < result.length; i++){
-                    document.getElementById(i + "_update_button").addEventListener("click", update(i));
-                    document.getElementById(i + "_rm_button").addEventListener("click", del(i));
-                }
-                json_load_btn.addEventListener("click", load_json);
-                new_btn.addEventListener("click", add_new);
-            })
+            const coins = getCoins();
+            render(content_template, hb, {coins: coins, json: JSON.stringify(coins)});
+            for (let i = 0; i < coins.length; i++){
+                document.getElementById(i + "_update_button").addEventListener("click", update(i));
+                document.getElementById(i + "_rm_button").addEventListener("click", del(i));
+            }
+            json_load_btn.addEventListener("click", load_json);
+            new_btn.addEventListener("click", add_new);
         </script>
 
         <footer class="container">
