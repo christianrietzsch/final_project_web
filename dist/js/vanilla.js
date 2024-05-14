@@ -134,13 +134,11 @@ function init_shop_item(json) {
 }
 
 document.getElementById('endButton').addEventListener('click', function() {
-  // Show the quiz section
   document.getElementById('quizSection').style.display = 'block';
-  // Call a function to load the quiz questions
   loadQuiz();
 });
 
-// Quiz questions
+
 const questions = [
   {
     question: "What is the first cryptocurrency?",
@@ -191,5 +189,11 @@ document.getElementById('submitQuiz').addEventListener('click', function() {
     }
   });
   alert(`Your score: ${score}/${questions.length}`);
+});
+document.getElementById('endButton').addEventListener('click', function() {
+  document.getElementById('startButton').style.display = 'none';
+  document.getElementById('endButton').style.display = 'none';
+  document.getElementById('quizSection').style.display = 'block';
+  loadQuiz();
 });
 
