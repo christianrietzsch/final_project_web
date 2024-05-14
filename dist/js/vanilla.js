@@ -108,35 +108,6 @@ function render(template_obj, dest_obj, data){
   dest_obj.innerHTML = template(data)
 }
 
-function init_shop_item(json) {
-  const name = json.name
-  arrow = $ID(name + "-Arrow")
-  arrow.innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;"
-  $ID(name + "-Buy").addEventListener("click",
-    function() {
-      render(modal_template, modal_template.nextElementSibling, json)
-      $ID("buy-btn").addEventListener("click", 
-        function() {
-          let val = amount.value
-          if(val && val > 0) {
-            addOrder({"index": json.index, "name": json.name, 
-              "description": json.description, 
-              "value": json.value, "amount": parseInt(val), 
-              "end_price": parseInt(val)* parseInt(json.value)})
-            close = $ID("close")
-            close.click()
-          } else {
-            console.log("NOT ALLOWED")
-            // add effect later
-          }
-        })
-    })
-  $ID(name + "-More").addEventListener("click", 
-    function() {
-      render($ID("more_template"), $ID("more_template").nextElementSibling, json)
-  })
-}
-
 document.getElementById('endButton').addEventListener('click', function() {
   document.getElementById('quizSection').style.display = 'block';
   loadQuiz();
