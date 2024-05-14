@@ -105,7 +105,7 @@
                         </svg>                                
                     </button>
                     <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
-                    <span class="text-muted m-2" id="{{this.id}}_val">x ${{this.value}}</span>
+                    <span class="text-muted m-2" id="{{this.id}}_val">x ${{this.curValue}}</span>
                 </div>
             </div>
             <div class="col" style="width: 50%; margin: auto; text-align: right;">
@@ -176,21 +176,21 @@
     const elements = document.getElementsByClassName("item_total")
         let total = 0
         for(let i = 0; i < elements.length; i++) {
-            total += parseInt(elements[i].innerText)
+            total += parseFloat(elements[i].innerText)
         }
-        total -= parseInt($ID("discount").innerHTML.substring(2))
+        total -= parseFloat($ID("discount").innerHTML.substring(2))
         $ID("total").innerText = "$ " + total
     }
             
     const changeCount = (input_box, id) => {
         return function(){
-            amount = parseInt(input_box.value)
+            amount = parseFloat(input_box.value)
                     if(amount <= 0){
                         amount = 1;
                         input_box.value = "1";
                     }
 
-                    const price = parseInt($ID(id+ "_val").innerText.substring(3))
+                    const price = parseFloat($ID(id+ "_val").innerText.substring(3))
                     $ID(id+"_total").innerText = amount*price
             updateTotalPrice()
             updateOrder(id, amount)

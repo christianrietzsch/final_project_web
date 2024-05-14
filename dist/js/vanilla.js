@@ -100,8 +100,9 @@ function getOrders() {
   new_orders = []
   orders.forEach((order) => {
     const coin = getCoinByID(order.id)
+    console.log(order.id);
     new_order = {...coin, amount: order.amount, 
-      end_price: coin.value*order.amount}
+      end_price: coin.curValue*order.amount}
     new_orders.push(new_order)
   })
   return {ord: new_orders}
