@@ -194,9 +194,7 @@
   };
 
   const buyFunc = (id) => {
-    console.log(buy_modal_template, buy_modal_hb)
     render(buy_modal_template, buy_modal_hb, getCoinByID(id));
-    console.log(getCoinByID(id))
     $ID("buy_btn").addEventListener("click", 
       () => {
         let val = amount.value
