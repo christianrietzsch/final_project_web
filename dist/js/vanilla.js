@@ -28,16 +28,28 @@ function removeFromOrdersByID(id) {
       new_orders.push(orders[i])
     }
   }
-  localStorage.setItem("orders", JSON.stringify({ord: new_orders}))
+  localStorage.setItem("orders", JSON.stringify(new_orders))
+}
+
+function changeOrderAmount(id, amount) {
+  const orders = getOrders().ord
+  let new_orders = []
+    for(let i = 0; i < orders.length; i++) {
+      let new_order = orders[i]
+      if(orders[i].index === id) {
+        new_order.amount = amount
+        new_order.end_price = amount*new_order.value
+      }
+      new_orders.push(new_order)  
+    }
+  localStorage.setItem("orders", JSON.stringify(new_orders))
 }
 
 function updateOrder(id, amount) {
   if(amount === -1) {
-    //removeFromOrdersByID(id)
-    //does not work!!
+    removeFromOrdersByID(id)
   } else {
-  //update item
-
+    changeOrderAmount(id, amount)
   }
 }
 
