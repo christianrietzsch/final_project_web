@@ -199,7 +199,7 @@
       () => {
         let val = amount.value
         if(val && val > 0) {
-          addOrder({"index": id, "amount": parseInt(val)})
+          addOrder({"id": id, "amount": parseInt(val)})
           $ID("close").click();
         } else {
           console.log("NOT ALLOWED")
