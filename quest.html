@@ -126,30 +126,52 @@
     <h1 class="space"> Welcome to the Crypto Quest!</h1>
     <div class="white-box-container">
         <button class="styled" id="startButton">Start</button>
-        <button class="styled" id="endButton">Quiz!</button>
+        <button class="styled" id="endButton">Quiz</button>
         <div class="white-box">
             <button class="button" id="button1" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight">1
             </button>
-            <button class="button" id="button2" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">2
+            <button class="button" id="button2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">2
             </button>
-            <button class="button" id="button3" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">3
+            <button class="button" id="button3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">3
             </button>
-            <button class="button" id="button4" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">4
+            <button class="button" id="button4" type="button" >4
             </button>
-            <button class="button" id="button5" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">5
+            <button class="button" id="button5" type="button" >5
             </button>
 
             <!-- Button 1 -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                 aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
+                    operates independently of a central authority, such as a government or financial institution. The
+                    most
+                    well-known cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of
+                    people using
+                    the pseudonym Satoshi Nakamoto.
+                    <br>
+                    <br>
+                    Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
+                    immutability. Blockchain is a distributed ledger technology that records all transactions across a
+                    network of computers. This technology ensures that transactions are secure and cannot be tampered
+                    with once they are recorded.
+                    <br>
+                    <br>
+                    Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
+                    "altcoins," have been created. Each cryptocurrency typically operates on its own blockchain or a
+                    variation of an
+                    existing one.
+                </div>
+            </div>
+
+            <!-- Button 2 -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
@@ -174,59 +196,6 @@
                 </div>
             </div>
 
-            <!-- Button 2 -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-                 aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
-                    operates
-                    independently of a central authority, such as a government or financial institution. The most
-                    well-known
-                    cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of people using
-                    the
-                    pseudonym Satoshi Nakamoto.
-
-                    Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
-                    immutability. Blockchain is a distributed ledger technology that records all transactions across a
-                    network of computers. This technology ensures that transactions are secure and cannot be tampered
-                    with
-                    once they are recorded.
-
-                    Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
-                    "altcoins,"
-                    have been created. Each cryptocurrency typically operates on its own blockchain or a variation of an
-                    existing one.
-
-                    Cryptocurrencies have gained popularity due to their potential for financial inclusion, lower
-                    transaction fees compared to traditional banking systems, and the ability to facilitate fast and
-                    borderless transactions. However, they also face challenges such as regulatory uncertainty,
-                    volatility,
-                    security concerns, and the potential for use in illicit activities.
-
-                    Investing in cryptocurrencies can be highly speculative and comes with risks. Prices can be
-                    extremely
-                    volatile, with significant fluctuations occurring in short periods. It's essential for individuals
-                    interested in investing in cryptocurrencies to conduct thorough research and understand the risks
-                    involved.
-                </div>
-            </div>
-
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1"
-                 aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 id="offcanvasRightLabel1">Starting off with Crypto</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    Find out if you are a Crypto Pro!
-                </div>
-            </div>
 
             <!-- Button 3 -->
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
@@ -254,16 +223,15 @@
                     </div>
                 </div>
             </div>
+
             <!-- Quiz Section - initially hidden -->
             <div id="quizSection" style="display: none;">
-                <h2>Cryptocurrency Quiz</h2>
-                <p>Test your knowledge about cryptocurrency!</p>
-
+                <h2>Quiz Time!</h2>
+                <p>Select one</p>
                 <div id="quizQuestions">
-                    <!-- Quiz questions will be dynamically inserted here -->
                 </div>
-
-                <button id="submitQuiz">Submit Quiz</button>
+                <br>
+                <button class="styled" id="submitQuiz">Submit</button>
             </div>
         </div>
     </div>
@@ -276,66 +244,8 @@
     <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
         &middot; <a href="cookies.html">Cookies</a></p>
 </footer>
-<script src="dist/js/vanilla.js"></script>
+<script src="dist/js/quest.js"></script>
 <script src="dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    const buttons = document.querySelectorAll('.button');
-    const startButton = document.getElementById('startButton');
 
-    function randomButtonPosition(button) {
-        const width = document.querySelector('.white-box').offsetWidth - button.offsetWidth;
-        const height = document.querySelector('.white-box').offsetHeight - button.offsetHeight;
-        const randomLeft = Math.floor(Math.random() * width);
-        const randomTop = Math.floor(Math.random() * height);
-        button.style.left = randomLeft + 'px';
-        button.style.top = randomTop + 'px';
-
-
-    }
-
-    let currentIndex = 0;
-
-    function setButton() {
-        const currentButton = buttons[currentIndex];
-        currentButton.style.display = 'block';
-        currentButton.disabled = false; // Enable the current button
-        currentIndex = (currentIndex + 1) % buttons.length; // Increment index, loop back to 0 if reached end
-    }
-
-    startButton.addEventListener('click', function () {
-        setButton(); // Show a random button when the start button is clicked
-        startButton.style.display = 'none'; // Hide the start button
-    });
-
-    buttons.forEach(button => {
-        button.addEventListener('click', function () {
-            // Show the modal associated with the button
-            const modalId = this.getAttribute('data-modal');
-            const modal = new bootstrap.Modal(document.getElementById(modalId));
-            modal.show(button);
-
-            modal.addEventListener('hidden.bs.modal', function () {
-                this.style.display = 'none'; // Hide the clicked button
-                const nextButton = document.querySelector('.button:not([style="display: block;"])');
-                if (nextButton) {
-                    randomButtonPosition(nextButton); // Set random position for the next button
-                    nextButton.style.display = 'block'; // Show the next button
-                } else {
-                    alert('Congratulations! You have pressed all the buttons.');
-                }
-            });
-        });
-    });
-
-    // Recalculate button positions on window resize
-    window.addEventListener('resize', function () {
-        buttons.forEach(button => {
-            if (button.style.display === 'block') {
-                randomButtonPosition(button);
-            }
-        });
-    });
-
-</script>
 </body>
 </html>
