@@ -126,7 +126,7 @@
     <h1 class="space"> Welcome to the Crypto Quest!</h1>
     <div class="white-box-container">
         <button class="styled" id="startButton">Start</button>
-        <button class="styled" id="endButton">Quiz!</button>
+        <button class="styled" id="endButton">Quiz</button>
         <div class="white-box">
             <button class="button" id="button1" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight"
@@ -256,14 +256,12 @@
             </div>
             <!-- Quiz Section - initially hidden -->
             <div id="quizSection" style="display: none;">
-                <h2>Cryptocurrency Quiz</h2>
-                <p>Test your knowledge about cryptocurrency!</p>
-
+                <h2>Quiz Time!</h2>
+                <p>Select one</p>
                 <div id="quizQuestions">
-                    <!-- Quiz questions will be dynamically inserted here -->
                 </div>
-
-                <button id="submitQuiz">Submit Quiz</button>
+                <br>
+                <button class="styled" id="submitQuiz">Submit</button>
             </div>
         </div>
     </div>
@@ -276,7 +274,7 @@
     <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
         &middot; <a href="cookies.html">Cookies</a></p>
 </footer>
-<script src="dist/js/vanilla.js"></script>
+<script src="dist/js/quest.js"></script>
 <script src="dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const buttons = document.querySelectorAll('.button');
