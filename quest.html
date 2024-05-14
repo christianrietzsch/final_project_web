@@ -24,10 +24,9 @@
 
         .white-box {
             background-color: white;
-            width: 95%;
+            width: 80%;
             height: 100%;
             border-radius: 20px;
-
             overflow: hidden;
         }
 
@@ -48,6 +47,7 @@
         }
 
         .styled {
+            text-align: left;
             border: 0;
             line-height: 2.5;
             padding: 0 20px;
@@ -125,9 +125,9 @@
 
     <h1 class="space"> Welcome to the Crypto Quest!</h1>
     <div class="white-box-container">
+        <button class="styled" id="startButton">Start</button>
+        <button class="styled" id="endButton">Quiz!</button>
         <div class="white-box">
-            <button class="styled" id="startButton">Start</button>
-
             <button class="button" id="button1" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight">1
@@ -147,11 +147,6 @@
             <button class="button" id="button5" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight">5
-            </button>
-
-            <button class="styled" id="endButton" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight1"
-                    aria-controls="offcanvasRight1">Quiz!
             </button>
 
             <!-- Button 1 -->
@@ -259,8 +254,21 @@
                     </div>
                 </div>
             </div>
+            <!-- Quiz Section - initially hidden -->
+            <div id="quizSection" style="display: none;">
+                <h2>Cryptocurrency Quiz</h2>
+                <p>Test your knowledge about cryptocurrency!</p>
+
+                <div id="quizQuestions">
+                    <!-- Quiz questions will be dynamically inserted here -->
+                </div>
+
+                <button id="submitQuiz">Submit Quiz</button>
+            </div>
         </div>
     </div>
+
+
 </main>
 <footer class="container">
     <hr class="featurette-divider">
@@ -268,6 +276,7 @@
     <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
         &middot; <a href="cookies.html">Cookies</a></p>
 </footer>
+<script src="dist/js/vanilla.js"></script>
 <script src="dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const buttons = document.querySelectorAll('.button');
@@ -280,18 +289,21 @@
         const randomTop = Math.floor(Math.random() * height);
         button.style.left = randomLeft + 'px';
         button.style.top = randomTop + 'px';
+
+
     }
 
-    function randomButton() {
-        const randomIndex = 0;
-        const randomButton = buttons[randomIndex];
-        randomButtonPosition(randomButton); // Set random position for the button
-        randomButton.style.display = 'block';
-        randomButton.disabled = false; // Enable the randomly selected button
+    let currentIndex = 0;
+
+    function setButton() {
+        const currentButton = buttons[currentIndex];
+        currentButton.style.display = 'block';
+        currentButton.disabled = false; // Enable the current button
+        currentIndex = (currentIndex + 1) % buttons.length; // Increment index, loop back to 0 if reached end
     }
 
     startButton.addEventListener('click', function () {
-        randomButton(); // Show a random button when the start button is clicked
+        setButton(); // Show a random button when the start button is clicked
         startButton.style.display = 'none'; // Hide the start button
     });
 
