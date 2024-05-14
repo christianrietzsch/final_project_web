@@ -91,12 +91,14 @@
 
 <script id="cart_item_template" type="text/x-handlebars-template">
     {{#each ord}}
+    <div="container">
         <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.index}}">
-            <div>
+
+            <div class="col">
                 <h6 class="my-0">{{this.name}}</h6>
                 <small class="text-muted">{{this.description}}</small>
             </div>
-            <div>
+            <div class="col">
                 <div class="input-group">
                     <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.index}}_rm_button">
                         <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
@@ -107,8 +109,11 @@
                     <span class="text-muted m-2" id="{{this.index}}_val">x ${{this.value}}</span>
                 </div>
             </div>
-            <span class="item_total text-muted" id="{{this.index}}_total">{{this.end_price}}</span>
+            <div class="col" style="width: 50%; margin: auto; text-align: right;">
+                <span class="item_total text-muted" id="{{this.index}}_total">{{this.end_price}}</span>
+            </div>
         </li>
+    </div>
     {{/each}}
 </script>
 
