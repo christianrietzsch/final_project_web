@@ -100,13 +100,7 @@
 
         <script>
             const load_json = () => {
-                jsonData().then((coins) => {
-                    for(const i in coins){
-                        coins[i].id = parseInt(i)
-                    }
-                    localStorage.setItem("coins", JSON.stringify(coins));
-                    window.location.reload();
-                })
+                jsonData().then((coins) => resetCoins(coins)).then(() => window.location.reload());
             };
 
             const add_new = () => {
@@ -121,19 +115,24 @@
             }
             const del = (id) => {
                 return () => {
-                    getCoins().then((coins) => {
-                        coins.splice(id, 1);
-                        for(const i in coins){
-                            coins[i].id = parseInt(i)
-                        }
-                        setCoins(coins);
-                        window.location.reload();
-                    })
+                    var coins = getCoins();
+                    coins.splice(id, 1);
+                    resetCoins(coins).then(() => window.location.reload())
                 };
             }
 
             const coins = getCoins();
-            render(content_template, hb, {coins: coins, json: JSON.stringify(coins)});
+            jcoins = []
+            for (const coin of coins){
+                jcoins.push({
+                    name: coin.name,
+                    description: coins.description,
+                    image: coin.image,
+                    coincapID: coin.coincapID
+                });
+            }
+            render(content_template, hb, {coins: coins, json: JSON.stringify(jcoins)});
+
             for (let i = 0; i < coins.length; i++){
                 document.getElementById(i + "_update_button").addEventListener("click", update(i));
                 document.getElementById(i + "_rm_button").addEventListener("click", del(i));

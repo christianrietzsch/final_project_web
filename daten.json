@@ -1,17 +1,14 @@
 [{ "name": "Dodgi-Coin",
    "description": "Eine sehr zuverlässige Coin",
-   "value": 20,
-   "rate": -0.50,
-   "image": "images/img2.jpg" },
+   "image": "images/img2.jpg",
+   "coincapID": "dogecoin" },
 
  { "name": "Botcoin",
    "description": "Eine sehr zuverlässige Coin",
-   "value": 1005,
-   "rate": 0.69,
-   "image": "images/img4.jpg" },
+   "image": "images/img4.jpg",
+   "coincapID": "bitcoin" },
 
  { "name": "WOMP",
    "description": "Keine sehr zuverlässige Coin",
-   "value": 69,
-   "rate": 0.420,
-   "image": "images/img1.jpg" }]
+   "image": "images/img1.jpg",
+   "coincapID": "wootrade" }]

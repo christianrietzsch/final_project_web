@@ -16,8 +16,24 @@ function getCoins() {
   else
     return JSON.parse(coins);
 }
-function setCoins(coins){
-  localStorage.setItem("coins", JSON.stringify(coins));
+async function resetCoins(coins){
+  return Promise.all([...Array(coins.length).keys()].map(async (i) => {
+    coins[i].id = parseInt(i);
+
+    await getAPIData(coins[i].coincapID).then((result) => {
+        value = []
+        for (let x = (result.data.length - 1); x >= (result.data.length - 50); x--)
+            value.push({time: result.data[x].date, value: result.data[x].priceUsd});
+        coins[i].value = value;
+        coins[i].curValue = Math.floor(value[0].value * 10000) / 10000;
+        coins[i].curRate = Math.floor((value[0].value / value[1].value * 100 - 100) * 10000) / 10000;
+        console.log(value);
+    });
+  })).then(() => {
+      localStorage.setItem("coins", JSON.stringify(coins))
+      localStorage.setItem("orders", JSON.stringify([]))
+    }
+  );
 }
 
 function removeFromOrdersByID(id) {
@@ -101,6 +117,15 @@ function getCoinByID(id) {
   const coins = getCoins();
   if (id >= coins.length) return {};
   else return coins[id];
+}
+
+async function getAPIData(cid){
+  return fetch(url = "https://api.coincap.io/v2/assets/" + cid + "/history?interval=d1&limit=10").then(response => {
+    if (!response.ok) {
+      throw new Error('API Network response was not ok');
+    }
+    return response.json();
+  })
 }
 
 function render(template_obj, dest_obj, data){

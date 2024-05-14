@@ -68,17 +68,14 @@
                     <input type="text" class="form-control" placeholder="Description" id="desc" value="{{coin.description}}" required>
                 </div>
                 <div class="input-group mb-3 has-validation">
-                    <span class="input-group-text" for="val">Value</span>
-                    <input type="number" step="any" class="form-control" placeholder="Value" id="val" value="{{coin.value}}" required>
-                </div>
-                <div class="input-group mb-3 has-validation">
-                    <span class="input-group-text" for="rat">Rate</span>
-                    <input type="number" step="any" class="form-control" placeholder="Rate" id="rat" value="{{coin.rate}}" required>
-                </div>
-                <div class="input-group mb-3 has-validation">
                     <span class="input-group-text" for="url">Image URL</span>
                     <input type="text" class="form-control" placeholder="Image URL" id="url" value="{{coin.image}}" required>
                 </div>
+                <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="cid">Coincap ID</span>
+                    <input type="text" step="any" class="form-control" placeholder="Coincap ID" id="cid" value="{{coin.coincapID}}" required>
+                </div>
+                <small>All Coincap IDs can be seen at <a href="https://api.coincap.io/v2/assets">api.coincap.io/v2/assets</a></small>
                 <div class="py-3">
                     <button class="btn btn-primary" type="submit">Save</button>
                     <button class="btn btn-danger" id="cancel_button">Cancel</button>
@@ -90,13 +87,12 @@
             max = (v1, v2) => {return v1 > v2 ? v1 : v2;}
 
             async function save () {
-                var coins = await getCoins();
+                var coins = getCoins();
                 const coin = {
                     name : nam.value,
                     description : desc.value,
-                    value : max(0.01, parseFloat(val.value)),
-                    rate : parseFloat(rat.value),
                     image : url.value,
+                    coincapID : cid.value,
                     id : parseInt(coins.length)
                 }
                 const id = getCurrentCoinID();
@@ -106,24 +102,22 @@
                 else
                     coins[id] = coin;
 
-                setCoins(coins)
-                location.href="admin.html";
+                resetCoins(coins).then(() => location.href="admin.html");
             }
 
-            getCurrentCoin().then((result)=>{
-                render(content_template, hb, {coin: result, name: (!(result.name) ? "Unnamed" : result.name)});
-                document.getElementById("form_input").addEventListener("submit", function(event) {
-                    event.preventDefault();
-                    if (this.checkValidity() === true){
-                        save()
-                    }
-                    this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
-                }, false);
-                cancel_button.addEventListener("click", (event) => {
-                    event.stopPropagation();
-                    location.href='admin.html';
-                })
-            });
+            const currentCoin = getCurrentCoin();
+            render(content_template, hb, {coin: currentCoin, name: (!(currentCoin.name) ? "Unnamed" : currentCoin.name)});
+            document.getElementById("form_input").addEventListener("submit", function(event) {
+                event.preventDefault();
+                if (this.checkValidity() === true){
+                    save()
+                }
+                this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
+            }, false);
+            cancel_button.addEventListener("click", (event) => {
+                event.stopPropagation();
+                location.href='admin.html';
+            })
         </script>
         
         <footer class="container">
