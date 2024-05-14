@@ -53,7 +53,6 @@ document.getElementById('submitQuiz').addEventListener('click', function () {
             }
         }
     });
-    // Display the score on the same page
     const quizSection = document.getElementById('quizSection');
     if (score === 3) {
         quizSection.innerHTML = `
@@ -74,6 +73,71 @@ document.getElementById('submitQuiz').addEventListener('click', function () {
 document.getElementById('endButton').addEventListener('click', function () {
     document.getElementById('startButton').style.display = 'none';
     document.getElementById('endButton').style.display = 'none';
+    document.getElementById('button1').style.display = 'none';
+    document.getElementById('button2').style.display = 'none';
+    document.getElementById('button3').style.display = 'none';
+    document.getElementById('button4').style.display = 'none';
+    document.getElementById('button5').style.display = 'none';
     document.getElementById('quizSection').style.display = 'block';
     loadQuiz();
 });
+
+
+const buttons = document.querySelectorAll('.button');
+const startButton = document.getElementById('startButton');
+
+function randomButtonPosition(button) {
+    const width = document.querySelector('.white-box').offsetWidth - button.offsetWidth;
+    const height = document.querySelector('.white-box').offsetHeight - button.offsetHeight;
+    const randomLeft = Math.floor(Math.random() * width);
+    const randomTop = Math.floor(Math.random() * height);
+    button.style.left = randomLeft + 'px';
+    button.style.top = randomTop + 'px';
+
+
+}
+
+let currentIndex = 0;
+
+function setButton() {
+    const currentButton = buttons[currentIndex];
+    currentButton.style.display = 'block';
+    currentButton.disabled = false;
+    currentIndex = (currentIndex + 1) % buttons.length;
+}
+
+startButton.addEventListener('click', function () {
+    setButton();
+    startButton.style.display = 'none';
+});
+
+buttons.forEach(button => {
+    button.addEventListener('click', function () {
+        // Show the modal associated with the button
+        const modalId = this.getAttribute('data-modal');
+        const modal = new bootstrap.Modal(document.getElementById(modalId));
+        modal.show(button);
+
+        modal.addEventListener('hidden.bs.modal', function () {
+            this.style.display = 'none';
+            const nextButton = document.querySelector('.button:not([style="display: block;"])');
+            if (nextButton) {
+                randomButtonPosition(nextButton);
+                nextButton.style.display = 'block';
+            } else {
+                alert('Congratulations! You have pressed all the buttons.');
+            }
+        });
+    });
+});
+
+
+window.addEventListener('resize', function () {
+    buttons.forEach(button => {
+        if (button.style.display === 'block') {
+            randomButtonPosition(button);
+        }
+    });
+});
+
+
