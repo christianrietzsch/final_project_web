@@ -76,31 +76,30 @@
         </div>
     </script>
 
-    <div></div>
+    <div id="more"></div>
 
   </div>
 
   <div class="modal fade" id="buyModal" tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content" id="modal">
+      <div class="modal-content" id="buy_modal">
 
-        <script id="modal_template" type="text/x-handlebars-template">
-                  <div class="modal-header">
-                    <h5 class="modal-title">{{name}}</h5>
-                    <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"></button>
-                  </div>
-                  <div class="modal-body">
-                    <p>{{this.value}}</p>
-                    <input id="amount">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" id="buy-btn" class="btn btn-primary">Add to Cart!</button>
-                  </div>
-        
+        <script id="buy_modal_template" type="text/x-handlebars-template">
+          <div class="modal-header">
+            <h5 class="modal-title">{{name}}</h5>
+            <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{value}}</p>
+            <input id="amount">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" id="buy_btn" class="btn btn-primary">Add to Cart!</button>
+          </div>
         </script>
 
-        <div></div>
+        <div id="buy_modal_hb""></div>
 
       </div>
     </div>
@@ -143,14 +142,14 @@
                     <p class="card-text">{{this.description}}</p>
                     <div class="d-flex justify-content-between align-items-center">
                       <div class="btn-group">
-                        <button type="button" id="{{this.name}}-Buy" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
-                        <button type="button" id="{{this.name}}-More" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
+                        <button type="button" onclick="{{this.buy}}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
+                        <button type="button" onclick="{{this.more}}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                       </div>
                       <div style="{{this.color}}">
                       <!--Make responsive; two cards will make the text look weird-->
                           <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
                           <a>{{this.rate}}%</a>
-                          <a style="font-size:25px;" id="{{this.name}}-Arrow"></a>
+                          <a style="font-size:25px;" id="{{this.id}}-arrow"></a>
                       </div>
                       </div>
                     </div>
@@ -168,41 +167,65 @@
   </ul>
 
 <script>
-getCoins().then(function(result) {      
-  json = []
-  let index = 0;
-  result.map(function(obj){
-    json.push({...obj, color: 
-    obj.rate > 0 ? "color:green;" : "color:red;", index: index++})
-  })
-  render($ID("shop_item_template"), $ID("items"), {res: json})
-  json.map(init_shop_item)
-})
-const template = Handlebars.compile($ID("shop_item_template").innerHTML);
+  const template = Handlebars.compile($ID("shop_item_template").innerHTML);
+  const allCoins = getCoins();
+  const buy_modal_template = $ID("buy_modal_template");
+  const buy_modal_hb = $ID("buy_modal_hb");
+  const more_template = $ID("more_template");
+  const more = $ID("more");
+  
 
   const renderShop = (coins) => {
     json = []
     let index = 0
     coins.map(function(obj){
-      json.push({...obj, color: 
-      obj.rate > 0 ? "color:green;" : "color:red;", index: index++})
+      json.push({
+          ...obj, 
+          color: obj.rate > 0 ? "color:green;" : "color:red;", 
+          buy: "buyFunc(" + obj.id + ")",
+          more: "moreFunc(" + obj.id + ")",
+        });
     })
     $ID("items").innerHTML = template({res: json});
-    json.map(init_shop_item)
+
+    for (const coin of coins){
+      $ID(coin.id + "-arrow").innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;";
+    }
   };
+
+  const buyFunc = (id) => {
+    console.log(buy_modal_template, buy_modal_hb)
+    render(buy_modal_template, buy_modal_hb, getCoinByID(id));
+    console.log(getCoinByID(id))
+    $ID("buy_btn").addEventListener("click", 
+      () => {
+        let val = amount.value
+        if(val && val > 0) {
+          addOrder({"index": id, "amount": parseInt(val)})
+          $ID("close").click();
+        } else {
+          console.log("NOT ALLOWED")
+          // add effect later
+        }
+      }
+    )
+  }
+
+  console.log(more_template);
+  const moreFunc = (id) => {
+    render(more_template, more, allCoins[id])
+  }
 
   const sortShop = (asc, val) => {
     const filter = search_bar.value;
 
-    getCoins().then((result) => {
-      coins = [];
-      for(const coin of result)
-        if (coin.name.toLowerCase().includes(filter.toLowerCase()))
-          coins.push(coin);
+    coins = [];
+    for(const coin of allCoins)
+      if (coin.name.toLowerCase().includes(filter.toLowerCase()))
+        coins.push(coin);
 
-      coins.sort((a, b) => (val(a) < val(b)) ^ asc ? -1 : 1);
-      renderShop(coins);
-    });
+    coins.sort((a, b) => (val(a) < val(b)) ^ asc ? -1 : 1);
+    renderShop(coins);
   };
 
   search_button.addEventListener("click", () => sortShop(0,(c)=>c.name));

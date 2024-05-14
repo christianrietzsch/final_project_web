@@ -9,7 +9,7 @@ async function jsonData(){
   return data;
 }
 
-async function getCoins() {
+function getCoins() {
   const coins = localStorage.getItem("coins");
   if (!coins)
     return [];
@@ -41,9 +41,9 @@ function updateOrder(id, amount) {
   }
 }
 
-function contains_order(orders, name) {
+function contains_order(orders, index) {
   for(let i = 0; i< orders.length; i++) {
-    index = orders[i].name === name
+    index = orders[i].index === index
     if(index) {
       return i;
     }
@@ -52,9 +52,9 @@ function contains_order(orders, name) {
 }
 
 function addOrder(order) {
-  orders = JSON.parse(localStorage.getItem("orders"))
+  const orders = JSON.parse(localStorage.getItem("orders"))
   if(orders) {
-    index = contains_order(orders, order.name)
+    index = contains_order(orders, order.index)
      if(index == -1) {
      orders.push(order)
      new_orders = orders
@@ -77,12 +77,16 @@ function getCurrentCoinID(){
   return parseInt(localStorage.getItem("current"));
 }
 
-async function getCurrentCoin() {
+function getCurrentCoin() {
   var id = parseInt(localStorage.getItem("current"));
   if (id == null) id = 0;
   else if (id < 0) return {};
 
-  const coins = await getCoins();
+  return getCoinByID(id);
+}
+
+function getCoinByID(id) {
+  const coins = getCoins();
   if (id >= coins.length) return {};
   else return coins[id];
 }
