@@ -50,7 +50,6 @@
         </header>
 
         <main>
-       </script>
             <div class="container padded">
                 <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Your cart</span>
@@ -74,16 +73,16 @@
                     </li>
                 </ul>
 
-                <form class="card p-2">
+                <div class="card p-2">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Promo code">
-                        <button type="submit" class="btn btn-secondary">Redeem</button>
+                        <input type="text" id="discount_field" class="form-control" placeholder="Promo code">
+                        <button type="button" id="sub_discount" onclick="addDiscount()"class="btn btn-secondary">Redeem</button>
                     </div>
-                </form>
+                </div>
 
                 <div class="py-3">
                     <div class="card input-group p-2">
-                        <button type="submit" class="btn btn-primary">Buy</button>
+                        <a type="button" href="checkout.html" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
             </div>
@@ -128,9 +127,7 @@
         render($ID("cart_item_template"), $ID("cart"), orders)
         let id_list = []
         orders.ord.forEach((obj) => id_list.push(obj.id))
-        for(let i = 0; i < id_list.length; i++) {
-            addCartListeners(id_list[i]);
-        }
+        id_list.map(addCartListeners)
         $ID("item_count").innerText = id_list.length
     }
     
@@ -138,14 +135,40 @@
         return function(){
             $ID(id+"").remove()
             let count = $ID("item_count")
-            count.innerText = parseInt(count.innerText)-1
-            // does not find function?
-
-            
-            //discount code
-            //für prozent etc abfrage beim parsen / updaten machen
+            count.innerText = parseInt(count.innerText)-1    
             updateTotalPrice()
             updateOrder(id, -1)
+        }
+    }
+
+    $ID("discount_field").addEventListener("keydown", (event) => {
+        if(event.key == "Enter") {
+            addDiscount()
+        }
+    })
+
+    function checkDiscount(discount) {
+        //checks if discount was already used
+        return true
+    }
+
+    function getDiscountValue(discount) {
+        return 5
+    }
+
+    function updateDiscount(discount) {
+        //set to current
+        //if buy, set to used
+    }
+
+    function addDiscount() {
+        //validate field if discount can be used
+        //else set to red
+        const discount = $ID("discount_field").value
+        if(checkDiscount(discount)) {            
+            $ID("discount").innerText = "-$" + getDiscountValue(discount)
+            updateTotalPrice()
+            updateDiscount(discount)
         }
     }
 
