@@ -90,7 +90,7 @@
             <button type="button" id="close" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <p>{{value}}</p>
+            <p>{{curValue}}</p>
             <input id="amount">
           </div>
           <div class="modal-footer">
@@ -114,13 +114,13 @@
         <ul class="dropdown-menu dropdown-menu-end">
           <li><h6 class="dropdown-header">Sort by (asc):</h6></li>
           <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.name);">Name</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.value);">Value</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.rate);">Rate</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.curValue);">Value</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.curRate);">Rate</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><h6 class="dropdown-header">Sort by (desc):</h6></li>
           <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.name);">Name</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.value);">Value</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.rate);">Rate</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.curValue);">Value</a></li>
+          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.curRate);">Rate</a></li>
         </ul>
       </div>
     </li>
@@ -148,7 +148,7 @@
                       <div style="{{this.color}}">
                       <!--Make responsive; two cards will make the text look weird-->
                           <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                          <a>{{this.rate}}%</a>
+                          <a>{{this.curRate}}%</a>
                           <a style="font-size:25px;" id="{{this.id}}-arrow"></a>
                       </div>
                       </div>
@@ -181,7 +181,7 @@
     coins.map(function(obj){
       json.push({
           ...obj, 
-          color: obj.rate > 0 ? "color:green;" : "color:red;", 
+          color: obj.curRate > 0 ? "color:green;" : "color:red;", 
           buy: "buyFunc(" + obj.id + ")",
           more: "moreFunc(" + obj.id + ")",
         });
@@ -189,7 +189,7 @@
     $ID("items").innerHTML = template({res: json});
 
     for (const coin of coins){
-      $ID(coin.id + "-arrow").innerHTML = json.rate >= 0 ? "&uarr;" : "&darr;";
+      $ID(coin.id + "-arrow").innerHTML = coin.curRate >= 0 ? "&uarr;" : "&darr;";
     }
   };
 
