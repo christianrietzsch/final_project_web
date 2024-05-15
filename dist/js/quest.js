@@ -86,13 +86,13 @@ document.getElementById('endButton').addEventListener('click', function () {
 const buttons = document.querySelectorAll('.button');
 const startButton = document.getElementById('startButton');
 
-function randomButtonPosition(button) {
-    const width = document.querySelector('.white-box').offsetWidth - button.offsetWidth;
-    const height = document.querySelector('.white-box').offsetHeight - button.offsetHeight;
+function randomButtonPosition() {
+    const width = document.querySelector('.white-box').offsetWidth - setButton().offsetWidth;
+    const height = document.querySelector('.white-box').offsetHeight - setButton().offsetHeight;
     const randomLeft = Math.floor(Math.random() * width);
     const randomTop = Math.floor(Math.random() * height);
-    button.style.left = randomLeft + 'px';
-    button.style.top = randomTop + 'px';
+    setButton().style.left = randomLeft + 'px';
+    setButton().style.top = randomTop + 'px';
 
 
 }
@@ -104,6 +104,7 @@ function setButton() {
     currentButton.style.display = 'block';
     currentButton.disabled = false;
     currentIndex = (currentIndex + 1) % buttons.length;
+    return currentButton
 }
 
 startButton.addEventListener('click', function () {
@@ -113,18 +114,12 @@ startButton.addEventListener('click', function () {
 
 buttons.forEach(button => {
     button.addEventListener('click', function () {
-        setButton()
+        randomButtonPosition();
         buttons[currentIndex].style.display = 'none';
     })
 });
 
 
-window.addEventListener('resize', function () {
-    buttons.forEach(button => {
-        if (button.style.display === 'block') {
-            randomButtonPosition(button);
-        }
-    });
-});
+
 
 
