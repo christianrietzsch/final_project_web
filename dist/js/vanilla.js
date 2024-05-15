@@ -25,8 +25,8 @@ async function resetCoins(coins){
         for (let x = (result.data.length - 1); x >= (result.data.length - 50); x--)
             value.push({time: result.data[x].date, value: result.data[x].priceUsd});
         coins[i].value = value;
-        coins[i].curValue = Math.floor(value[0].value * 10000) / 10000;
-        coins[i].curRate = Math.floor((value[0].value / value[1].value * 100 - 100) * 10000) / 10000;
+        coins[i].curValue = round(value[0].value, 4);
+        coins[i].curRate = round(value[0].value / value[1].value * 100 - 100, 4);
         console.log(value);
     });
   })).then(() => {
@@ -34,6 +34,10 @@ async function resetCoins(coins){
       localStorage.setItem("orders", JSON.stringify([]))
     }
   );
+}
+
+function round(val, amount){
+  return Math.round(val * Math.pow(10, amount)) / Math.pow(10, amount);
 }
 
 function removeFromOrdersByID(id) {
@@ -100,9 +104,8 @@ function getOrders() {
   new_orders = []
   orders.forEach((order) => {
     const coin = getCoinByID(order.id)
-    console.log(order.id);
     new_order = {...coin, amount: order.amount, 
-      end_price: coin.curValue*order.amount}
+      end_price: round(coin.curValue*order.amount + 0.005, 2)}
     new_orders.push(new_order)
   })
   return {ord: new_orders}

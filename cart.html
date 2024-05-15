@@ -173,29 +173,29 @@
     }
 
     function updateTotalPrice() {
-    const elements = document.getElementsByClassName("item_total")
+        const elements = document.getElementsByClassName("item_total")
         let total = 0
         for(let i = 0; i < elements.length; i++) {
             total += parseFloat(elements[i].innerText)
         }
         total -= parseFloat($ID("discount").innerHTML.substring(2))
-        $ID("total").innerText = "$ " + total
+        $ID("total").innerText = "$ " + round(total, 2)
     }
             
     const changeCount = (input_box, id) => {
         return function(){
             amount = parseFloat(input_box.value)
-                    if(amount <= 0){
-                        amount = 1;
-                        input_box.value = "1";
-                    }
+                if(amount <= 0){
+                    amount = 1;
+                    input_box.value = "1";
+                }
 
-                    const price = parseFloat($ID(id+ "_val").innerText.substring(3))
-                    $ID(id+"_total").innerText = amount*price
+            const price = parseFloat($ID(id+ "_val").innerText.substring(3))
+            $ID(id+"_total").innerText = round(amount * price + 0.005, 2);
             updateTotalPrice()
             updateOrder(id, amount)
-                }
-            }
+        }
+    }
 
     init_cart_items(getOrders())
     updateTotalPrice()
