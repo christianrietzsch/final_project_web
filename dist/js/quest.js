@@ -113,22 +113,9 @@ startButton.addEventListener('click', function () {
 
 buttons.forEach(button => {
     button.addEventListener('click', function () {
-        // Show the modal associated with the button
-        const modalId = this.getAttribute('data-modal');
-        const modal = new bootstrap.Modal(document.getElementById(modalId));
-        modal.show(button);
-
-        modal.addEventListener('hidden.bs.modal', function () {
-            this.style.display = 'none';
-            const nextButton = document.querySelector('.button:not([style="display: block;"])');
-            if (nextButton) {
-                randomButtonPosition(nextButton);
-                nextButton.style.display = 'block';
-            } else {
-                alert('Congratulations! You have pressed all the buttons.');
-            }
-        });
-    });
+        setButton()
+        buttons[currentIndex].style.display = 'none';
+    })
 });
 
 
