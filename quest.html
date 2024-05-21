@@ -13,9 +13,11 @@
     <link href="dist/css/custom.css" rel="stylesheet">
     <script src="dist/js/handlebars.min-v4.7.8.js"></script>
     <style>
+
+
         .white-box-container {
             position: relative;
-            height: 80vh; /* 80% of the viewport height */
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -23,17 +25,17 @@
         }
 
         .white-box {
-            background-color: white;
+            position: relative;
             width: 80%;
             height: 100%;
             border-radius: 20px;
             overflow: hidden;
         }
 
+
         .button {
             display: none; /* Initially hide the buttons */
             position: absolute; /* Set position to absolute */
-            background-color: #4CAF50;
             border: none;
             border-radius: 50%;
             width: 50px;
@@ -44,6 +46,26 @@
             font-size: 20px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+        }
+
+        .button1-color {
+            background-color: #4CAF50;
+        }
+
+        .button2-color {
+            background-color: #45a
+        }
+
+        .button3-color {
+            background-color: #04414d;
+        }
+
+        .button4-color {
+            background-color: #4f5050;
+        }
+
+        .button5-color {
+            background-color: #25cff2;
         }
 
         .styled {
@@ -88,164 +110,277 @@
             background-color: #f8f9fa;
             border-top: 1px solid #dee2e6;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            gap: 1px;
+        }
+
+        .grid input {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+        }
+
     </style>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="home.html">Coincidence</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-
-</header>
-
-<main>
-
-    <h1 class="space"> Welcome to the Crypto Quest!</h1>
-    <div class="white-box-container">
-        <button class="styled" id="startButton">Start</button>
-        <button class="styled" id="endButton">Quiz</button>
-        <div class="white-box">
-            <button class="button" id="button1" type="button" data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">1
-            </button>
-            <button class="button" id="button2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">2
-            </button>
-            <button class="button" id="button3" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">3
-            </button>
-            <button class="button" id="button4" type="button" >4
-            </button>
-            <button class="button" id="button5" type="button" >5
-            </button>
-
-            <!-- Button 1 -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-                 aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                            aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
-                    operates independently of a central authority, such as a government or financial institution. The
-                    most
-                    well-known cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group of
-                    people using
-                    the pseudonym Satoshi Nakamoto.
-                    <br>
-                    <br>
-                    Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
-                    immutability. Blockchain is a distributed ledger technology that records all transactions across a
-                    network of computers. This technology ensures that transactions are secure and cannot be tampered
-                    with once they are recorded.
-                    <br>
-                    <br>
-                    Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
-                    "altcoins," have been created. Each cryptocurrency typically operates on its own blockchain or a
-                    variation of an
-                    existing one.
+<div
+        class="bg-image"
+        style="
+    background-image: url('https://mdbcdn.b-cdn.net/img/Photos/Others/images/76.webp');
+    height: 100vh;
+  "
+>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="home.html">Coincidence</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
+        </nav>
 
-            <!-- Button 2 -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Fun Fact!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Pizza Day: On May 22, 2010, a programmer named Laszlo Hanyecz made the first real-world
-                            transaction using Bitcoin. He famously purchased two pizzas for 10,000 BTC, which would be
-                            worth
-                            millions of dollars today. This event is commemorated in the crypto community as "Bitcoin
-                            Pizza
-                            Day."
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+    </header>
 
+    <main>
+
+
+        <h1 class="space"> Welcome to the Crypto Quest!</h1>
+        <p class="space">Click on the start button below and find the buttons on the page to get to know the world of crypto currency and test your knowledge in a quiz!</p>
+        <div class="white-box-container">
+            <button class="styled" id="startButton">Start</button>
+            <button class="styled" id="endButton">Quiz</button>
+            <div class="white-box">
+                <button class="button button1-color" id="button1" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight"
+                        aria-controls="offcanvasRight">1
+                </button>
+                <button class="button button2-color" id="button2" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">2
+                </button>
+                <button class="button button3-color" id="button3" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal2">3
+                </button>
+                <button class="button button4-color" id="button4" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight2"
+                        aria-controls="offcanvasRight">4
+                </button>
+                <button class="button button5-color" id="button5" type="button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal3">5
+                </button>
+
+                <!-- Button 1 -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                     aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel">Starting off with Crypto</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
+                        operates independently of a central authority, such as a government or financial institution.
+                        The
+                        most
+                        well-known cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group
+                        of
+                        people using
+                        the pseudonym Satoshi Nakamoto.
+                        <br>
+                        <br>
+                        Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
+                        immutability. Blockchain is a distributed ledger technology that records all transactions across
+                        a
+                        network of computers. This technology ensures that transactions are secure and cannot be
+                        tampered
+                        with once they are recorded.
+                        <br>
+                        <br>
+                        Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
+                        "altcoins," have been created. Each cryptocurrency typically operates on its own blockchain or a
+                        variation of an
+                        existing one.
+                    </div>
+                </div>
+
+                <!-- Button 2 -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Fun Fact!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Pizza Day: On May 22, 2010, a programmer named Laszlo Hanyecz made the first real-world
+                                transaction using Bitcoin. He famously purchased two pizzas for 10,000 BTC, which would
+                                be
+                                worth
+                                millions of dollars today. This event is commemorated in the crypto community as
+                                "Bitcoin
+                                Pizza
+                                Day."
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <!-- Button 3 -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
-                 aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel2">Fun Fact!</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Cryptocurrency Mining Energy Consumption: The process of mining cryptocurrencies, especially
-                            Bitcoin, requires substantial computational power, leading to significant energy
-                            consumption.
-                            Bitcoin mining alone consumes more electricity than many countries. This has led to debates
-                            about
-                            the environmental impact of cryptocurrencies and the need for more sustainable mining
-                            practices.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+                <!-- Button 3 -->
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">Fun Fact!</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Cryptocurrency Mining Energy Consumption: The process of mining cryptocurrencies,
+                                especially
+                                Bitcoin, requires substantial computational power, leading to significant energy
+                                consumption.
+                                Bitcoin mining alone consumes more electricity than many countries. This has led to
+                                debates
+                                about
+                                the environmental impact of cryptocurrencies and the need for more sustainable mining
+                                practices.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Quiz Section - initially hidden -->
-            <div id="quizSection" style="display: none;">
-                <h2>Quiz Time!</h2>
-                <p>Select one</p>
-                <div id="quizQuestions">
+                <!-- Button 4 -->
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2"
+                     aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="offcanvasRightLabel2">Crossword Puzzle</h5>
+                        <h6>Can you find the words we are looking for?</h6>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="container">
+                            <div class="grid" id="crossword">
+                                <!-- 10x10 grid inputs -->
+                                <script>
+                                    for (let i = 0; i < 70; i++) {
+                                        document.write('<input type="text" maxlength="1">');
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <script>
+
+                            const gridInputs = document.querySelectorAll('.grid input');
+                            const grid = [
+                                'b', 'l', 'o', '', 'k', '', 'h', '', '', 'n',
+                                'i','', '', '', '', '', '', '', '', '',
+                                '', '', '', '', '', '', '', '', '', '',
+                                '', '', '', '', '', '', '', '', '', '',
+                                '', '', '', 't', '', '', '', '', '', '',
+                                '', '', '', 'o', '', '', '', '', '', '',
+                                'n', '', '', '', '', '', '', '', '', '',
+
+                            ];
+
+                            for (let i = 0; i < grid.length; i++) {
+                                if (grid[i] !== '') {
+                                    gridInputs[i].value = grid[i];
+                                    gridInputs[i].disabled = true;
+                                }
+                            }
+                        </script>
+                    </div>
                 </div>
-                <br>
-                <button class="styled" id="submitQuiz">Submit</button>
+
+                <!-- Button 5 -->
+                <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel3">Seems like you pressed all the
+                                    buttons</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Good Job! You're ready for the quiz. Click the "Quiz" button to test your
+                                knowledge.
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dismiss</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Quiz Section - initially hidden -->
+                <div id="quizSection" style="display: none;">
+                    <h2>Quiz Time!</h2>
+                    <p>Select one</p>
+                    <div id="quizQuestions">
+                    </div>
+                    <br>
+                    <button class="styled" id="submitQuiz">Submit</button>
+                </div>
             </div>
         </div>
-    </div>
 
 
-</main>
-<footer class="container">
-    <hr class="featurette-divider">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
-        &middot; <a href="cookies.html">Cookies</a></p>
-</footer>
-<script src="dist/js/quest.js"></script>
-<script src="dist/js/bootstrap.bundle.min.js"></script>
-
+    </main>
+    <footer class="container">
+        <hr class="featurette-divider">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a
+                href="terms.html">Terms</a>
+            &middot; <a href="cookies.html">Cookies</a></p>
+    </footer>
+    <script src="dist/js/quest.js"></script>
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>
