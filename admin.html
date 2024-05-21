@@ -124,11 +124,13 @@
             for (const coin of coins){
                 jcoins.push({
                     name: coin.name,
-                    description: coins.description,
+                    description: coin.description,
+                    longDescription: coin.longDescription,
                     image: coin.image,
                     coincapID: coin.coincapID
                 });
             }
+            console.log(jcoins);
             render(content_template, hb, {coins: coins, json: JSON.stringify(jcoins)});
 
             for (let i = 0; i < coins.length; i++){

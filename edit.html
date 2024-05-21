@@ -68,6 +68,10 @@
                     <input type="text" class="form-control" placeholder="Description" id="desc" value="{{coin.description}}" required>
                 </div>
                 <div class="input-group mb-3 has-validation">
+                    <span class="input-group-text" for="desc">Long description</span>
+                    <textarea class="form-control" placeholder="Long description" id="longDesc" required>{{coin.longDescription}}</textarea>
+                </div>
+                <div class="input-group mb-3 has-validation">
                     <span class="input-group-text" for="url">Image URL</span>
                     <input type="text" class="form-control" placeholder="Image URL" id="url" value="{{coin.image}}" required>
                 </div>
@@ -93,11 +97,11 @@
                 const coin = {
                     name : nam.value,
                     description : desc.value,
+                    longDescription : longDesc.value,
                     image : url.value,
                     coincapID : cid.value,
                     id : parseInt(coins.length)
                 }
-                const id = getCoinByID(id);
 
                 if (id < 0)
                     coins.push(coin);

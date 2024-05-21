@@ -22,7 +22,7 @@
                 <div class="container-fluid">
                     <a class="navbar-brand" href="home.html">Coincidence</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                        <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -64,9 +64,9 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             <h3 class="card-title">{{name}}</h5>
-                            <p class="card-text">Here is space for a long discription of Botcoin.</p>
+                            <p class="card-text">{{longDescription}}</p>
 
-                            <div class="row row-cols-2 mt-4 align-items-end">
+                            <div class="row row-cols-1 row-cols-sm-2 mt-4 align-items-end">
                                 <div class="col my-2">
                                     <h5>Current Value: </h5>
                                     <a>$ {{val}}</a>
@@ -108,29 +108,56 @@
 
             <canvas class="my-4 w-100" id="chart"></canvas>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                    <th scope="col">Date</th>
-                    <th scope="col">Rate</th>
-                    <th scope="col">Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each value}}
-                    <tr>
-                        <td>{{this.date}}</th>
-                        <td>
-                            <div style="{{this.color}}">
-                                <a>{{this.rate}}%</a>
-                                <a id="{{@index}}-rate-arrow"></a>
-                            </div>
-                        </td>
-                        <td>$ {{this.value}}</td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+            <div class="table-responsive d-none d-sm-block">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each value}}
+                        <tr>
+                            <td>{{this.date}}</th>
+                            <td>
+                                <div style="{{this.color}}">
+                                    <a>{{this.rateLG}}%</a>
+                                    <a id="{{@index}}-lg-rate-arrow"></a>
+                                </div>
+                            </td>
+                            <td>$ {{this.valueLG}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive d-block d-sm-none">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each value}}
+                        <tr>
+                            <td>{{this.date}}</th>
+                            <td>
+                                <div style="{{this.color}}">
+                                    <a>{{this.rateSM}}%</a>
+                                    <a id="{{@index}}-sm-rate-arrow"></a>
+                                </div>
+                            </td>
+                            <td>$ {{this.valueSM}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
         </script>
 
         <script>
@@ -141,8 +168,11 @@
             coin.color = coin.rat > 0 ? "color:green" : "color:red";
             for (let i = 0; i < coin.value.length - 1; i++){
                 coin.value[i].date = toDate(coin.value[i].time);
-                coin.value[i].rate = coin.value[i].value / coin.value[i + 1].value * 100 - 100;
-                coin.value[i].color = coin.value[i].rate > 0 ? "color:green" : "color:red";
+                coin.value[i].rateLG = coin.value[i].value / coin.value[i + 1].value * 100 - 100;
+                coin.value[i].valueLG = coin.value[i].value;
+                coin.value[i].rateSM = round(coin.value[i].rateLG, 6);
+                coin.value[i].valueSM = round(coin.value[i].valueLG, 6);
+                coin.value[i].color = coin.value[i].rateLG > 0 ? "color:green" : "color:red";
             }
 
             coin.value.pop();
@@ -150,7 +180,8 @@
             render(details_template, hb, coin)
             $ID("rate-arrow").innerHTML = coin.rat >= 0 ? "&uarr;" : "&darr;";
             for (let i = 0; i < coin.value.length - 1; i++){
-                $ID(i+"-rate-arrow").innerHTML = coin.value[i].rate >= 0 ? "&uarr;" : "&darr;";
+                $ID(i+"-sm-rate-arrow").innerHTML = coin.value[i].rateLG >= 0 ? "&uarr;" : "&darr;";
+                $ID(i+"-lg-rate-arrow").innerHTML = coin.value[i].rateLG >= 0 ? "&uarr;" : "&darr;";
             }
             new Chart($ID("chart"), toChartData(coin.id, 364));
 
