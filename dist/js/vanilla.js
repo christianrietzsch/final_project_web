@@ -21,13 +21,21 @@ async function resetCoins(coins){
     coins[i].id = parseInt(i);
 
     await getAPIData(coins[i].coincapID).then((result) => {
-        value = []
-        for (let x = (result.data.length - 1); x >= (result.data.length - 50); x--)
-            value.push({time: result.data[x].date, value: result.data[x].priceUsd});
-        coins[i].value = value;
-        coins[i].curValue = round(value[0].value, 4);
-        coins[i].curRate = round(value[0].value / value[1].value * 100 - 100, 4);
-        console.log(value);
+      value = []
+      for (let x = (result.data.length - 1); x >= 0; x--)
+        value.push({time: result.data[x].date, value: result.data[x].priceUsd});
+      coins[i].value = value;
+      coins[i].curValue = round(value[0].value, 4);
+      coins[i].curRate = round(value[0].value / value[1].value * 100 - 100, 4);
+    });
+
+    await getAPIAdvancedData(coins[i].coincapID).then((result) => {
+      coins[i].supply = parseFloat(result.data.supply);
+      coins[i].maxSupply = parseFloat(result.data.maxSupply);
+      if (!coins[i].maxSupply)
+        coins[i].maxSupply = "Unknown";
+      coins[i].marketCapUsd = parseFloat(result.data.marketCapUsd);
+      coins[i].volumeUsd24Hr = parseFloat(result.data.volumeUsd24Hr);
     });
   })).then(() => {
       localStorage.setItem("coins", JSON.stringify(coins))
@@ -85,7 +93,7 @@ function contains_order(orders, id) {
 function addOrder(order) {
   const orders = JSON.parse(localStorage.getItem("orders"))
   if(orders) {
-    id = contains_order(orders, order.id)
+    var id = contains_order(orders, order.id)
      if(id == -1) {
      orders.push(order)
      new_orders = orders
@@ -127,11 +135,20 @@ async function getAPIData(cid){
   })
 }
 
-function toChartData(id, amount){
-  toDate = (date) => {
-    return date.slice(8, 10) + "." + date.slice(5, 7) + "." + date.slice(0, 4);
-  };
+async function getAPIAdvancedData(cid){
+  return fetch(url = "https://api.coincap.io/v2/assets/" + cid).then(response => {
+    if (!response.ok) {
+      throw new Error('API Network response was not ok');
+    }
+    return response.json();
+  })
+}
 
+function toDate(date) {
+  return date.slice(8, 10) + "." + date.slice(5, 7) + "." + date.slice(0, 4);
+}
+
+function toChartData(id, amount){
   const coin = getCoinByID(id);
   labels = [];
   data = [];

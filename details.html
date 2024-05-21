@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Coincidence</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/custom.css" rel="stylesheet">
+        <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+        <script src="dist/js/vanilla.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="home.html">Coincidence</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="home.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="shop.html">Shop</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="admin.html">Admin</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav mb-2 mb-md-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="cart.html">Cart
+                                    <svg width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
+                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                                    </svg>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="container padded" id="hb">
+            </div>
+        </main>
+
+        <script id="details_template" type="text/x-handlebars-template">
+            <div class="card mt-5">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                    <img src="{{image}}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">{{name}}</h5>
+                            <p class="card-text">Here is space for a long discription of Botcoin.</p>
+
+                            <div class="row row-cols-2 mt-4 align-items-end">
+                                <div class="col my-2">
+                                    <h5>Current Value: </h5>
+                                    <a>$ {{val}}</a>
+                                </div>
+                                <div class="col my-2">
+                                    <h5>Current Rate: </h5>
+                                    <div style="{{color}}">
+                                        <a>{{rat}}%</a>
+                                        <a id="rate-arrow"></a>
+                                    </div>
+                                </div>
+                                <div class="col my-2">
+                                    <h5>Trading supply: </h5>
+                                    <a>{{supply}}</a>
+                                </div>
+                                <div class="col my-2">
+                                    <h5>Maximum supply: </h5>
+                                    <a>{{maxSupply}}</a>
+                                </div>
+                                <div class="col my-2">
+                                    <h5>Market cap: </h5>
+                                    <a>$ {{marketCapUsd}}</a>
+                                </div>
+                                <div class="col my-2">
+                                    <h5>24-hr Volume: </h5>
+                                    <a>$ {{volumeUsd24Hr}}</a>
+                                </div>
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <input type="number" class="form-control" aria-label="Amount" id="cart_count" value="" placeholder="Amount">
+                                <button class="btn btn-outline-success" id="cart_buy_button">Add to cart</button>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <canvas class="my-4 w-100" id="chart"></canvas>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Rate</th>
+                    <th scope="col">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each value}}
+                    <tr>
+                        <td>{{this.date}}</th>
+                        <td>
+                            <div style="{{this.color}}">
+                                <a>{{this.rate}}%</a>
+                                <a id="{{@index}}-rate-arrow"></a>
+                            </div>
+                        </td>
+                        <td>$ {{this.value}}</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </script>
+
+        <script>
+            const id = parseInt(new URL(window.location.href).searchParams.get("selected"));
+            var coin = getCoinByID(id);
+            coin.val = coin.value[0].value;
+            coin.rat = coin.value[0].value / coin.value[1].value * 100 - 100;
+            coin.color = coin.rat > 0 ? "color:green" : "color:red";
+            for (let i = 0; i < coin.value.length - 1; i++){
+                coin.value[i].date = toDate(coin.value[i].time);
+                coin.value[i].rate = coin.value[i].value / coin.value[i + 1].value * 100 - 100;
+                coin.value[i].color = coin.value[i].rate > 0 ? "color:green" : "color:red";
+            }
+
+            coin.value.pop();
+
+            render(details_template, hb, coin)
+            $ID("rate-arrow").innerHTML = coin.rat >= 0 ? "&uarr;" : "&darr;";
+            for (let i = 0; i < coin.value.length - 1; i++){
+                $ID(i+"-rate-arrow").innerHTML = coin.value[i].rate >= 0 ? "&uarr;" : "&darr;";
+            }
+            new Chart($ID("chart"), toChartData(coin.id, 364));
+
+            cart_count.addEventListener("change", () => {
+                if(parseFloat(cart_count.value) <= 0){
+                    cart_count.value = "1";
+                }
+            });
+            cart_buy_button.addEventListener("click", () => {
+                var amount = parseInt(cart_count.value)
+                if (!amount || amount <= 0){
+                    amount = 1;
+                    cart_count.value = "1";
+                }
+                addOrder({"id": id, "amount": amount})
+            });
+        </script>
+        
+        <footer class="container">
+            <hr class="featurette-divider">
+            <p class="float-end"><a href="#">Back to top</a></p>
+            <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="cookies.html">Cookies</a></p>
+        </footer>
+
+        <script src="dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
