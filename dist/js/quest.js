@@ -85,39 +85,38 @@ document.getElementById('endButton').addEventListener('click', function () {
 
 const buttons = document.querySelectorAll('.button');
 const startButton = document.getElementById('startButton');
-
-function randomButtonPosition() {
-    const width = document.querySelector('.white-box').offsetWidth - setButton().offsetWidth;
-    const height = document.querySelector('.white-box').offsetHeight - setButton().offsetHeight;
-    const randomLeft = Math.floor(Math.random() * width);
-    const randomTop = Math.floor(Math.random() * height);
-    setButton().style.left = randomLeft + 'px';
-    setButton().style.top = randomTop + 'px';
-
-
-}
-
 let currentIndex = 0;
 
-function setButton() {
-    const currentButton = buttons[currentIndex];
-    currentButton.style.display = 'block';
-    currentButton.disabled = false;
-    currentIndex = (currentIndex + 1) % buttons.length;
-    return currentButton
+
+function randomButtonPosition() {
+
+    const width = document.querySelector('.white-box').offsetWidth - buttons[currentIndex].offsetWidth;
+    const height = document.querySelector('.white-box').offsetHeight - buttons[currentIndex].offsetHeight;
+    const randomLeft = Math.floor(Math.random() * width);
+    const randomTop = Math.floor(Math.random() * height);
+
+    buttons[currentIndex].style.left = randomLeft + 'px';
+    buttons[currentIndex].style.top = randomTop + 'px';
+    buttons[currentIndex].style.display = 'block';
+
+
 }
 
-startButton.addEventListener('click', function () {
-    setButton();
-    startButton.style.display = 'none';
-});
 
 buttons.forEach(button => {
     button.addEventListener('click', function () {
-        randomButtonPosition();
+
         buttons[currentIndex].style.display = 'none';
-    })
+        currentIndex++;
+        randomButtonPosition();
+    });
 });
+
+startButton.addEventListener('click', function () {
+    randomButtonPosition();
+    startButton.style.display = 'none';
+});
+
 
 
 
