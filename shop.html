@@ -206,6 +206,17 @@
     }
   };
 
+  function addToCart(id) {
+    var amount = parseInt(cart_count.value)
+      if (!amount || amount <= 0){
+        amount = 1;
+        cart_count.value = "1";
+      }
+
+      addOrder({"id": id, "amount": amount})
+      bootstrap.Offcanvas.getInstance(more).hide();
+  }
+
   const moreFunc = (id) => {
     var coin = allCoins[id];
     coin.colorDay = coin.curRate > 0 ? "color:green;" : "color:red;";
@@ -220,14 +231,13 @@
         cart_count.value = "1";
       }
     });
-    cart_buy_button.addEventListener("click", () => {
-      var amount = parseInt(cart_count.value)
-      if (!amount || amount <= 0){
-        amount = 1;
-        cart_count.value = "1";
+    cart_count.addEventListener("keydown", (event) => {
+      if(event.key === 'Enter'){
+        addToCart(id);
       }
-
-      addOrder({"id": id, "amount": amount})
+    });
+    cart_buy_button.addEventListener("click", () => {
+      addToCart(id);
     });
     $ID("offcanvas-24-arrow").innerHTML = coin.curRate >= 0 ? "&uarr;" : "&darr;";
     $ID("offcanvas-30-arrow").innerHTML = coin.monthRate >= 0 ? "&uarr;" : "&darr;";
