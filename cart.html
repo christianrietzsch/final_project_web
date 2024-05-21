@@ -57,21 +57,7 @@
                 </h4>
 
 
-                <ul class="list-group mb-3">
-                    <div id="cart"></div>
-                    <li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Promo code</h6>
-                            <small id="discount_code"></small>
-                        </div>
-                        <span class="text-success" id="discount">−$0</span>
-                    </li>
-
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong id="total">$</strong>
-                    </li>
-                </ul>
+                <ul class="list-group mb-3" id="cart"></ul>
 
                 <div class="card p-2">
                     <div class="input-group">
@@ -90,30 +76,44 @@
 
 <script id="cart_item_template" type="text/x-handlebars-template">
     {{#each ord}}
-    <div class="container">
-        <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
-
-            <div class="col">
-                <h6 class="my-0">{{this.name}}</h6>
-                <small class="text-muted">{{this.description}}</small>
+    <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
+        <div class="col-4">
+            <h6 class="my-0">{{this.name}}</h6>
+            <small class="text-muted">{{this.description}}</small>
+        </div>
+        <div class="col-3">
+            <div class="input-group">
+                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                    </svg>
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">-</button>
+                <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
+                <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">+</button>
             </div>
-            <div class="col">
-                <div class="input-group">
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button">
-                        <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                        </svg>                                
-                    </button>
-                    <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
-                    <span class="text-muted m-2" id="{{this.id}}_val">x ${{this.curValue}}</span>
-                </div>
-            </div>
-            <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                <span class="item_total text-muted" id="{{this.id}}_total">{{this.end_price}}</span>
-            </div>
-        </li>
-    </div>
+        </div>
+        <div class="col" style="margin: auto;">
+            <span class="text-muted m-2" id="{{this.id}}_val">x $ {{this.curValue}}</span>
+        </div>
+        <div class="col" style="width: 50%; margin: auto; text-align: right;">
+            <span class="item_total text-muted" id="{{this.id}}_total">$ {{this.end_price}}</span>
+        </div>
+    </li>
     {{/each}}
+
+    <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+            <h6 class="my-0">Promo code</h6>
+            <small id="discount_code"></small>
+        </div>
+        <span class="text-success" id="discount">−$ 0</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total (USD)</span>
+        <strong id="total">$</strong>
+    </li>
 </script>
 
 <script>
@@ -121,6 +121,14 @@
     function addCartListeners(id) {
         $ID(id+"_rm_button").addEventListener("click", remove(id))
         $ID(id+"_count_input").addEventListener("change", changeCount($ID(id+"_count_input"), id))
+        $ID(id+"_-_button").addEventListener("click", () =>{
+            $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) - 1;
+            changeCount($ID(id+"_count_input"), id)();
+        });        
+        $ID(id+"_+_button").addEventListener("click", () =>{
+            $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) + 1;
+            changeCount($ID(id+"_count_input"), id)();
+        });
     }
 
     function init_cart_items(orders) {
@@ -176,7 +184,7 @@
         const elements = document.getElementsByClassName("item_total")
         let total = 0
         for(let i = 0; i < elements.length; i++) {
-            total += parseFloat(elements[i].innerText)
+            total += parseFloat(elements[i].innerText.substring(2))
         }
         total -= parseFloat($ID("discount").innerHTML.substring(2))
         $ID("total").innerText = "$ " + round(total, 2)
@@ -188,10 +196,10 @@
                 if(amount <= 0){
                     amount = 1;
                     input_box.value = "1";
-                }
+            }
 
             const price = parseFloat($ID(id+ "_val").innerText.substring(3))
-            $ID(id+"_total").innerText = round(amount * price + 0.005, 2);
+            $ID(id+"_total").innerText = "$ " + round(amount * price + 0.005, 2);
             updateTotalPrice()
             updateOrder(id, amount)
         }
