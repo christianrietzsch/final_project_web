@@ -111,31 +111,61 @@ function getOrders() {
   return {ord: new_orders}
 }
 
-function getCurrentCoinID(){
-  return parseInt(localStorage.getItem("current"));
-}
-
-function getCurrentCoin() {
-  var id = parseInt(localStorage.getItem("current"));
-  if (id == null) id = 0;
-  else if (id < 0) return {};
-
-  return getCoinByID(id);
-}
-
 function getCoinByID(id) {
   const coins = getCoins();
   if (id >= coins.length) return {};
+  else if(id < 0) return {};
   else return coins[id];
 }
 
 async function getAPIData(cid){
-  return fetch(url = "https://api.coincap.io/v2/assets/" + cid + "/history?interval=d1&limit=10").then(response => {
+  return fetch(url = "https://api.coincap.io/v2/assets/" + cid + "/history?interval=d1").then(response => {
     if (!response.ok) {
       throw new Error('API Network response was not ok');
     }
     return response.json();
   })
+}
+
+function toChartData(id, amount){
+  toDate = (date) => {
+    return date.slice(8, 10) + "." + date.slice(5, 7) + "." + date.slice(0, 4);
+  };
+
+  const coin = getCoinByID(id);
+  labels = [];
+  data = [];
+  for (let i = amount - 1; i >= 0; i--){
+    labels.push(toDate(coin.value[i].time));
+    data.push(coin.value[i].value);
+  }
+
+  return {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            data: data,
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+        }]
+    },
+    options: {
+      scales: {
+          yAxes: [{
+            ticks: {
+                beginAtZero: false
+            }
+          }]
+      },
+      legend: {
+          display: false
+      }
+    }
+  }
 }
 
 function render(template_obj, dest_obj, data){

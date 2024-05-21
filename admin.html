@@ -104,13 +104,11 @@
             };
 
             const add_new = () => {
-                localStorage.setItem("current", "-1");
-                location.href="edit.html";
+                location.href="edit.html?selected=-1";
             }
             const update = (id) => {
                 return () => {
-                    localStorage.setItem("current", id);
-                    location.href="edit.html";
+                    location.href="edit.html?selected=" + id;
                 };
             }
             const del = (id) => {
