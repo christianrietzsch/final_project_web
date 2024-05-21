@@ -110,6 +110,28 @@
             background-color: #f8f9fa;
             border-top: 1px solid #dee2e6;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 30px);
+            gap: 1px;
+        }
+
+        .grid input {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+        }
+
     </style>
 </head>
 <body>
@@ -120,42 +142,41 @@
     height: 100vh;
   "
 >
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="home.html">Coincidence</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="home.html">Coincidence</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-</header>
+    </header>
 
-<main>
+    <main>
 
 
         <h1 class="space"> Welcome to the Crypto Quest!</h1>
-        <p class="space">Click on the buttons below to learn more about cryptocurrency and test your knowledge with a
-            quiz!</p>
+        <p class="space">Click on the start button below and find the buttons on the page to get to know the world of crypto currency and test your knowledge in a quiz!</p>
         <div class="white-box-container">
             <button class="styled" id="startButton">Start</button>
             <button class="styled" id="endButton">Quiz</button>
@@ -269,37 +290,48 @@
                         </div>
                     </div>
                 </div>
-                <!-- Button 1 -->
+
+                <!-- Button 4 -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2"
                      aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
-                        <h5 id="offcanvasRightLabel2">Starting off with Crypto</h5>
+                        <h5 id="offcanvasRightLabel2">Crossword Puzzle</h5>
+                        <h6>Can you find the words we are looking for?</h6>
                         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        Cryptocurrency is a type of digital or virtual currency that uses cryptography for security and
-                        operates independently of a central authority, such as a government or financial institution.
-                        The
-                        most
-                        well-known cryptocurrency is Bitcoin, which was created in 2009 by an anonymous person or group
-                        of
-                        people using
-                        the pseudonym Satoshi Nakamoto.
-                        <br>
-                        <br>
-                        Cryptocurrencies leverage blockchain technology to gain decentralization, transparency, and
-                        immutability. Blockchain is a distributed ledger technology that records all transactions across
-                        a
-                        network of computers. This technology ensures that transactions are secure and cannot be
-                        tampered
-                        with once they are recorded.
-                        <br>
-                        <br>
-                        Since the inception of Bitcoin, thousands of other cryptocurrencies, often referred to as
-                        "altcoins," have been created. Each cryptocurrency typically operates on its own blockchain or a
-                        variation of an
-                        existing one.
+                        <div class="container">
+                            <div class="grid" id="crossword">
+                                <!-- 10x10 grid inputs -->
+                                <script>
+                                    for (let i = 0; i < 70; i++) {
+                                        document.write('<input type="text" maxlength="1">');
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                        <script>
+
+                            const gridInputs = document.querySelectorAll('.grid input');
+                            const grid = [
+                                'b', 'l', 'o', '', 'k', '', 'h', '', '', 'n',
+                                'i','', '', '', '', '', '', '', '', '',
+                                '', '', '', '', '', '', '', '', '', '',
+                                '', '', '', '', '', '', '', '', '', '',
+                                '', '', '', 't', '', '', '', '', '', '',
+                                '', '', '', 'o', '', '', '', '', '', '',
+                                'n', '', '', '', '', '', '', '', '', '',
+
+                            ];
+
+                            for (let i = 0; i < grid.length; i++) {
+                                if (grid[i] !== '') {
+                                    gridInputs[i].value = grid[i];
+                                    gridInputs[i].disabled = true;
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
 
@@ -339,16 +371,16 @@
         </div>
 
 
-
-</main>
-<footer class="container">
-    <hr class="featurette-divider">
-    <p class="float-end"><a href="#">Back to top</a></p>
-    <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>
-        &middot; <a href="cookies.html">Cookies</a></p>
-</footer>
-<script src="dist/js/quest.js"></script>
-<script src="dist/js/bootstrap.bundle.min.js"></script>
+    </main>
+    <footer class="container">
+        <hr class="featurette-divider">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a
+                href="terms.html">Terms</a>
+            &middot; <a href="cookies.html">Cookies</a></p>
+    </footer>
+    <script src="dist/js/quest.js"></script>
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
 </div>
 </body>
 </html>
