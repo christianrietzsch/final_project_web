@@ -1,9 +1,16 @@
+/*
+This file contains the logic for the quiz and the game.
+In the first section the code for the quiz is written.
+ */
+
 document.getElementById('endButton').addEventListener('click', function () {
     document.getElementById('quizSection').style.display = 'block';
     loadQuiz();
 });
 
-
+/*
+The quiz questions are stored in an array of objects.
+ */
 const questions = [
     {
         question: "What is the first cryptocurrency?",
@@ -22,6 +29,9 @@ const questions = [
     }
 ];
 
+/*
+The function loadQuiz() is used to load the quiz questions and options to the DOM.
+ */
 function loadQuiz() {
     const quizQuestions = document.getElementById('quizQuestions');
     quizQuestions.innerHTML = '';
@@ -42,7 +52,9 @@ function loadQuiz() {
         quizQuestions.appendChild(questionElement);
     });
 }
-
+/*
+The event listener is added to the submitQuiz button to calculate the score of the quiz.
+ */
 document.getElementById('submitQuiz').addEventListener('click', function () {
     let score = 0;
     questions.forEach((question, index) => {
@@ -69,7 +81,9 @@ document.getElementById('submitQuiz').addEventListener('click', function () {
     }
 });
 
-
+/*
+This section hides the other buttons and displays the quiz section when the end button is clicked.
+ */
 document.getElementById('endButton').addEventListener('click', function () {
     document.getElementById('startButton').style.display = 'none';
     document.getElementById('endButton').style.display = 'none';
@@ -82,12 +96,16 @@ document.getElementById('endButton').addEventListener('click', function () {
     loadQuiz();
 });
 
-
+/*
+This section contains the logic for the buttons.
+ */
 const buttons = document.querySelectorAll('.button');
 const startButton = document.getElementById('startButton');
 let currentIndex = 0;
 
-
+/*
+The function randomButtonPosition() is used to randomly position the buttons on the screen.
+ */
 function randomButtonPosition() {
 
     const width = document.querySelector('.white-box').offsetWidth - buttons[currentIndex].offsetWidth;
@@ -101,7 +119,10 @@ function randomButtonPosition() {
 
 
 }
+/*
+The event listener is added to the buttons to hide the button that is clicked and display the next button.
 
+ */
 
 buttons.forEach(button => {
     button.addEventListener('click', function () {
