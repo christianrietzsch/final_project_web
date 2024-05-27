@@ -129,7 +129,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure, you want to remove {{coin}} from the cart?</p>
+                    <p id="modal_text">Are you sure, you want to remove {{coin}} from the cart?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -146,8 +146,8 @@
         function addCartListeners(id) {
             $ID(id+"_rm_button").addEventListener("click", () => {
                 currentCoin = id;
+                modal_text.innerHTML ="Are you sure, you want to remove " + getCoinByID(id).name + " from the cart?";
             });
-            // $ID(id+"_rm_button").addEventListener("click", remove(id))
             $ID(id+"_count_input").addEventListener("change", changeCount($ID(id+"_count_input"), id))
             $ID(id+"_-_button").addEventListener("click", () =>{
                 $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) - 1;
