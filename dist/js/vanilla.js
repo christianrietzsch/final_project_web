@@ -9,7 +9,7 @@ async function jsonData(){
   return data;
 }
 
-async function renderPartials() {
+function renderPartials() {
 	renderPartial("navbar")
 	renderPartial("footer")
 }
