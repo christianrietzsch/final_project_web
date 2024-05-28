@@ -52,6 +52,7 @@ function loadQuiz() {
         quizQuestions.appendChild(questionElement);
     });
 }
+
 /*
 The event listener is added to the submitQuiz button to calculate the score of the quiz.
  */
@@ -68,15 +69,18 @@ document.getElementById('submitQuiz').addEventListener('click', function () {
     const quizSection = document.getElementById('quizSection');
     if (score === 3) {
         quizSection.innerHTML = `
-        <h2>Quiz Score</h2>
-        <p>Your score: ${score}/${questions.length}</p>
-        <p>Congratulations! Here is your promo-code: </p>
+<div style="text-align: center">
+        <h1 style="font-size: 50px; text-shadow: 1px 1px 1px #000">Quiz Score</h1>
+        <p><h2>Your score: ${score}/${questions.length}</h2></p>
+        <p><h3>Congratulations! </p> <p>Here is your promo-code: </h3></p>
+        <p style="text-blink: 3">Michi10</p></div>
     `;
     } else {
         quizSection.innerHTML = `
-        <h2>Quiz Score</h2>
-        <p>Your score: ${score}/${questions.length}</p>
-        <p>Better luck next time </p>
+        <div style="text-align: center">
+        <h1 style="font-size: 50px; text-shadow: 1px 1px 1px #000">Quiz Score</h1>
+        <p><h2>Your score: ${score}/${questions.length}</h2></p>
+        <p><h3>Better luck next time </h3></p></div>
         `;
     }
 });
@@ -119,6 +123,7 @@ function randomButtonPosition() {
 
 
 }
+
 /*
 The event listener is added to the buttons to hide the button that is clicked and display the next button.
 

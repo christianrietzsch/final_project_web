@@ -26,15 +26,15 @@
 
 
 <div class="bg"
-     style="background-image: url('https://picsum.photos/200');
+     style="background-image: url('images/background3.jpg');
                         background-size: cover;
                         background-position: center;">
 
   <div class="container padded">
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <img src="images/logo.jpg" width="400" height="200"></img>
+      <div class="col-lg-4 col-md-8 mx-auto">
+        <img src="images/logo.jpg" width="100%" height="100%"></img>
       </div>
     </div>
   </section>
@@ -96,7 +96,7 @@
 
   </div>
 
-  <ul class="list-group pb-3">
+  <ul class="list-group pb-5">
     <li class="list-group-item d-flex justify-content-between lh-sm pt-2">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_bar">
       <button class="btn btn-outline-secondary me-2" id="search_button" type="submit">Search</button>
@@ -118,7 +118,7 @@
     <li class="list-group-item d-flex justify-content-between lh-sm">
         <div class="album pb-4 pt-1">
           <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="items">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3" id="items">
       
       
             <script id="shop_item_template" type="text/x-handlebars-template">
@@ -126,13 +126,13 @@
               {{#each res}}
               <div>
                 <div class="col">
-                  <div class="card shadow-sm">
-                    <img onclick="window.location.href = 'details.html?selected={{this.id}}'" src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt="">
+                  <div class="card shadow-sm" style="min-width: 230px;">
+                    <img onclick="$ID('{{this.id}}-button').click()" src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt="">
                     <div class="card-body">
                       <h5 class="card-title text-center" id="name">{{this.name}}</h5>
                       <p class="card-text">{{this.description}}</p>
                       <div class="d-flex justify-content-between align-items-center">
-                        <button type="button" onclick="{{this.more}}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
+                        <button type="button" id="{{this.id}}-button" onclick="{{this.more}}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
                         <div style="{{this.color}}">
                           <!--Make responsive; two cards will make the text look weird-->
                           <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
