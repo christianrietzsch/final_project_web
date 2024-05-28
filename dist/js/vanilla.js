@@ -19,9 +19,7 @@ function loadDiscounts() {
     if(discounts) {
 	return JSON.parse(discounts)
     } else {
-  	return {current: null, available: ["Michi10", "HAPPY10"], values: {"Michi10": 10, "HAPPY10": 10}}
-	//add more discounts!!
-	//maybe add % discounts
+  	return {current: null, available: ["Michi10", "HAPPY10"], values: {"Michi10": 10, "HAPPY10": "0.1%"}}
     }
 
 }
@@ -74,6 +72,7 @@ async function resetCoins(coins){
     }
   );
 }
+
 async function reloadAPI(coins){
   return Promise.all([...Array(coins.length).keys()].map(async (i) => {
     coins[i].id = parseInt(i);
