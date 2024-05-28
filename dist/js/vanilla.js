@@ -19,8 +19,9 @@ function loadDiscounts() {
     if(discounts) {
 	return JSON.parse(discounts)
     } else {
-  	return {current: null, used: [], available: ["Michi10"], values: {"Michi10": 10}}
+  	return {current: null, available: ["Michi10"], values: {"Michi10": 10}}
 	//add more discounts!!
+	//maybe add % discounts
     }
 
 }

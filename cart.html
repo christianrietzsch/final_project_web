@@ -55,56 +55,30 @@
 
     <script id="cart_item_template" type="text/x-handlebars-template">
         {{#each ord}}
-        <div class="d-none d-sm-block">
-            <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}_bg">
-                <div class="col-4">
-                    <h6 class="my-0">{{this.name}}</h6>
-                    <small class="text-muted">{{this.description}}</small>
+        <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
+            <div class="col-4">
+                <h6 class="my-0">{{this.name}}</h6>
+                <small class="text-muted">{{this.description}}</small>
+            </div>
+            <div class="col-3">
+                <div class="input-group">
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button" data-bs-toggle="modal" data-bs-target="#delete_modal">
+                        <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">-</button>
+                    <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
+                    <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">+</button>
                 </div>
-                <div class="col-3">
-                    <div class="input-group">
-                        <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button_bg" data-bs-toggle="modal" data-bs-target="#delete_modal">
-                            <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                            </svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button_bg">-</button>
-                        <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input_bg">
-                        <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button_bg">+</button>
-                    </div>
-                </div>
-                <div class="col" style="margin: auto;">
-                    <span class="text-muted m-2" id="{{this.id}}_val_bg">x $ {{this.curValue}}</span>
-                </div>
-                <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                    <span class="item_total text-muted" id="{{this.id}}_total_bg">$ {{this.end_price}}</span>
-                </div>
-            </li>
-        </div>
-        <div class="d-block d-sm-none">
-            <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}_sm">
-                <div class="col-4">
-                    <h6 class="my-0">{{this.name}}</h6>
-                    <small class="text-muted">{{this.description}}</small>
-                </div>
-                <div class="col-3">
-                    <div class="input-group">
-                        <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button_sm" data-bs-toggle="modal" data-bs-target="#delete_modal">
-                            <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                            </svg>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button_sm">-</button>
-                        <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input_sm">
-                        <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button_sm">+</button>
-                    </div>
-                </div>
-                <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                    <span class="text-muted m-2" id="{{this.id}}_val_sm">x $ {{this.curValue}}</span>
-                    <span class="item_total text-muted" id="{{this.id}}_total_sm">$ {{this.end_price}}</span>
-                </div>
-            </li>
-        </div>
+            </div>
+            <div class="col" style="margin: auto;">
+                <span class="text-muted m-2" id="{{this.id}}_val">x $ {{this.curValue}}</span>
+            </div>
+            <div class="col" style="width: 50%; margin: auto; text-align: right;">
+                <span class="item_total text-muted" id="{{this.id}}_total">$ {{this.end_price}}</span>
+            </div>
+        </li>
         {{/each}}
 
         <li class="list-group-item d-flex justify-content-between bg-light">
@@ -145,18 +119,18 @@
         var currentCoin = -1;
 
         function addCartListeners(id) {
-            $ID(id+"_rm_button_bg").addEventListener("click", () => {
+            $ID(id+"_rm_button").addEventListener("click", () => {
                 currentCoin = id;
                 modal_text.innerHTML ="Are you sure, you want to remove " + getCoinByID(id).name + " from the cart?";
             });
-            $ID(id+"_count_input_bg").addEventListener("change", changeCount($ID(id+"_count_input_bg"), id))
-            $ID(id+"_-_button_bg").addEventListener("click", () =>{
-                $ID(id+"_count_input_bg").value = parseInt($ID(id+"_count_input_bg").value) - 1;
-                changeCount($ID(id+"_count_input_bg"), id)();
+            $ID(id+"_count_input").addEventListener("change", changeCount($ID(id+"_count_input"), id))
+            $ID(id+"_-_button").addEventListener("click", () =>{
+                $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) - 1;
+                changeCount($ID(id+"_count_input"), id)();
             });        
-            $ID(id+"_+_button_bg").addEventListener("click", () =>{
-                $ID(id+"_count_input_bg").value = parseInt($ID(id+"_count_input_bg").value) + 1;
-                changeCount($ID(id+"_count_input_bg"), id)();
+            $ID(id+"_+_button").addEventListener("click", () =>{
+                $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) + 1;
+                changeCount($ID(id+"_count_input"), id)();
             });
         }
 
@@ -169,7 +143,7 @@
         }
         
         const remove = () => {
-            $ID(currentCoin+"_bg").remove()
+            $ID(currentCoin+"").remove()
             let count = $ID("item_count")
             count.innerText = parseInt(count.innerText)-1    
             updateTotalPrice()
@@ -193,7 +167,6 @@
 
         function updateDiscount(discount, used) {
 	    if(used) {
-	        discounts.used.push(discounts.current)
 		discounts.available.splice(discounts.available.indexOf(discounts.current))	
 	     } 
 	    discounts.current = discount
@@ -236,8 +209,8 @@
                         input_box.value = "1";
                 }
 
-                const price = parseFloat($ID(id+ "_val_bg").innerText.substring(3))
-                $ID(id+"_total_bg").innerText = "$ " + round(amount * price + 0.005, 2);
+                const price = parseFloat($ID(id+ "_val").innerText.substring(3))
+                $ID(id+"_total").innerText = "$ " + round(amount * price + 0.005, 2);
                 updateTotalPrice()
                 updateOrder(id, amount)
             }
