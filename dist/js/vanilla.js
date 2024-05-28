@@ -9,6 +9,21 @@ async function jsonData(){
   return data;
 }
 
+async function renderPartials() {
+	renderPartial("navbar")
+	renderPartial("footer")
+}
+
+async function loadPartial(name) {
+  const code = await fetch(name+".html").then(response => response.text())
+  Handlebars.registerPartial(name, code)
+}
+
+async function renderPartial(name) {
+  await loadPartial(name)
+  render($ID(name+"-template"),$ID(name),{})
+}
+
 function getCoins() {
   const coins = localStorage.getItem("coins");
   if (!coins)
