@@ -97,8 +97,7 @@ function updateOrder(id, amount) {
 
 function contains_order(orders, id) {
   for(let i = 0; i< orders.length; i++) {
-    id = orders[i].id === id
-    if(id) {
+    if(orders[i].id === id) {
       return i;
     }
   }

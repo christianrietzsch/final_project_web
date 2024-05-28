@@ -98,8 +98,8 @@
 
                             <div class="input-group mt-3">
                                 <input type="number" class="form-control" aria-label="Amount" id="cart_count" value="" placeholder="Amount">
-                                <button class="btn btn-outline-success" id="cart_buy_button">Add to cart</button>
-                            </div>    
+                                <button class="btn btn-outline-success" id="cart_buy_button"  data-bs-toggle="modal" data-bs-target="#cart_modal">Add to cart</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -160,6 +160,23 @@
             </div>
         </script>
 
+        <div class="modal fade" id="cart_modal" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLiveLabel">Added {{coin}} to cart</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal_text">{{Amount}} {{coin}}s have been added to your cart.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script>
             const id = parseInt(new URL(window.location.href).searchParams.get("selected"));
             var coin = getCoinByID(id);
@@ -196,7 +213,17 @@
                     amount = 1;
                     cart_count.value = "1";
                 }
+                if (amount > 1)
+                    modal_text.innerHTML = amount + " " + getCoinByID(id).name + "s have been added to your cart.";
+                else
+                    modal_text.innerHTML = amount + " " + getCoinByID(id).name + " has been added to your cart.";
+                staticBackdropLiveLabel.innerHTML ="Added " + getCoinByID(id).name + " to cart";
                 addOrder({"id": id, "amount": amount});
+            });
+            cart_count.addEventListener("keydown", (event) => {
+                if(event.key === 'Enter'){
+                    cart_buy_button.click();
+                }
             });
         </script>
         
