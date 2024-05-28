@@ -72,7 +72,8 @@
                             </div>
 
                             <div class="input-group mt-3">
-                                <input type="number" class="form-control" aria-label="Amount" id="cart_count" value="" placeholder="Amount">
+                                <span class="input-group-text" for="cart_count">Amount</span>
+                                <input type="number" class="form-control" aria-label="Amount" id="cart_count" value="1" placeholder="Amount">
                                 <button class="btn btn-outline-success" id="cart_buy_button"  data-bs-toggle="modal" data-bs-target="#cart_modal">Add to cart</button>
                             </div>
                         </div>
@@ -83,7 +84,7 @@
 
             <canvas class="my-4 w-100" id="chart"></canvas>
 
-            <div class="table-responsive d-none d-sm-block">
+            <!-- <div class="table-responsive d-none d-sm-block">
                 <table class="table">
                     <thead>
                         <tr>
@@ -132,7 +133,7 @@
                         {{/each}}
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </script>
 
         <div class="modal fade" id="cart_modal" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
@@ -160,23 +161,23 @@
             coin.val = coin.value[0].value;
             coin.rat = coin.value[0].value / coin.value[1].value * 100 - 100;
             coin.color = coin.rat > 0 ? "color:green" : "color:red";
-            for (let i = 0; i < coin.value.length - 1; i++){
-                coin.value[i].date = toDate(coin.value[i].time);
-                coin.value[i].rateLG = coin.value[i].value / coin.value[i + 1].value * 100 - 100;
-                coin.value[i].valueLG = coin.value[i].value;
-                coin.value[i].rateSM = round(coin.value[i].rateLG, 6);
-                coin.value[i].valueSM = round(coin.value[i].valueLG, 6);
-                coin.value[i].color = coin.value[i].rateLG > 0 ? "color:green" : "color:red";
-            }
+            // for (let i = 0; i < coin.value.length - 1; i++){
+            //     coin.value[i].date = toDate(coin.value[i].time);
+            //     coin.value[i].rateLG = coin.value[i].value / coin.value[i + 1].value * 100 - 100;
+            //     coin.value[i].valueLG = coin.value[i].value;
+            //     coin.value[i].rateSM = round(coin.value[i].rateLG, 6);
+            //     coin.value[i].valueSM = round(coin.value[i].valueLG, 6);
+            //     coin.value[i].color = coin.value[i].rateLG > 0 ? "color:green" : "color:red";
+            // }
 
             coin.value.pop();
 
             render(details_template, hb, coin)
             $ID("rate-arrow").innerHTML = coin.rat >= 0 ? "&uarr;" : "&darr;";
-            for (let i = 0; i < coin.value.length - 1; i++){
-                $ID(i+"-sm-rate-arrow").innerHTML = coin.value[i].rateLG >= 0 ? "&uarr;" : "&darr;";
-                $ID(i+"-lg-rate-arrow").innerHTML = coin.value[i].rateLG >= 0 ? "&uarr;" : "&darr;";
-            }
+            // for (let i = 0; i < coin.value.length - 1; i++){
+            //     $ID(i+"-sm-rate-arrow").innerHTML = coin.value[i].rateLG >= 0 ? "&uarr;" : "&darr;";
+            //     $ID(i+"-lg-rate-arrow").innerHTML = coin.value[i].rateLG >= 0 ? "&uarr;" : "&darr;";
+            // }
             new Chart($ID("chart"), toChartData(coin.id, 364));
 
             cart_count.addEventListener("change", () => {
