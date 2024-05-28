@@ -56,7 +56,11 @@
     <script id="cart_item_template" type="text/x-handlebars-template">
         {{#each ord}}
         <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
+	<div class="col-1" style="margin-right:3px;">
+		<img src="{{this.image}}" width="90%" height="90%"></img>
+	</div>
             <div class="col-4">
+                
                 <h6 class="my-0">{{this.name}}</h6>
                 <small class="text-muted">{{this.description}}</small>
             </div>
