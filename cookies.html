@@ -11,43 +11,22 @@
 
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="dist/css/custom.css" rel="stylesheet">
+        <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+        <script src="dist/js/vanilla.js"></script>
     </head>
 
     <body class="bg-light">
-        <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="home.html">Coincidence</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="home.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="shop.html">Shop</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="admin.html">Admin</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav mb-2 mb-md-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="cart.html">Cart
-                                    <svg width="24" height="24" fill="currentColor" class="bi bi-cart" viewBox="0 0 18 18">
-                                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+       	<script id="navbar-template" type="text/x-handlebars-template">
+      	  {{#> navbar}}
+
+      	  {{/navbar}}
+        </script>
+	<div id="navbar"></div>
 
         <main>
+	<script>
+		renderPartials()
+	</script>
             <div class="container padded">
                 <h2 class="featurette-heading">COOKIE POLICY</h2>
                 <span class="text-muted">Last updated: 17.04.2024</span>
@@ -78,11 +57,12 @@
             </div>
         </main>
 
-        <footer class="container">
-            <hr class="featurette-divider">
-            <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; 2024 Coincidence, Inc. &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="cookies.html">Cookies</a></p>
-        </footer>
+<script id="footer-template" type="text/x-handlebars-template">
+      	  {{#> footer}}
+  
+      	  {{/footer}}
+        </script>
+	<div id="footer"></div>
 
         <script src="dist/js/bootstrap.bundle.min.js"></script>
     </body>

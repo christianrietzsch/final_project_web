@@ -9,6 +9,36 @@ async function jsonData(){
   return data;
 }
 
+function renderPartials() {
+	renderPartial("navbar")
+	renderPartial("footer")
+}
+
+function loadDiscounts() {
+    const discounts = localStorage.getItem("discounts");
+    if(discounts) {
+	return JSON.parse(discounts)
+    } else {
+  	return {current: null, used: [], available: ["Michi10"], values: {"Michi10": 10}}
+	//add more discounts!!
+    }
+
+}
+
+function writeDiscounts(discounts) {
+    localStorage.setItem("discounts", JSON.stringify(discounts))
+}
+
+async function loadPartial(name) {
+  const code = await fetch(name+".html").then(response => response.text())
+  Handlebars.registerPartial(name, code)
+}
+
+async function renderPartial(name) {
+  await loadPartial(name)
+  render($ID(name+"-template"),$ID(name),{})
+}
+
 function getCoins() {
   const coins = localStorage.getItem("coins");
   if (!coins)
