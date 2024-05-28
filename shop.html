@@ -127,7 +127,7 @@
               <div>
                 <div class="col">
                   <div class="card shadow-sm">
-                    <img src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt="">
+                    <img onclick="window.location.href = 'details.html?selected={{this.id}}'" src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt="">
                     <div class="card-body">
                       <h5 class="card-title text-center" id="name">{{this.name}}</h5>
                       <p class="card-text">{{this.description}}</p>

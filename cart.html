@@ -186,7 +186,6 @@
 
         function updateDiscount(discount, used) {
 	    if(used) {
-	        discounts.used.push(discounts.current)
 		discounts.available.splice(discounts.available.indexOf(discounts.current))	
 	     } 
 	    discounts.current = discount
