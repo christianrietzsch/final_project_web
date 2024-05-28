@@ -44,7 +44,7 @@
         
                         <div class="py-3">
                             <div class="card input-group p-2">
-                                <a type="button" href="checkout.html" class="btn btn-primary">Buy</a>
+                                <a type="button" onclick="buy_items()"class="btn btn-primary">Buy</a>
                             </div>
                         </div>
                     </div>
@@ -157,18 +157,29 @@
         })
 
         function checkDiscount(discount) {
-            //checks if discount was already used
-            return true
+	    return discounts.available.includes(discount)
+
         }
 
         function getDiscountValue(discount) {
-            return 5
+            return discounts.values[discount]
         }
 
-        function updateDiscount(discount) {
-            //set to current
-            //if buy, set to used
+        function updateDiscount(discount, used) {
+	    if(used) {
+	        discounts.used.push(discounts.current)
+		discounts.available.splice(discounts.available.indexOf(discounts.current))	
+	     } 
+	    discounts.current = discount
+	    discounts.available.splice(discounts.available.indexOf(discount))
+	    writeDiscounts(discounts)
+
         }
+
+	function buy_items() {
+		updateDiscount(null, true)
+		window.location.href = "checkout.html"
+	}
 
         function addDiscount() {
             //validate field if discount can be used
@@ -177,7 +188,7 @@
             if(checkDiscount(discount)) {            
                 $ID("discount").innerText = "-$" + getDiscountValue(discount)
                 updateTotalPrice()
-                updateDiscount(discount)
+                updateDiscount(discount, false)
             }
         }
 
@@ -207,6 +218,11 @@
         }
 
         init_cart_items(getOrders())
+        const discounts = loadDiscounts()
+	if(discounts.current != null) {
+		$ID("discount_field").value = discounts.current
+		addDiscount()
+	}
         updateTotalPrice()
     </script>
 
