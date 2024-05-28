@@ -74,6 +74,32 @@ async function resetCoins(coins){
     }
   );
 }
+async function reloadAPI(coins){
+  return Promise.all([...Array(coins.length).keys()].map(async (i) => {
+    coins[i].id = parseInt(i);
+
+    await getAPIData(coins[i].coincapID).then((result) => {
+      value = []
+      for (let x = (result.data.length - 1); x >= 0; x--)
+        value.push({time: result.data[x].date, value: result.data[x].priceUsd});
+      coins[i].value = value;
+      coins[i].curValue = round(value[0].value, 4);
+      coins[i].curRate = round(value[0].value / value[1].value * 100 - 100, 4);
+    });
+
+    await getAPIAdvancedData(coins[i].coincapID).then((result) => {
+      coins[i].supply = parseFloat(result.data.supply);
+      coins[i].maxSupply = parseFloat(result.data.maxSupply);
+      if (!coins[i].maxSupply)
+        coins[i].maxSupply = "Unknown";
+      coins[i].marketCapUsd = parseFloat(result.data.marketCapUsd);
+      coins[i].volumeUsd24Hr = parseFloat(result.data.volumeUsd24Hr);
+    });
+  })).then(() => {
+      localStorage.setItem("coins", JSON.stringify(coins))
+    }
+  );
+}
 
 function round(val, amount){
   return Math.round(val * Math.pow(10, amount)) / Math.pow(10, amount);
