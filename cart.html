@@ -157,7 +157,7 @@
         })
 
         function checkDiscount(discount) {
-	    return discounts.available.includes(discount)
+	    return discounts.available.includes(discount) || discounts.current === discount
 
         }
 
@@ -184,11 +184,15 @@
             //validate field if discount can be used
             //else set to red
             const discount = $ID("discount_field").value
+	    console.log(checkDiscount(discount))
             if(checkDiscount(discount)) {            
                 $ID("discount").innerText = "-$" + getDiscountValue(discount)
                 updateTotalPrice()
                 updateDiscount(discount, false)
-            }
+            } else {
+		$ID("discount").innerText = "-$" + 0
+		updateTotalPrice()
+	    }
         }
 
         function updateTotalPrice() {
@@ -218,6 +222,7 @@
 
         init_cart_items(getOrders())
         const discounts = loadDiscounts()
+	console.log(discounts.current)
 	if(discounts.current != null) {
 		$ID("discount_field").value = discounts.current
 		addDiscount()
