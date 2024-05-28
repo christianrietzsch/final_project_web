@@ -207,7 +207,12 @@
                 total += parseFloat(elements[i].innerText.substring(2))
             }
             total -= parseFloat($ID("discount").innerHTML.substring(2))
-            $ID("total").innerText = "$ " + round(total, 2)
+            if(round(total, 2) >= 0) {
+		price = round(total, 2)
+	    } else {
+		price = 0
+	    }
+            $ID("total").innerText = "$ " + price
         }
                 
         const changeCount = (input_box, id) => {

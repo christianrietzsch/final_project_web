@@ -29,7 +29,7 @@ function writeDiscounts(discounts) {
 }
 
 async function loadPartial(name) {
-  const code = await fetch(name+".html").then(response => response.text())
+  const code = await fetch("partials/"+name+".html").then(response => response.text())
   Handlebars.registerPartial(name, code)
 }
 

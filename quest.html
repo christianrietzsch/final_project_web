@@ -16,7 +16,7 @@
 
         .white-box-container {
             position: relative;
-            height: 90vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -26,9 +26,20 @@
         .white-box {
             position: relative;
             width: 100%;
-            height: 100%;
+            height: 80%;
             border-radius: 20px;
             overflow: hidden;
+        }
+
+        .quizbox {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: scroll;
+            background-color: #ffffff;
+            padding: 3rem;
+            display: flex;
         }
 
 
@@ -115,8 +126,6 @@
         }
 
 
-
-
         .grid {
             display: grid;
             grid-template-columns: repeat(10, 30px);
@@ -177,11 +186,13 @@
 
 
         <div class="space"><h1 style="font-size: 50px"> Welcome to the Crypto Quest!</h1>
-            <p> <h2>Click on the start button below and find the buttons on the page to get to know the world of crypto
+            <p>
+            <h2>Click on the start button below and find the buttons on the page to get to know the world of crypto
                 currency and test your knowledge in a quiz!</h2></div>
         <div class="white-box-container">
             <button class="styled" id="startButton">Start</button>
             <button class="styled" id="endButton">Quiz</button>
+
             <div class="white-box">
                 <button class="button button1-color" id="button1" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRight"
@@ -360,18 +371,20 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Quiz Section - initially hidden -->
-                <div  id="quizSection" style="display: none; height: 100%; background-color: #ffffff; text-indent: 3rem">
-                    <br>
-                    <h2>Quiz Time!</h2>
-                    <p>Select one</p>
-                    <div id="quizQuestions">
-                    </div>
-                    <br>
-                    <button class="styled" style="margin-left: 5rem" id="submitQuiz">Submit</button>
+
+
+            <!-- Quiz Section - initially hidden -->
+            <div class="quizbox" id="quizSection"
+                 style="display: none; ">
+                <br>
+                <h2>Quiz Time!</h2>
+                <p>Select one</p>
+                <div id="quizQuestions">
                 </div>
+                <br>
+                <button class="styled" style="margin-left: 5rem" id="submitQuiz">Submit</button>
             </div>
+        </div>
         </div>
 
 
