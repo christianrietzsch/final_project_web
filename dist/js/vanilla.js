@@ -2,6 +2,10 @@ function $ID (id) {
   return document.getElementById(id)
 }
 
+function $ALL (param) {
+  return document.querySelectorAll(param);
+}
+
 async function jsonData(){
   const response = await fetch("daten.json", {cache: "no-store"}); 
   // cache disabled for debugging purposes 
@@ -172,6 +176,29 @@ function getOrders() {
     new_orders.push(new_order)
   })
   return {ord: new_orders}
+}
+
+function addToOrderHistory(newOrder){
+  let orderHist = JSON.parse(localStorage.getItem("orderHist"));
+  if (!orderHist)
+    orderHist = [newOrder];
+  else
+    orderHist.push(newOrder);
+
+  console.log(orderHist);
+  localStorage.setItem("orderHist", JSON.stringify(orderHist));
+}
+
+function getTimestamp(){
+  const d = new Date();
+  return {
+    date : pad2(d.getDate()) + "." + pad2(d.getMonth() + 1) + "." + d.getFullYear().toString(),
+    time : pad2(d.getHours()) + ":" + pad2(d.getMinutes()) + ":" + pad2(d.getSeconds())
+  };
+
+  function pad2(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
 }
 
 function getCoinByID(id) {

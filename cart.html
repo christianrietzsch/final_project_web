@@ -216,7 +216,8 @@
 	    } else {
 		price = 0
 	    }
-            $ID("total").innerText = "$ " + price
+            $ID("total").innerText = "$ " + price;
+            localStorage.setItem("order_total", JSON.stringify(price));
         }
                 
         const changeCount = (input_box, id) => {
