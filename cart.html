@@ -56,31 +56,32 @@
     <script id="cart_item_template" type="text/x-handlebars-template">
         {{#each ord}}
         <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
-	<div class="col-1" style="margin-right:3px;">
-		<img src="{{this.image}}" width="90%" height="90%"></img>
-	</div>
-            <div class="col-4">
-                
-                <h6 class="my-0">{{this.name}}</h6>
-                <small class="text-muted">{{this.description}}</small>
-            </div>
-            <div class="col-3">
-                <div class="input-group">
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button" data-bs-toggle="modal" data-bs-target="#delete_modal">
-                        <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                        </svg>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">-</button>
-                    <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
-                    <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">+</button>
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                <img src="{{image}}" class="card-img" alt="...">
                 </div>
-            </div>
-            <div class="col" style="margin: auto;">
-                <span class="text-muted m-2" id="{{this.id}}_val">x $ {{this.curValue}}</span>
-            </div>
-            <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                <span class="item_total text-muted" id="{{this.id}}_total">$ {{this.end_price}}</span>
+                <div class="col-md-8 my-2" style="margin-top: auto; margin-bottom: auto;">
+                    <div class="card-body row">
+                        <div class="col-6">
+                            <h6 class="card-title">{{name}}</h6>
+                            <small class="card-text text-muted">{{description}}</small>
+                            <div class="input-group my-3">
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button" data-bs-toggle="modal" data-bs-target="#delete_modal">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                    </svg>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">-</button>
+                                <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
+                                <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">+</button>
+                            </div>
+                            <span class="text-muted" style="margin-left: 1rem;" id="{{this.id}}_val">x $ {{this.curValue}}</span>
+                        </div> 
+                        <div class="col-2" style="width: 50%; margin: auto; text-align: right;">
+                            <span class="item_total text-muted" id="{{this.id}}_total">$ {{this.end_price}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </li>
         {{/each}}
