@@ -99,16 +99,8 @@
 
     <script>
         renderPartials()
-
-        function init_cart_items(orders) {
-            render($ID("cart_item_template"), $ID("cart"), orders)
-            let id_list = []
-            orders.ord.forEach((obj) => id_list.push(obj.id))
-            id_list.map(addCartListeners)
-            $ID("item_count").innerText = id_list.length
-        }
         
-        init_cart_items(JSON.parse(localStorage.getItem("orderHist")).at(-1));
+        render($ID("cart_item_template"), $ID("cart"), JSON.parse(localStorage.getItem("orderHist")).at(-1))
     </script>
 
 <script id="footer-template" type="text/x-handlebars-template">
