@@ -58,7 +58,7 @@ async function resetCoins(coins){
       for (let x = (result.data.length - 1); x >= 0; x--)
         value.push({time: result.data[x].date, value: result.data[x].priceUsd});
       coins[i].value = value;
-      coins[i].curValue = round(value[0].value, 4);
+      coins[i].curValue = round(parseFloat(value[0].value) + 0.00005, 4);
       coins[i].curRate = round(value[0].value / value[1].value * 100 - 100, 4);
     });
 
@@ -86,7 +86,7 @@ async function reloadAPI(coins){
       for (let x = (result.data.length - 1); x >= 0; x--)
         value.push({time: result.data[x].date, value: result.data[x].priceUsd});
       coins[i].value = value;
-      coins[i].curValue = round(value[0].value, 4);
+      coins[i].curValue = round(parseFloat(value[0].value) + 0.00005, 4);
       coins[i].curRate = round(value[0].value / value[1].value * 100 - 100, 4);
     });
 
