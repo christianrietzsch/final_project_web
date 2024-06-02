@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Coincidence</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="dist/css/custom.css" rel="stylesheet">
+        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
+        <script src="dist/js/vanilla.js"></script>
+    </head>
+
+    <body>
+        <script id="navbar-template" type="text/x-handlebars-template">
+      	  {{#> navbar Cart='active'}}
+
+      	  {{/navbar}}
+        </script>
+	<div id="navbar"></div>
+
+        <main>
+            <div class="container padded">
+                <div class="row mt-5">
+                    <div class="col d-none d-md-block"></div>
+                    <div class="col-lg-6">
+                        <h1 class="first-heading d-flex">Thank you</h1>
+                        <small>for your purchase of crypto currency at</small>
+                        <strong>Coincidence, Inc.</strong>
+        
+                        <div id="cart"></div>                                
+                    </div>
+                    <div class="col d-none d-md-block"></div>
+                </div>
+            </div>
+        </main>
+
+    <script id="cart_item_template" type="text/x-handlebars-template">
+        <hr class="my-4">
+        <h4 class="my-3">The following coins will be added to your crypto wallet:</h4>
+        <ul class="list-group">
+            {{#each coins}}
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div class="col">
+                  <img src="{{this.image}}" width="100%" style="margin-top: auto; margin-bottom: auto;">
+                </div>
+                <div class="col" style="margin: auto;">
+                  <h6 class="m-2">{{this.name}}</h6>
+                </div>
+                <div class="col" style="margin: auto;">
+                    <strong class="m-2">x {{this.amount}}</strong>
+                </div>
+                <div class="col" style="width: 50%; margin: auto; text-align: right;">
+                    <span class="item_total text-muted">$ {{this.price}}</span>
+                </div>
+            </li>
+            {{/each}}
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <strong>$ {{total}}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Wallet address</span>
+                <strong>{{address.wallet}}</strong>
+            </li>
+        </ul>
+
+        <hr class="my-4">
+        <h4 class="my-3">The bill will be sent to the following address:</h4>
+        <strong>{{address.firstName}} {{address.lastName}}</strong>
+        <p style="line-height: 1.5rem;">{{address.address}} {{address.address2}}<br/>{{address.zip}} {{address.city}}, {{address.country}}</p>
+
+        <strong>A digital copy will also be sent to:</strong>
+        <p>{{address.eMail}}</p>
+    </script>
+
+    <div class="modal fade" id="delete_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLiveLabel">Removing Coin</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal_text">Are you sure, you want to remove {{coin}} from the cart?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="remove()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        renderPartials()
+
+        function init_cart_items(orders) {
+            render($ID("cart_item_template"), $ID("cart"), orders)
+            let id_list = []
+            orders.ord.forEach((obj) => id_list.push(obj.id))
+            id_list.map(addCartListeners)
+            $ID("item_count").innerText = id_list.length
+        }
+        
+        init_cart_items(JSON.parse(localStorage.getItem("orderHist")).at(-1));
+    </script>
+
+<script id="footer-template" type="text/x-handlebars-template">
+      	  {{#> footer}} {{/footer}}
+</script>
+	<div id="footer"></div>
+
+        <script src="dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

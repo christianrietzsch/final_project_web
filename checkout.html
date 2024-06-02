@@ -55,8 +55,8 @@
                   </div>
       
                   <div class="col-12">
-                    <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" value="" required>
                   </div>
 
                   <div class="col-12">
@@ -236,10 +236,11 @@
         };
 
         for (o of order)
-          orderTotal.coins.push({name: o.name, amount: o.amount});
+          orderTotal.coins.push({name: o.name, amount: o.amount, image: o.image, price: o.end_price});
 
         addToOrderHistory(orderTotal);
         localStorage.removeItem("orders");
+        location.href="thanks.html";
       }
 
       document.getElementById("form_input").addEventListener("submit", function(event) {
