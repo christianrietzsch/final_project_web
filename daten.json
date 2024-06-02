@@ -1,17 +1,163 @@
-[{ "name": "Dodgi-Coin",
-   "description": "Eine sehr zuverlässige Coin",
-   "longDescription": "Eine sehr lange Beschreibung über die beste Münze der Welt",
-   "image": "images/img2.jpg",
-   "coincapID": "dogecoin" },
-
- { "name": "Botcoin",
-   "description": "Eine sehr zuverlässige Coin",
-   "longDescription": "Eine sehr lange Beschreibung über die beste Münze der Welt",
-   "image": "images/img4.jpg",
-   "coincapID": "bitcoin" },
-
- { "name": "WOMP",
-   "description": "Keine sehr zuverlässige Coin",
-   "longDescription": "Eine sehr lange Beschreibung über die schlechteste Münze der Welt",
-   "image": "images/img1.jpg",
-   "coincapID": "wootrade" }]
+[
+  {
+    "name": "QuantumByte",
+    "description": "Advanced quantum computing coin.",
+    "longDescription": "QuantumByte leverages the power of quantum computing to provide unparalleled processing speed and security in transactions. By integrating cutting-edge quantum algorithms, QuantumByte aims to revolutionize the way digital currencies operate, ensuring faster and more secure transactions for users worldwide.",
+    "coincapID": "ethereum",
+    "image": "images/img1.jpg"
+  },
+  {
+    "name": "SolarFlare",
+    "description": "Eco-friendly solar energy coin.",
+    "longDescription": "SolarFlare is designed to incentivize and support the adoption of solar energy through blockchain technology. By rewarding users who contribute to solar energy projects, SolarFlare aims to accelerate the transition to renewable energy sources, reducing our carbon footprint and promoting sustainability.",
+    "coincapID": "tether",
+    "image": "images/img2.jpg"
+  },
+  {
+    "name": "AeroToken",
+    "description": "Aerospace industry cryptocurrency.",
+    "longDescription": "AeroToken aims to revolutionize transactions in the aerospace sector, making them more efficient and transparent. By utilizing blockchain technology, AeroToken provides a secure and decentralized platform for aerospace companies to conduct transactions, manage contracts, and track assets in real-time.",
+    "coincapID": "binance-coin",
+    "image": "images/img3.jpg"
+  },
+  {
+    "name": "BioCoin",
+    "description": "Biotechnology and healthcare coin.",
+    "longDescription": "BioCoin supports advancements in biotechnology and healthcare by funding research and development projects. Through a decentralized platform, BioCoin connects investors with innovative biotech startups, enabling the development of groundbreaking treatments and technologies that improve human health.",
+    "coincapID": "solana",
+    "image": "images/img5.jpg"
+  },
+  {
+    "name": "Oceanic",
+    "description": "Marine conservation coin.",
+    "longDescription": "Oceanic is dedicated to funding marine conservation efforts and promoting sustainable ocean practices. By using blockchain technology, Oceanic ensures transparent and efficient allocation of funds to projects that protect marine ecosystems, reduce pollution, and support marine biodiversity.",
+    "coincapID": "usd-coin",
+    "image": "images/img6.jpg"
+  },
+  {
+    "name": "TerraNova",
+    "description": "Land restoration coin.",
+    "longDescription": "TerraNova funds initiatives for land restoration and reforestation, aiming to combat climate change. Through its decentralized platform, TerraNova supports projects that restore degraded lands, promote sustainable agriculture, and enhance biodiversity, contributing to a healthier planet.",
+    "coincapID": "xrp",
+    "image": "images/img7.jpg"
+  },
+  {
+    "name": "Aether",
+    "description": "Next-gen virtual reality coin.",
+    "longDescription": "Aether supports the development and adoption of virtual reality technologies, creating new experiences and opportunities. By funding VR projects and startups, Aether aims to revolutionize entertainment, education, and remote work, bringing immersive experiences to users worldwide.",
+    "coincapID": "shiba-inu",
+    "image": "images/img10.jpg"
+  },
+  {
+    "name": "HydroCoin",
+    "description": "Clean water technology coin.",
+    "longDescription": "HydroCoin promotes investments in clean water technologies, ensuring access to safe drinking water worldwide. Through blockchain technology, HydroCoin facilitates the funding and development of innovative water purification and management solutions, addressing global water scarcity issues.",
+    "coincapID": "cardano",
+    "image": "images/img9.jpg"
+  },
+  {
+    "name": "Windy",
+    "description": "Wind energy innovation coin.",
+    "longDescription": "Windy focuses on accelerating the adoption of wind energy by funding innovative projects and technologies. By providing a decentralized platform for investment and collaboration, Windy aims to make wind energy more accessible and cost-effective, contributing to a cleaner and greener future.",
+    "coincapID": "avalanche",
+    "image": "images/img11.jpg"
+  },
+  {
+    "name": "CyberGuard",
+    "description": "Cybersecurity enhancement coin.",
+    "longDescription": "CyberGuard aims to strengthen cybersecurity measures globally by funding research and development in the field. By leveraging blockchain technology, CyberGuard provides a secure platform for transactions and data protection, ensuring the integrity and privacy of digital interactions.",
+    "coincapID": "chainlink",
+    "image": "images/img12.jpg"
+  },
+  {
+    "name": "Neon",
+    "description": "Entertainment industry coin.",
+    "longDescription": "Neon supports the entertainment industry by providing a decentralized platform for content creation and distribution. By enabling artists and creators to monetize their work directly, Neon fosters a more equitable and transparent entertainment ecosystem, benefiting both creators and consumers.",
+    "coincapID": "wrapped-bitcoin",
+    "image": "images/img1.jpg"
+  },
+  {
+    "name": "AquaPulse",
+    "description": "Water resource management coin.",
+    "longDescription": "AquaPulse helps in efficient water resource management and conservation through blockchain technology. By providing a platform for tracking and optimizing water usage, AquaPulse supports sustainable water practices and ensures the equitable distribution of this vital resource.",
+    "coincapID": "tron",
+    "image": "images/img3.jpg"
+  },
+  {
+    "name": "GreenLeaf",
+    "description": "Sustainable agriculture coin.",
+    "longDescription": "GreenLeaf promotes sustainable agriculture practices by supporting farmers and funding eco-friendly initiatives. By leveraging blockchain technology, GreenLeaf ensures transparent and efficient resource allocation, helping to create a more sustainable and resilient agricultural system.",
+    "coincapID": "polkadot",
+    "image": "images/img5.jpg"
+  },
+  {
+    "name": "Medico",
+    "description": "Healthcare services coin.",
+    "longDescription": "Medico aims to revolutionize healthcare services by making them more accessible and efficient through blockchain. By connecting patients with healthcare providers and facilitating secure data sharing, Medico improves the quality and accessibility of medical care worldwide.",
+    "coincapID": "bitcoin-cash",
+    "image": "images/img8.jpg"
+  },
+  {
+    "name": "EduCoin",
+    "description": "Education and e-learning coin.",
+    "longDescription": "EduCoin supports the education sector by funding e-learning platforms and educational resources. By providing a decentralized platform for education, EduCoin makes learning more accessible and affordable, empowering individuals with knowledge and skills for the future.",
+    "coincapID": "near-protocol",
+    "image": "images/img6.jpg"
+  },
+  {
+    "name": "Artistry",
+    "description": "Digital art and NFT coin.",
+    "longDescription": "Artistry empowers digital artists by providing a platform for creating, selling, and trading NFTs. By leveraging blockchain technology, Artistry ensures the authenticity and ownership of digital artworks, creating new opportunities for artists to monetize their creations.",
+    "coincapID": "polygon",
+    "image": "images/img7.jpg"
+  },
+  {
+    "name": "CleanAir",
+    "description": "Air quality improvement coin.",
+    "longDescription": "CleanAir focuses on improving air quality by funding innovative technologies and environmental projects. By supporting initiatives that reduce pollution and promote clean air, CleanAir contributes to healthier living conditions and a more sustainable environment.",
+    "coincapID": "litecoin",
+    "image": "images/img9.jpg"
+  },
+  {
+    "name": "Urbanist",
+    "description": "Smart city development coin.",
+    "longDescription": "Urbanist supports the development of smart cities by funding projects that enhance urban living through technology. By promoting sustainable and efficient urban solutions, Urbanist aims to create cities that are more livable, resilient, and connected.",
+    "coincapID": "uniswap",
+    "image": "images/img10.jpg"
+  },
+  {
+    "name": "TechWave",
+    "description": "Technology innovation coin.",
+    "longDescription": "TechWave promotes technological innovation by funding startups and research in cutting-edge fields. By providing a platform for collaboration and investment, TechWave accelerates the development of new technologies that drive progress and improve quality of life.",
+    "coincapID": "internet-computer",
+    "image": "images/img11.jpg"
+  },
+  {
+    "name": "BioLife",
+    "description": "Biodegradable products coin.",
+    "longDescription": "BioLife encourages the use of biodegradable products by supporting companies that produce eco-friendly alternatives. By promoting sustainable consumption and reducing plastic waste, BioLife contributes to a cleaner and healthier planet for future generations.",
+    "coincapID": "multi-collateral-dai",
+    "image": "images/img12.jpg"
+  },
+  {
+    "name": "Dodgi-Coin",
+    "description": "Reliability redefined in crypto.",
+    "longDescription": "Dodgi-Coin combines humor with high performance, providing a secure and reliable cryptocurrency backed by a passionate community. Known for its playful approach, Dodgi-Coin offers stability and trust in a fun and engaging package.",
+    "image": "images/img2.jpg",
+    "coincapID": "dogecoin"
+  },
+  {
+    "name": "Botcoin",
+    "description": "Automating your crypto future.",
+    "longDescription": "Botcoin leverages advanced automation to simplify cryptocurrency trading and management. With smart algorithms and AI-driven strategies, Botcoin empowers users to optimize their investments and navigate the crypto market with ease and confidence.",
+    "image": "images/img4.jpg",
+    "coincapID": "bitcoin"
+  },
+  {
+    "name": "WOMP",
+    "description": "The wildcard of cryptocurrencies.",
+    "longDescription": "WOMP is the unpredictable player in the crypto world, offering high-risk, high-reward opportunities for adventurous investors. With its unconventional approach, WOMP captures the spirit of innovation and unpredictability, making it a unique addition to any crypto portfolio.",
+    "image": "images/img1.jpg",
+    "coincapID": "wootrade"
+  }
+]
