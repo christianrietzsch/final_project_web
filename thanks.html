@@ -63,9 +63,11 @@
                 <span>Total (USD)</span>
                 <strong>$ {{total}}</strong>
             </li>
-            <li class="list-group-item d-flex justify-content-between">
-                <span>Wallet address</span>
-                <strong>{{address.wallet}}</strong>
+            <li class="list-group-item">
+                <div class="row">
+                    <span class="col-sm-6 col-md-4">Wallet address</span>
+                    <strong class="col-sm-12 col-md-8" style="text-align: right;">{{address.wallet}}</strong>
+                </div>
             </li>
         </ul>
 
