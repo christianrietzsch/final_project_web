@@ -16,8 +16,12 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
         $(document).ready(function () {
-            console.log($('a[href="#openModal"]')[0]);
+        let popup = sessionStorage.getItem("c")
+            $('a[href="#openModal"]')[0];
             $('a[href="#openModal"]')[0].click();
+            if(popup) {
+                document.querySelector(".one").click()
+            }
         })</script>
 
     <style>
@@ -306,9 +310,9 @@
     renderPartials()
 </script>
 <script type="text/javascript">
-
+    
     document.querySelector(".one").addEventListener("click", function () {
-        document.querySelector(".popup").style.display = "none";
+        sessionStorage.setItem("c", "true")
     });
 </script>
 <script src="dist/js/bootstrap.bundle.min.js"></script>

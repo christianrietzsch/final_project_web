@@ -63,7 +63,7 @@
         <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="{{image}}" class="card-img" alt="...">
+                    <img src="{{image}}" onclick="(window.location.href='details.html?selected={{id}}')" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8 my-2" style="margin-top: auto; margin-bottom: auto;">
                     <div class="card-body row">
@@ -261,10 +261,10 @@
         if (this.checkValidity() === true) {
         }
         if (addDiscount()) {
-
             this.classList.add("was-validated");
         } else {
             this.classList.add("is-invalid")
+            //TODO
             this.classList.add("was-validated");
         }
     }, false);
