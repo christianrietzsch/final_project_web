@@ -21,66 +21,75 @@
 
       	  {{/navbar}}
         </script>
-	<div id="navbar"></div>
+	    <div id="navbar"></div>
 
         <main>
-            <div class="container padded">
-                <div class="row mt-5">
-                    <div class="col d-none d-md-block"></div>
-                    <div class="col-lg-8">        
-                        <div id="history"></div>                                
+            <div class="bg" style="background-image: url('images/background4.jpg'); background-size: repeat; background-position: top;">
+                <div class="container padded">
+                    <div class="row pt-5">
+                        <div class="col d-none d-md-block"></div>
+                        <div class="col-lg-8">        
+                            <div id="history"></div>                                
+                        </div>
+                        <div class="col d-none d-md-block"></div>
                     </div>
-                    <div class="col d-none d-md-block"></div>
                 </div>
             </div>
         </main>
 
     <script id="history_template" type="text/x-handlebars-template">
-        <h1 class="my-3 first-heading">Order History</h1>
-        {{#each orders}}
-        <hr class="my-4">
-        <h4>{{date}} <small>({{time}})</small></h4>
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-5">
-                <h4 class="my-3">Billing Address:</h4>
-                <p style="line-height: 1.5rem;">
-                    <strong>{{address.firstName}} {{address.lastName}}</strong><br/>
-                    {{address.address}} {{address.address2}}<br/>
-                    {{address.zip}} {{address.city}}, {{address.country}}<br/>
-                    {{address.eMail}}
-                </p>
-                <h4 class="my-3">Wallet Address:</h4>
-                <p style="line-height: 1.5rem;">
-                    <strong>{{address.wallet}}</strong>
-                </p>
-            </div>
-            <div class="col-12 col-md-6 col-lg-7">
-                <h4 class="my-3">Coins:</h4>
-                <ul class="list-group">
-                    {{#each coins}}
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div class="col">
-                          <img src="{{this.image}}" width="100%" style="margin-top: auto; margin-bottom: auto;">
+        <ul class="list-group pb-5">
+            <li class="list-group-item d-flex justify-content-between lh-sm pt-2">        
+                <h1 class="my-3 first-heading">Order History</h1>
+            </li>
+            {{#each orders}}
+            <li class="list-group-item">
+                <div class="my-3">
+                    <h4>{{date}} <small>({{time}})</small></h4>
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-5">
+                            <h4 class="my-3">Billing Address:</h4>
+                            <p style="line-height: 1.5rem;">
+                                <strong>{{address.firstName}} {{address.lastName}}</strong><br/>
+                                {{address.address}} {{address.address2}}<br/>
+                                {{address.zip}} {{address.city}}, {{address.country}}<br/>
+                                {{address.eMail}}
+                            </p>
+                            <h4 class="my-3">Wallet Address:</h4>
+                            <p style="line-height: 1.5rem;">
+                                <strong>{{address.wallet}}</strong>
+                            </p>
                         </div>
-                        <div class="col" style="margin: auto;">
-                          <h6 class="m-2">{{this.name}}</h6>
+                        <div class="col-12 col-md-6 col-lg-7">
+                            <h4 class="my-3">Coins:</h4>
+                            <ul class="list-group">
+                                {{#each coins}}
+                                <li class="list-group-item d-flex justify-content-between lh-sm">
+                                    <div class="col">
+                                    <img src="{{this.image}}" width="100%" style="margin-top: auto; margin-bottom: auto;">
+                                    </div>
+                                    <div class="col" style="margin: auto;">
+                                    <h6 class="m-2">{{this.name}}</h6>
+                                    </div>
+                                    <div class="col" style="margin: auto;">
+                                        <strong class="m-2">x {{this.amount}}</strong>
+                                    </div>
+                                    <div class="col" style="width: 50%; margin: auto; text-align: right;">
+                                        <span class="item_total text-muted">$ {{this.price}}</span>
+                                    </div>
+                                </li>
+                                {{/each}}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>Total (USD)</span>
+                                    <strong>$ {{total}}</strong>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="col" style="margin: auto;">
-                            <strong class="m-2">x {{this.amount}}</strong>
-                        </div>
-                        <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                            <span class="item_total text-muted">$ {{this.price}}</span>
-                        </div>
-                    </li>
-                    {{/each}}
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong>$ {{total}}</strong>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        {{/each}}
+                    </div>
+                </div>   
+            </li>
+            {{/each}}
+        </ul>
     </script>
 
     <script id="no_history_template" type="text/x-handlebars-template">
