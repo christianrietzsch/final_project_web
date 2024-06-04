@@ -111,17 +111,16 @@ let currentIndex = 0;
 The function randomButtonPosition() is used to randomly position the buttons on the screen.
  */
 function randomButtonPosition() {
+    if (currentIndex >= 5) return;
 
-    const width = document.querySelector('.white-box').offsetWidth - buttons[currentIndex].offsetWidth;
-    const height = document.querySelector('.white-box').offsetHeight - buttons[currentIndex].offsetHeight;
+    const width = document.querySelector('.white-box').offsetWidth - buttons[currentIndex].offsetWidth - 50;
+    const height = document.querySelector('.white-box').offsetHeight - buttons[currentIndex].offsetHeight + 50;
     const randomLeft = Math.floor(Math.random() * width);
     const randomTop = Math.floor(Math.random() * height);
 
     buttons[currentIndex].style.left = randomLeft + 'px';
     buttons[currentIndex].style.top = randomTop + 'px';
     buttons[currentIndex].style.display = 'block';
-
-
 }
 
 /*
