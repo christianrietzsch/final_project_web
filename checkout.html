@@ -1,112 +1,117 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Coincidence</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
+<head>
+    <title>Coincidence</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+    />
 
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="dist/css/custom.css" rel="stylesheet">
-        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
-        <script src="dist/js/vanilla.js"></script>
-    </head>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/custom.css" rel="stylesheet">
+    <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+    <script src="dist/js/vanilla.js"></script>
+</head>
 
-    <body>
-       
-	<script id="navbar-template" type="text/x-handlebars-template">
-      	  {{#> navbar Cart='active'}}
+<body>
 
-      	  {{/navbar}}
+<script id="navbar-template" type="text/x-handlebars-template">
+    {{#> navbar Cart='active'}}
+
+    {{/navbar}}
         </script>
-	<div id="navbar"></div>
+<div id="navbar"></div>
 
-    <div class="container">
-        <main>
-          <div class="py-5 text-center">
+<div class="container">
+    <main>
+        <div class="py-5 text-center">
             <h1>Checkout</h1>
-          </div>
-      
-          <div class="row g-5">
-            <div class="col-md-12 col-lg-4 order-lg-last">
-              <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">Your cart</span>
-                <span class="badge bg-primary rounded-pill" id="item_count">3</span>
-              </h4>
-              <ul class="list-group mb-3" id="cart_hb">
+        </div>
 
-              </ul>
+        <div class="row g-5">
+            <div class="col-md-12 col-lg-4 order-lg-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-pill" id="item_count">3</span>
+                </h4>
+                <ul class="list-group mb-3" id="cart_hb">
+
+                </ul>
             </div>
             <div class="col-md-12 col-lg-8">
-              <h4 class="mb-3">Billing address</h4>
-              <form class="needs-validation" id="form_input" novalidate>
-              </form>
+                <h4 class="mb-3">Billing address</h4>
+                <form class="needs-validation" id="form_input" novalidate>
+                </form>
             </div>
-          </div>
-        </main>
-      
-      <script id="address_template" type="text/x-handlebars-template">
-        <div class="row g-3">
-          <div class="col-sm-6">
-            <label for="firstName" class="form-label">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Willy" value="{{firstName}}" required>
-          </div>
-
-          <div class="col-sm-6">
-            <label for="lastName" class="form-label">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Brandt" value="{{lastName}}" required>
-          </div>
-
-          <div class="col-12">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{eMail}}" required>
-          </div>
-
-          <div class="col-12">
-            <label for="country" class="form-label">Country or Region</label>
-            <input type="text" class="form-control" id="country" placeholder="Germany" value="{{country}}" required>
-          </div>
-
-          <div class="col-sm-6">
-            <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" placeholder="Willy-Brandt-Straße 1" value="{{address}}" required>
-          </div>
-
-          <div class="col-sm-6">
-            <label for="address2" class="form-label">Addition to Address <span class="text-muted">(Optional)</span></label>
-            <input type="text" class="form-control" id="address2" placeholder="" value="{{address2}}">
-          </div>
-
-          <div class="col-sm-6">
-            <label for="zip" class="form-label">Zip</label>
-            <input type="text" class="form-control" id="zip" placeholder="10557" value="{{zip}}" required>
-          </div>
-
-          <div class="col-sm-6">
-            <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control" id="city" placeholder="Berlin" value="{{city}}" required>
-          </div>
         </div>
-    
+    </main>
+
+    <script id="address_template" type="text/x-handlebars-template">
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <label for="firstName" class="form-label">First name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Willy" value="{{firstName}}"
+                       required>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Brandt" value="{{lastName}}"
+                       required>
+            </div>
+
+            <div class="col-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{eMail}}"
+                       required>
+            </div>
+
+            <div class="col-12">
+                <label for="country" class="form-label">Country or Region</label>
+                <input type="text" class="form-control" id="country" placeholder="Germany" value="{{country}}" required>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Willy-Brandt-Straße 1"
+                       value="{{address}}" required>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="address2" class="form-label">Addition to Address <span class="text-muted">(Optional)</span></label>
+                <input type="text" class="form-control" id="address2" placeholder="" value="{{address2}}">
+            </div>
+
+            <div class="col-sm-6">
+                <label for="zip" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="zip" placeholder="10557" value="{{zip}}" required>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" placeholder="Berlin" value="{{city}}" required>
+            </div>
+        </div>
+
         <hr class="my-4">
 
         <h4 class="mb-3">Wallet Address</h4>
 
         <div class="my-3">
-          <div class="col-12">
-            <input type="text" class="form-control" id="wallet" placeholder="ExampleWalletAddress12345678901234" value="{{wallet}}" required>
-            <small class="text-muted" for="wallet">Address to where the currency shall be sent</small>
-          </div>
+            <div class="col-12">
+                <input type="text" class="form-control" id="wallet" placeholder="ExampleWalletAddress12345678901234"
+                       value="{{wallet}}" required>
+                <small class="text-muted" for="wallet">Address to where the currency shall be sent</small>
+            </div>
         </div>
 
         <hr class="my-4">
-    
+
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="save-info">
-          <label class="form-check-label" for="save-info">Save this information for next time</label>
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Save this information for next time</label>
         </div>
 
         <hr class="my-4">
@@ -114,64 +119,64 @@
         <h4 class="mb-3">Payment</h4>
 
         <div class="my-3">
-          <div class="form-check">
-            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-            <label class="form-check-label" for="credit">Credit card</label>
-          </div>
-          <div class="form-check">
-            <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-            <label class="form-check-label" for="paypal">PayPal</label>
-          </div>
-          <div class="form-check">
-            <input id="klarna" name="paymentMethod" type="radio" class="form-check-input" required>
-            <label class="form-check-label" for="klarna">Klarna</label>
-          </div>
+            <div class="form-check">
+                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
+                <label class="form-check-label" for="credit">Credit card</label>
+            </div>
+            <div class="form-check">
+                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="paypal">PayPal</label>
+            </div>
+            <div class="form-check">
+                <input id="klarna" name="paymentMethod" type="radio" class="form-check-input" required>
+                <label class="form-check-label" for="klarna">Klarna</label>
+            </div>
         </div>
 
         <div class="row gy-3" id="credit-details">
-          <div class="col-md-6">
-            <label for="cc-name" class="form-label">Name on card</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="" required>
-            <small class="text-muted">Full name as displayed on card</small>
-          </div>
+            <div class="col-md-6">
+                <label for="cc-name" class="form-label">Name on card</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Full name as displayed on card</small>
+            </div>
 
-          <div class="col-md-6">
-            <label for="cc-number" class="form-label">Credit card number</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="" required>
-          </div>
+            <div class="col-md-6">
+                <label for="cc-number" class="form-label">Credit card number</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+            </div>
 
-          <div class="col-md-3">
-            <label for="cc-expiration" class="form-label">Expiration</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-          </div>
+            <div class="col-md-3">
+                <label for="cc-expiration" class="form-label">Expiration</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+            </div>
 
-          <div class="col-md-3">
-            <label for="cc-cvv" class="form-label">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-          </div>
+            <div class="col-md-3">
+                <label for="cc-cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+            </div>
         </div>
 
         <hr class="my-4">
 
         <button class="w-100 btn btn-primary btn-lg" type="submit">Buy now</button>
-      </script>  
+    </script>
 
-      <script id="cart_item_template" type="text/x-handlebars-template">
+    <script id="cart_item_template" type="text/x-handlebars-template">
         {{#each ord}}
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div class="col">
-              <img src="{{this.image}}" width="100%" style="margin-top: auto; margin-bottom: auto;">
-            </div>
-            <div class="col" style="margin: auto;">
-              <h6 class="m-2">{{this.name}}</h6>
-            </div>
-            <div class="col" style="margin: auto;">
-              <p class="my-2">{{this.amount}} x<br/><span class="text-muted">$ {{this.curValueRound}}</span></p>
-            </div>
-            <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                <span class="item_total text-muted">$ {{this.end_price}}</span>
-            </div>
-        </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div class="col">
+                    <img src="{{this.image}}" width="100%" style="margin-top: auto; margin-bottom: auto;">
+                </div>
+                <div class="col" style="margin: auto;">
+                    <h6 class="m-2">{{this.name}}</h6>
+                </div>
+                <div class="col" style="margin: auto;">
+                    <p class="my-2">{{this.amount}} x<br/><span class="text-muted">$ {{this.curValueRound}}</span></p>
+                </div>
+                <div class="col" style="width: 50%; margin: auto; text-align: right;">
+                    <span class="item_total text-muted">$ {{this.end_price}}</span>
+                </div>
+            </li>
         {{/each}}
 
         <li class="list-group-item d-flex justify-content-between bg-light">
@@ -187,91 +192,90 @@
             <strong id="total">$</strong>
         </li>
     </script>
-  
+
     <script>
-	    renderPartials()
+        renderPartials()
 
-      const order = getOrders().ord;
-      $ID("item_count").innerText = order.length;
-      for (let ord of order)
-        ord.curValueRound = round(ord.curValue + 0.005, 2);
-      render(cart_item_template, cart_hb, {ord: order})
-      const end_price = JSON.parse(localStorage.getItem("order_total"));
-      total.innerText = "$ " + end_price
+        const order = getOrders().ord;
+        $ID("item_count").innerText = order.length;
+        for (let ord of order)
+            ord.curValueRound = round(ord.curValue + 0.005, 2);
+        render(cart_item_template, cart_hb, {ord: order})
+        const end_price = JSON.parse(localStorage.getItem("order_total"));
+        total.innerText = "$ " + end_price
 
-      var address = JSON.parse(localStorage.getItem("address"));
-      if (!address)
-        address = {};
+        var address = JSON.parse(localStorage.getItem("address"));
+        if (!address)
+            address = {};
 
-      render(address_template, $ID("form_input"), address)
+        render(address_template, $ID("form_input"), address)
 
-      Array.prototype.forEach.call($ALL('input[type=radio][name="paymentMethod"]'), (r) => {
-        r.addEventListener("change", () => {
-          if (r.id == "credit"){
-            $ID("credit-details").style = "";
-            $ID("cc-name").required = true;
-            $ID("cc-number").required = true;
-            $ID("cc-expiration").required = true;
-            $ID("cc-cvv").required = true;
-          }
-          else{
-            $ID("credit-details").style = "display: none;";
-            $ID("cc-name").required = false;
-            $ID("cc-number").required = false;
-            $ID("cc-expiration").required = false;
-            $ID("cc-cvv").required = false;
-          }
-        });
-      })
+        Array.prototype.forEach.call($ALL('input[type=radio][name="paymentMethod"]'), (r) => {
+            r.addEventListener("change", () => {
+                if (r.id == "credit") {
+                    $ID("credit-details").style = "";
+                    $ID("cc-name").required = true;
+                    $ID("cc-number").required = true;
+                    $ID("cc-expiration").required = true;
+                    $ID("cc-cvv").required = true;
+                } else {
+                    $ID("credit-details").style = "display: none;";
+                    $ID("cc-name").required = false;
+                    $ID("cc-number").required = false;
+                    $ID("cc-expiration").required = false;
+                    $ID("cc-cvv").required = false;
+                }
+            });
+        })
 
-      function buyNow() {
-        const address = {
-          firstName : $ID("firstName").value,
-          lastName : $ID("lastName").value,
-          eMail : $ID("email").value,
-          country : $ID("country").value,
-          address : $ID("address").value,
-          address2 : $ID("address2").value,
-          zip : $ID("zip").value,
-          city : $ID("city").value,
-          wallet : $ID("wallet").value
-        };
+        function buyNow() {
+            const address = {
+                firstName: $ID("firstName").value,
+                lastName: $ID("lastName").value,
+                eMail: $ID("email").value,
+                country: $ID("country").value,
+                address: $ID("address").value,
+                address2: $ID("address2").value,
+                zip: $ID("zip").value,
+                city: $ID("city").value,
+                wallet: $ID("wallet").value
+            };
 
-        const orderTotal = {
-          address : address,
-          total : end_price,
-          coins : [],
-          ...getTimestamp()
-        };
+            const orderTotal = {
+                address: address,
+                total: end_price,
+                coins: [],
+                ...getTimestamp()
+            };
 
-        for (o of order)
-          orderTotal.coins.push({name: o.name, amount: o.amount, image: o.image, price: o.end_price});
+            for (o of order)
+                orderTotal.coins.push({name: o.name, amount: o.amount, image: o.image, price: o.end_price});
 
-        addToOrderHistory(orderTotal);
-        localStorage.removeItem("orders");
+            addToOrderHistory(orderTotal);
+            localStorage.removeItem("orders");
 
-        if ($ID("save-info").checked)
-          localStorage.setItem("address", JSON.stringify(address));
+            if ($ID("save-info").checked)
+                localStorage.setItem("address", JSON.stringify(address));
 
-        location.href="thanks.html";
-      }
-
-      $ID("form_input").addEventListener("submit", function(event) {
-        event.preventDefault();
-        if (this.checkValidity() === true){
-          buyNow();
+            location.href = "thanks.html";
         }
-        this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
-      }, false);
+
+        $ID("form_input").addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (this.checkValidity() === true) {
+                buyNow();
+            }
+            this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
+        }, false);
     </script>
 
-<script id="footer-template" type="text/x-handlebars-template">
-      	  {{#> footer}}
-  
-      	  {{/footer}}
-        </script>
-	<div id="footer"></div>
+    <script id="footer-template" type="text/x-handlebars-template">
+        {{#> footer}}
 
-        <script src="dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+        {{/footer}}
+        </script>
+    <div id="footer"></div>
+
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

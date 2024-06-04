@@ -8,34 +8,38 @@
     <style media="screen">
         *,
         *:before,
-        *:after{
+        *:after {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-        .popup{
+
+        .popup {
             background-color: #ffffff;
             width: 420px;
             padding: 30px 40px;
             position: absolute;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             left: 50%;
             top: 50%;
             border-radius: 8px;
-            font-family: "Poppins",sans-serif;
+            font-family: "Poppins", sans-serif;
             display: none;
             text-align: center;
         }
-        .popup h2{
+
+        .popup h2 {
             margin-top: -20px;
         }
-        .popup p{
+
+        .popup p {
             font-size: 14px;
             text-align: justify;
             margin: 20px 0;
             line-height: 25px;
         }
-        a.one{
+
+        a.one {
             display: block;
             width: 150px;
             position: relative;
@@ -47,10 +51,22 @@
             text-decoration: none;
             padding: 8px 0;
         }
-        a.two{
-            a.two:link{color:#ff0000;};
-            a.two:visited{color:#0000ff;};
-            a.two:hover{color:#ffcc00;};
+
+        a.two {
+            a.two:link {
+                color: #ff0000;
+            }
+        ;
+
+            a.two:visited {
+                color: #0000ff;
+            }
+        ;
+
+            a.two:hover {
+                color: #ffcc00;
+            }
+        ;
         }
     </style>
 </head>
@@ -58,7 +74,9 @@
 <div class="popup">
     <h2>Policies</h2>
     <p>
-        I agree to Coincidence Inc.'s <a class="two" href= "terms.html"> Terms and Conditions</a>, <a class="two" href="privacy.html"> Privacy Policy </a> and <a class="two" href="cookies.html"> Cookie Policy </a>.
+        I agree to Coincidence Inc.'s <a class="two" href="terms.html"> Terms and Conditions</a>, <a class="two"
+                                                                                                     href="privacy.html">
+        Privacy Policy </a> and <a class="two" href="cookies.html"> Cookie Policy </a>.
     </p>
 
     <a class="one" href="#">Agree</a>
@@ -66,11 +84,11 @@
 <!--Script-->
 <script type="text/javascript">
 
-    document.querySelector(".one").addEventListener("click", function(){
+    document.querySelector(".one").addEventListener("click", function () {
         document.querySelector(".popup").style.display = "none";
     });
 </script>
 </body>
 </html>
 
-onclick="document.location='terms.html
+

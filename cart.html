@@ -1,68 +1,69 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Coincidence</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
+<head>
+    <title>Coincidence</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+    />
 
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="dist/css/custom.css" rel="stylesheet">
-        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
-        <script src="dist/js/vanilla.js"></script>
-    </head>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/custom.css" rel="stylesheet">
+    <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+    <script src="dist/js/vanilla.js"></script>
+</head>
 
-    <body>
-        <script id="navbar-template" type="text/x-handlebars-template">
-      	  {{#> navbar Cart='active'}}
+<body>
+<script id="navbar-template" type="text/x-handlebars-template">
+    {{#> navbar Cart='active'}}
 
-      	  {{/navbar}}
+    {{/navbar}}
         </script>
-	<div id="navbar"></div>
+<div id="navbar"></div>
 
-        <main>
-            <div class="container padded">
-                <div class="row mt-5">
-                    <div class="col d-none d-md-block"></div>
-                    <div class="col-lg-6">
-                        <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
-                            <span class="text-primary">Your cart</span>
-                            <span class="badge bg-primary rounded-pill" id="item_count">0</span>
-                        </h4>
-        
-                        <ul class="list-group mb-3" id="cart"></ul>
-        
-                        <div class="card p-2">
-                            <form id="form_input" class="needs-validaton" novalidate>
-                            <div class="input-group">
-                                <input type="text" id="discount_field" class="form-control" placeholder="Promo code" required>
-                                <button type="submit" id="sub_discount" class="btn btn-secondary">Redeem</button>
-                                <!--<button type="submit" id="sub_discount" onclick="addDiscount()"class="btn btn-secondary">Redeem</button>-->
+<main>
+    <div class="container padded">
+        <div class="row mt-5">
+            <div class="col d-none d-md-block"></div>
+            <div class="col-lg-6">
+                <h4 class="first-heading d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-pill" id="item_count">0</span>
+                </h4>
 
-                            </div>
-                            </form>
+                <ul class="list-group mb-3" id="cart"></ul>
+
+                <div class="card p-2">
+                    <form id="form_input" class="needs-validaton" novalidate>
+                        <div class="input-group">
+                            <input type="text" id="discount_field" class="form-control" placeholder="Promo code"
+                                   required>
+                            <button type="submit" id="sub_discount" class="btn btn-secondary">Redeem</button>
+                            <!--<button type="submit" id="sub_discount" onclick="addDiscount()"class="btn btn-secondary">Redeem</button>-->
+
                         </div>
-        
-                        <div class="py-3">
-                            <div class="card input-group p-2">
-                                <a type="button" onclick="buy_items()"class="btn btn-primary">Buy</a>
-                            </div>
-                        </div>
+                    </form>
+                </div>
+
+                <div class="py-3">
+                    <div class="card input-group p-2">
+                        <a type="button" onclick="buy_items()" class="btn btn-primary">Buy</a>
                     </div>
-                    <div class="col d-none d-md-block"></div>
                 </div>
             </div>
-        </main>
+            <div class="col d-none d-md-block"></div>
+        </div>
+    </div>
+</main>
 
-    <script id="cart_item_template" type="text/x-handlebars-template">
-        {{#each ord}}
+<script id="cart_item_template" type="text/x-handlebars-template">
+    {{#each ord}}
         <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                <img src="{{image}}" class="card-img" alt="...">
+                    <img src="{{image}}" class="card-img" alt="...">
                 </div>
                 <div class="col-md-8 my-2" style="margin-top: auto; margin-bottom: auto;">
                     <div class="card-body row">
@@ -70,17 +71,25 @@
                             <h6 class="card-title">{{name}}</h6>
                             <small class="card-text text-muted">{{description}}</small>
                             <div class="input-group my-3">
-                                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button" data-bs-toggle="modal" data-bs-target="#delete_modal">
-                                    <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_rm_button"
+                                        data-bs-toggle="modal" data-bs-target="#delete_modal">
+                                    <svg width="16" height="16" fill="currentColor" class="bi bi-trash-fill"
+                                         viewBox="0 0 16 16">
                                         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                     </svg>
                                 </button>
-                                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">-</button>
-                                <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}" id="{{this.id}}_count_input">
-                                <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">+</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">
+                                    -
+                                </button>
+                                <input type="number" class="form-control" aria-label="Amount" value="{{this.amount}}"
+                                       id="{{this.id}}_count_input">
+                                <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">
+                                    +
+                                </button>
                             </div>
-                            <span class="text-muted" style="margin-left: 1rem;" id="{{this.id}}_val">x $ {{this.curValue}}</span>
-                        </div> 
+                            <span class="text-muted" style="margin-left: 1rem;"
+                                  id="{{this.id}}_val">x $ {{this.curValue}}</span>
+                        </div>
                         <div class="col-2" style="width: 50%; margin: auto; text-align: right;">
                             <span class="item_total text-muted" id="{{this.id}}_total">$ {{this.end_price}}</span>
                         </div>
@@ -88,189 +97,190 @@
                 </div>
             </div>
         </li>
-        {{/each}}
+    {{/each}}
 
-        <li class="list-group-item d-flex justify-content-between bg-light">
-            <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small id="discount_code"></small>
+    <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+            <h6 class="my-0">Promo code</h6>
+            <small id="discount_code"></small>
+        </div>
+        <span class="text-success" id="discount">−$ 0</span>
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total (USD)</span>
+        <strong id="total">$</strong>
+    </li>
+</script>
+
+<div class="modal fade" id="delete_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLiveLabel">Removing Coin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <span class="text-success" id="discount">−$ 0</span>
-        </li>
-
-        <li class="list-group-item d-flex justify-content-between">
-            <span>Total (USD)</span>
-            <strong id="total">$</strong>
-        </li>
-    </script>
-
-    <div class="modal fade" id="delete_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLiveLabel">Removing Coin</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="modal_text">Are you sure, you want to remove {{coin}} from the cart?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="remove()">Delete</button>
-                </div>
+            <div class="modal-body">
+                <p id="modal_text">Are you sure, you want to remove {{coin}} from the cart?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="remove()">Delete</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <script>
-	renderPartials()
-        var currentCoin = -1;
+<script>
+    renderPartials()
+    var currentCoin = -1;
 
-               function addCartListeners(id) {
-            $ID(id+"_rm_button").addEventListener("click", () => {
-                currentCoin = id;
-                modal_text.innerHTML ="Are you sure, you want to remove " + getCoinByID(id).name + " from the cart?";
-            });
-            $ID(id+"_count_input").addEventListener("change", changeCount($ID(id+"_count_input"), id))
-            $ID(id+"_-_button").addEventListener("click", () =>{
-                $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) - 1;
-                changeCount($ID(id+"_count_input"), id)();
-            });        
-            $ID(id+"_+_button").addEventListener("click", () =>{
-                $ID(id+"_count_input").value = parseInt($ID(id+"_count_input").value) + 1;
-                changeCount($ID(id+"_count_input"), id)();
-            });
-        }
+    function addCartListeners(id) {
+        $ID(id + "_rm_button").addEventListener("click", () => {
+            currentCoin = id;
+            modal_text.innerHTML = "Are you sure, you want to remove " + getCoinByID(id).name + " from the cart?";
+        });
+        $ID(id + "_count_input").addEventListener("change", changeCount($ID(id + "_count_input"), id))
+        $ID(id + "_-_button").addEventListener("click", () => {
+            $ID(id + "_count_input").value = parseInt($ID(id + "_count_input").value) - 1;
+            changeCount($ID(id + "_count_input"), id)();
+        });
+        $ID(id + "_+_button").addEventListener("click", () => {
+            $ID(id + "_count_input").value = parseInt($ID(id + "_count_input").value) + 1;
+            changeCount($ID(id + "_count_input"), id)();
+        });
+    }
 
-        function init_cart_items(orders) {
-            render($ID("cart_item_template"), $ID("cart"), orders)
-            let id_list = []
-            orders.ord.forEach((obj) => id_list.push(obj.id))
-            id_list.map(addCartListeners)
-            $ID("item_count").innerText = id_list.length
-        }
-        
-        const remove = () => {
-            $ID(currentCoin+"").remove()
-            let count = $ID("item_count")
-            count.innerText = parseInt(count.innerText)-1    
-            updateTotalPrice()
-            updateOrder(currentCoin, -1)
-        }
+    function init_cart_items(orders) {
+        render($ID("cart_item_template"), $ID("cart"), orders)
+        let id_list = []
+        orders.ord.forEach((obj) => id_list.push(obj.id))
+        id_list.map(addCartListeners)
+        $ID("item_count").innerText = id_list.length
+    }
 
-        $ID("discount_field").addEventListener("keydown", (event) => {
-            if(event.key == "Enter") {
-                addDiscount()
-            }
-        })
-
-        function checkDiscount(discount) {
-	    return discounts.available.includes(discount) || discounts.current === discount
-
-        }
-
-        function getDiscountValue(discount) {
-	    const value = discounts.values[discount]
-	    if(Number.isInteger(value)) {
-		return value
-	    } else {
-	    return (Number.parseFloat(value.slice(0,value.length-1))/100)*Number.parseFloat($ID("total").innerText.substring(2))
-	    }
-
-        }
-
-        function updateDiscount(discount, used) {
-	    if(used) {
-		discounts.available.splice(discounts.available.indexOf(discounts.current))	
-	     } 
-	    discounts.current = discount
-	    discounts.available.splice(discounts.available.indexOf(discount))
-	    writeDiscounts(discounts)
-
-        }
-
-	function buy_items() {
-		updateDiscount(null, true)
-		window.location.href = "checkout.html"
-	}
-
-        function addDiscount() {
-            //validate field if discount can be used
-            //else set to red
-            const discount = $ID("discount_field").value
-            if(checkDiscount(discount)) {            
-                $ID("discount").innerText = "-$" + round(getDiscountValue(discount),2)
-                updateTotalPrice()
-                updateDiscount(discount, false)
-                return true
-            } else {
-    
-		$ID("discount").innerText = "-$ " + 0
-		updateTotalPrice()
-    return false
-	    }
-        }
-
-        function updateTotalPrice() {
-            const elements = document.getElementsByClassName("item_total")
-            let total = 0
-            for(let i = 0; i < elements.length; i++) {
-                total += parseFloat(elements[i].innerText.substring(2))
-            }
-            total -= parseFloat($ID("discount").innerHTML.substring(2))
-            if(round(total, 2) >= 0) {
-		price = round(total, 2)
-	    } else {
-		price = 0
-	    }
-            $ID("total").innerText = "$ " + price;
-            localStorage.setItem("order_total", JSON.stringify(price));
-        }
-                
-        const changeCount = (input_box, id) => {
-            return function(){
-                amount = parseFloat(input_box.value)
-                    if(amount <= 0){
-                        amount = 1;
-                        input_box.value = "1";
-                }
-
-                const price = parseFloat($ID(id+ "_val").innerText.substring(3))
-                $ID(id+"_total").innerText = "$ " + round(amount * price + 0.005, 2);
-                updateTotalPrice()
-                updateOrder(id, amount)
-            }
-        }
-
-        init_cart_items(getOrders())
+    const remove = () => {
+        $ID(currentCoin + "").remove()
+        let count = $ID("item_count")
+        count.innerText = parseInt(count.innerText) - 1
         updateTotalPrice()
-        const discounts = loadDiscounts()
-    $ID("form_input").addEventListener("submit", function(event) {
+        updateOrder(currentCoin, -1)
+    }
+
+    $ID("discount_field").addEventListener("keydown", (event) => {
+        if (event.key == "Enter") {
+            addDiscount()
+        }
+    })
+
+    function checkDiscount(discount) {
+        return discounts.available.includes(discount) || discounts.current === discount
+
+    }
+
+    function getDiscountValue(discount) {
+        const value = discounts.values[discount]
+        if (Number.isInteger(value)) {
+            return value
+        } else {
+            return (Number.parseFloat(value.slice(0, value.length - 1)) / 100) * Number.parseFloat($ID("total").innerText.substring(2))
+        }
+
+    }
+
+    function updateDiscount(discount, used) {
+        if (used) {
+            discounts.available.splice(discounts.available.indexOf(discounts.current))
+        }
+        discounts.current = discount
+        discounts.available.splice(discounts.available.indexOf(discount))
+        writeDiscounts(discounts)
+
+    }
+
+    function buy_items() {
+        updateDiscount(null, true)
+        window.location.href = "checkout.html"
+    }
+
+    function addDiscount() {
+        //validate field if discount can be used
+        //else set to red
+        const discount = $ID("discount_field").value
+        if (checkDiscount(discount)) {
+            $ID("discount").innerText = "-$" + round(getDiscountValue(discount), 2)
+            updateTotalPrice()
+            updateDiscount(discount, false)
+            return true
+        } else {
+
+            $ID("discount").innerText = "-$ " + 0
+            updateTotalPrice()
+            return false
+        }
+    }
+
+    function updateTotalPrice() {
+        const elements = document.getElementsByClassName("item_total")
+        let total = 0
+        for (let i = 0; i < elements.length; i++) {
+            total += parseFloat(elements[i].innerText.substring(2))
+        }
+        total -= parseFloat($ID("discount").innerHTML.substring(2))
+        if (round(total, 2) >= 0) {
+            price = round(total, 2)
+        } else {
+            price = 0
+        }
+        $ID("total").innerText = "$ " + price;
+        localStorage.setItem("order_total", JSON.stringify(price));
+    }
+
+    const changeCount = (input_box, id) => {
+        return function () {
+            amount = parseFloat(input_box.value)
+            if (amount <= 0) {
+                amount = 1;
+                input_box.value = "1";
+            }
+
+            const price = parseFloat($ID(id + "_val").innerText.substring(3))
+            $ID(id + "_total").innerText = "$ " + round(amount * price + 0.005, 2);
+            updateTotalPrice()
+            updateOrder(id, amount)
+        }
+    }
+
+    init_cart_items(getOrders())
+    updateTotalPrice()
+    const discounts = loadDiscounts()
+    $ID("form_input").addEventListener("submit", function (event) {
         event.preventDefault();
-        if (this.checkValidity() === true){
-        } 
-        if(addDiscount()) {
-        
-            this.classList.add("was-validated"); 
+        if (this.checkValidity() === true) {
+        }
+        if (addDiscount()) {
+
+            this.classList.add("was-validated");
         } else {
             this.classList.add("is-invalid")
-            this.classList.add("was-validated"); 
+            this.classList.add("was-validated");
         }
-      }, false);
+    }, false);
 
-	if(discounts.current != null) {
-		$ID("discount_field").value = discounts.current
-		addDiscount()
-	}
+    if (discounts.current != null) {
+        $ID("discount_field").value = discounts.current
+        addDiscount()
+    }
 
-    </script>
+</script>
 
 <script id="footer-template" type="text/x-handlebars-template">
-      	  {{#> footer}} {{/footer}}
+    {{#> footer}} {{/footer}}
 </script>
-	<div id="footer"></div>
+<div id="footer"></div>
 
-        <script src="dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+<script src="dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

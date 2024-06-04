@@ -1,48 +1,49 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Coincidence</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
+<head>
+    <title>Coincidence</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+    />
 
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="dist/css/custom.css" rel="stylesheet">
-        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
-        <script src="dist/js/vanilla.js"></script>
-    </head>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/custom.css" rel="stylesheet">
+    <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+    <script src="dist/js/vanilla.js"></script>
+</head>
 
-    <body>
-        <script id="navbar-template" type="text/x-handlebars-template">
-      	  {{#> navbar History='active'}}
+<body>
+<script id="navbar-template" type="text/x-handlebars-template">
+    {{#> navbar History='active'}}
 
-      	  {{/navbar}}
+    {{/navbar}}
         </script>
-	    <div id="navbar"></div>
+<div id="navbar"></div>
 
-        <main>
-            <div class="bg" style="background-image: url('images/background4.jpg'); background-size: repeat; background-position: top;">
-                <div class="container padded">
-                    <div class="row pt-5">
-                        <div class="col d-none d-md-block"></div>
-                        <div class="col-lg-8">        
-                            <div id="history"></div>                                
-                        </div>
-                        <div class="col d-none d-md-block"></div>
-                    </div>
+<main>
+    <div class="bg"
+         style="background-image: url('images/background4.jpg'); background-size: repeat; background-position: top;">
+        <div class="container padded">
+            <div class="row pt-5">
+                <div class="col d-none d-md-block"></div>
+                <div class="col-lg-8">
+                    <div id="history"></div>
                 </div>
+                <div class="col d-none d-md-block"></div>
             </div>
-        </main>
+        </div>
+    </div>
+</main>
 
-    <script id="history_template" type="text/x-handlebars-template">
-        <ul class="list-group pb-5">
-            <li class="list-group-item d-flex justify-content-between lh-sm pt-2">        
-                <h1 class="my-3 first-heading">Order History</h1>
-            </li>
-            {{#each orders}}
+<script id="history_template" type="text/x-handlebars-template">
+    <ul class="list-group pb-5">
+        <li class="list-group-item d-flex justify-content-between lh-sm pt-2">
+            <h1 class="my-3 first-heading">Order History</h1>
+        </li>
+        {{#each orders}}
             <li class="list-group-item">
                 <div class="my-3">
                     <h4>{{date}} <small>({{time}})</small></h4>
@@ -64,20 +65,21 @@
                             <h4 class="my-3">Coins:</h4>
                             <ul class="list-group">
                                 {{#each coins}}
-                                <li class="list-group-item d-flex justify-content-between lh-sm">
-                                    <div class="col">
-                                    <img src="{{this.image}}" width="100%" style="margin-top: auto; margin-bottom: auto;">
-                                    </div>
-                                    <div class="col" style="margin: auto;">
-                                    <h6 class="m-2">{{this.name}}</h6>
-                                    </div>
-                                    <div class="col" style="margin: auto;">
-                                        <strong class="m-2">x {{this.amount}}</strong>
-                                    </div>
-                                    <div class="col" style="width: 50%; margin: auto; text-align: right;">
-                                        <span class="item_total text-muted">$ {{this.price}}</span>
-                                    </div>
-                                </li>
+                                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                                        <div class="col">
+                                            <img src="{{this.image}}" width="100%"
+                                                 style="margin-top: auto; margin-bottom: auto;">
+                                        </div>
+                                        <div class="col" style="margin: auto;">
+                                            <h6 class="m-2">{{this.name}}</h6>
+                                        </div>
+                                        <div class="col" style="margin: auto;">
+                                            <strong class="m-2">x {{this.amount}}</strong>
+                                        </div>
+                                        <div class="col" style="width: 50%; margin: auto; text-align: right;">
+                                            <span class="item_total text-muted">$ {{this.price}}</span>
+                                        </div>
+                                    </li>
                                 {{/each}}
                                 <li class="list-group-item d-flex justify-content-between">
                                     <span>Total (USD)</span>
@@ -86,34 +88,34 @@
                             </ul>
                         </div>
                     </div>
-                </div>   
+                </div>
             </li>
-            {{/each}}
-        </ul>
-    </script>
+        {{/each}}
+    </ul>
+</script>
 
-    <script id="no_history_template" type="text/x-handlebars-template">
-        <h1 class="my-3 first-heading">Order History</h1>
-        <hr class="my-4">
-        <h4>After your first order, you can always inspect it here.</h4>
-        <span>Go to the shop, and try it out now.</span>
-    </script>
+<script id="no_history_template" type="text/x-handlebars-template">
+    <h1 class="my-3 first-heading">Order History</h1>
+    <hr class="my-4">
+    <h4>After your first order, you can always inspect it here.</h4>
+    <span>Go to the shop, and try it out now.</span>
+</script>
 
-    <script>
-        renderPartials()
-        
-        const orderHist = JSON.parse(localStorage.getItem("orderHist"));
-        if (!orderHist)
-            render($ID("no_history_template"), $ID("history"), {})
-        else
-            render($ID("history_template"), $ID("history"), {orders: orderHist.toReversed()})
-    </script>
+<script>
+    renderPartials()
+
+    const orderHist = JSON.parse(localStorage.getItem("orderHist"));
+    if (!orderHist)
+        render($ID("no_history_template"), $ID("history"), {})
+    else
+        render($ID("history_template"), $ID("history"), {orders: orderHist.toReversed()})
+</script>
 
 <script id="footer-template" type="text/x-handlebars-template">
-      	  {{#> footer}} {{/footer}}
+    {{#> footer}} {{/footer}}
 </script>
-	<div id="footer"></div>
+<div id="footer"></div>
 
-        <script src="dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+<script src="dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

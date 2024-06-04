@@ -15,7 +15,7 @@
     <script src="dist/js/vanilla.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             console.log($('a[href="#openModal"]')[0]);
             $('a[href="#openModal"]')[0].click();
         })</script>
@@ -39,6 +39,7 @@
             opacity: 1;
             pointer-events: auto;
         }
+
         .modalDialog > div {
             width: 400px;
             position: relative;
@@ -47,7 +48,8 @@
             border-radius: 10px;
             background: #fff;
         }
-        a.one{
+
+        a.one {
             display: block;
             width: 150px;
             position: relative;
@@ -71,7 +73,9 @@
 
         <h2 style="padding: 20px">Policies</h2>
         <p>
-            I agree to Coincidence Inc.'s <a class="two" href= "terms.html"> Terms and Conditions</a>, <a class="two" href="privacy.html"> Privacy Policy </a> and <a class="two" href="cookies.html"> Cookie Policy </a>.
+            I agree to Coincidence Inc.'s <a class="two" href="terms.html"> Terms and Conditions</a>, <a class="two"
+                                                                                                         href="privacy.html">
+            Privacy Policy </a> and <a class="two" href="cookies.html"> Cookie Policy </a>.
         </p>
 
         <a class="one" href="#">Agree</a>
@@ -162,7 +166,8 @@
                 </svg>
 
                 <h2 class="fw-normal">Crypto Quest</h2>
-                <p>Ready for an adventure? Join us on a quest to uncover hidden gems and unlock trading treasures. There might even be a surprise waiting for you.</p>
+                <p>Ready for an adventure? Join us on a quest to uncover hidden gems and unlock trading treasures. There
+                    might even be a surprise waiting for you.</p>
                 <p><a class="btn btn-secondary" href="#Adventure">Start the Quest &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
@@ -302,7 +307,7 @@
 </script>
 <script type="text/javascript">
 
-    document.querySelector(".one").addEventListener("click", function(){
+    document.querySelector(".one").addEventListener("click", function () {
         document.querySelector(".popup").style.display = "none";
     });
 </script>

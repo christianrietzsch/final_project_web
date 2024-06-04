@@ -1,257 +1,279 @@
 <!doctype html>
 <html lang="en">
-  <head>      
-        <title>Coincidence</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" /> <meta
+<head>
+    <title>Coincidence</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+    />
 
-        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="dist/css/custom.css" rel="stylesheet">
-        <script src="dist/js/handlebars.min-v4.7.8.js"></script>   
-        <script src="dist/js/vanilla.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-  </head>
-    
-  <script id="navbar-template" type="text/x-handlebars-template">
-      	  {{#> navbar Shop='active'}}
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dist/css/custom.css" rel="stylesheet">
+    <script src="dist/js/handlebars.min-v4.7.8.js"></script>
+    <script src="dist/js/vanilla.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+            integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+            crossorigin="anonymous"></script>
+</head>
 
-      	  {{/navbar}}
+<script id="navbar-template" type="text/x-handlebars-template">
+    {{#> navbar Shop='active'}}
+
+    {{/navbar}}
         </script>
-	<div id="navbar"></div>
+<div id="navbar"></div>
 
 <main>
 
 
-<div class="bg"
-     style="background-image: url('images/background4.jpg');
+    <div class="bg"
+         style="background-image: url('images/background4.jpg');
                         background-size: repeat;
                         background-position: top;">
 
-  <div class="container padded">
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-7 col-md-8 mx-auto">
-        <img src="images/logo.png" width="100%" height="100%"></img>
-      </div>
-    </div>
-  </section>
-
-  <div class="offcanvas offcanvas-start" id="more">
-
-    <script id="more_template" type="text/x-handlebars-template">
-        <div class="offcanvas-header">
-          <h1 class="offcanvas-title">{{name}}</h1>
-          <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-          <p>{{description}}</p>
-          <canvas class="my-4 w-100" id="more_chart" width="900" height="600"></canvas>
-
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <h6 class="my-0">Current value</h6>
-              <h6 class="my-0">$ {{curValue}}</h6>
-            </li>            
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <h6 class="my-0">Trend (24-hrs)</h6>
-              <div style="{{colorDay}}">
-                <!--Make responsive; two cards will make the text look weird-->
-                <a>{{curRate}}%</a>
-                <a id="offcanvas-24-arrow"></a>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <h6 class="my-0">Trend (30-days)</h6>
-              <div style="{{colorMonth}}">
-                <!--Make responsive; two cards will make the text look weird-->
-                <a>{{monthRate}}%</a>
-                <a id="offcanvas-30-arrow"></a>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <h6 class="my-0">Trend (1-year)</h6>
-              <div style="{{colorYear}}">
-                <!--Make responsive; two cards will make the text look weird-->
-                <a>{{yearRate}}%</a>
-                <a id="offcanvas-1-arrow"></a>
-              </div>
-            </li>
-          </ul>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text" for="cart_count">Amount</span>
-            <input type="number" class="form-control" aria-label="Amount" id="cart_count" value="1" placeholder="Amount">
-            <button class="btn btn-outline-success" id="cart_buy_button">Add to cart</button>
-          </div>
-
-          <div class="input-group">
-            <button class="btn btn-outline-secondary" onclick="location.href='details.html?selected={{id}}'">Show details</button>
-          </div>
-        </div>
-    </script>
-
-    <div id="more"></div>
-
-  </div>
-
-  <ul class="list-group pb-5">
-    <li class="list-group-item d-flex justify-content-between lh-sm pt-2">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search_bar">
-      <button class="btn btn-outline-secondary me-2" id="search_button" type="submit">Search</button>
-      <div class="dropdown">
-        <button class="btn btn-outline-danger me-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li><h6 class="dropdown-header">Sort by (asc):</h6></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.name);">Name</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.curValue);">Value</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.curRate);">Rate</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><h6 class="dropdown-header">Sort by (desc):</h6></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.name);">Name</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.curValue);">Value</a></li>
-          <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.curRate);">Rate</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="list-group-item d-flex justify-content-between lh-sm">
-        <div class="album pb-4 pt-1">
-          <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3" id="items">
-      
-      
-            <script id="shop_item_template" type="text/x-handlebars-template">
-            
-              {{#each res}}
-              <div>
-                <div class="col">
-                  <div class="card shadow-sm" style="min-width: 230px;">
-                    <img onclick="$ID('{{this.id}}-button').click()" src="{{this.image}}" class="card-img-top" width="100%" height="100%" alt="">
-                    <div class="card-body">
-                      <h5 class="card-title text-center" id="name">{{this.name}}</h5>
-                      <p class="card-text">{{this.description}}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <button type="button" id="{{this.id}}-button" onclick="{{this.more}}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="offcanvas" data-bs-target="#more">Learn more!</button>
-                        <div style="{{this.color}}">
-                          <!--Make responsive; two cards will make the text look weird-->
-                          <svg width="16" height="16" fill="currentColor" class="bi bi-activity text-dark" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/></svg>
-                          <a>{{this.curRate}}%</a>
-                          <a style="font-size:25px;" id="{{this.id}}-arrow"></a>
-                        </div>
-                      </div>
+        <div class="container padded">
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5">
+                    <div class="col-lg-7 col-md-8 mx-auto">
+                        <img src="images/logo.png" width="100%" height="100%"></img>
                     </div>
-                  </div>
                 </div>
-              </div>
-              {{/each}}
-            
+            </section>
+
+            <div class="offcanvas offcanvas-start" id="more">
+
+                <script id="more_template" type="text/x-handlebars-template">
+                    <div class="offcanvas-header">
+                        <h1 class="offcanvas-title">{{name}}</h1>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <p>{{description}}</p>
+                        <canvas class="my-4 w-100" id="more_chart" width="900" height="600"></canvas>
+
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <h6 class="my-0">Current value</h6>
+                                <h6 class="my-0">$ {{curValue}}</h6>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <h6 class="my-0">Trend (24-hrs)</h6>
+                                <div style="{{colorDay}}">
+                                    <!--Make responsive; two cards will make the text look weird-->
+                                    <a>{{curRate}}%</a>
+                                    <a id="offcanvas-24-arrow"></a>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <h6 class="my-0">Trend (30-days)</h6>
+                                <div style="{{colorMonth}}">
+                                    <!--Make responsive; two cards will make the text look weird-->
+                                    <a>{{monthRate}}%</a>
+                                    <a id="offcanvas-30-arrow"></a>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between lh-sm">
+                                <h6 class="my-0">Trend (1-year)</h6>
+                                <div style="{{colorYear}}">
+                                    <!--Make responsive; two cards will make the text look weird-->
+                                    <a>{{yearRate}}%</a>
+                                    <a id="offcanvas-1-arrow"></a>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" for="cart_count">Amount</span>
+                            <input type="number" class="form-control" aria-label="Amount" id="cart_count" value="1"
+                                   placeholder="Amount">
+                            <button class="btn btn-outline-success" id="cart_buy_button">Add to cart</button>
+                        </div>
+
+                        <div class="input-group">
+                            <button class="btn btn-outline-secondary"
+                                    onclick="location.href='details.html?selected={{id}}'">Show details</button>
+                        </div>
+                    </div>
+                </script>
+
+                <div id="more"></div>
+
+            </div>
+
+            <ul class="list-group pb-5">
+                <li class="list-group-item d-flex justify-content-between lh-sm pt-2">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                           id="search_bar">
+                    <button class="btn btn-outline-secondary me-2" id="search_button" type="submit">Search</button>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-danger me-2 dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Sort
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><h6 class="dropdown-header">Sort by (asc):</h6></li>
+                            <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.name);">Name</a></li>
+                            <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.curValue);">Value</a></li>
+                            <li><a class="dropdown-item" href="javascript:sortShop(0,(c)=>c.curRate);">Rate</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><h6 class="dropdown-header">Sort by (desc):</h6></li>
+                            <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.name);">Name</a></li>
+                            <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.curValue);">Value</a></li>
+                            <li><a class="dropdown-item" href="javascript:sortShop(1,(c)=>c.curRate);">Rate</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div class="album pb-4 pt-1">
+                        <div class="container">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3" id="items">
+
+
+                                <script id="shop_item_template" type="text/x-handlebars-template">
+
+                                    {{#each res}}
+                                        <div>
+                                            <div class="col">
+                                                <div class="card shadow-sm" style="min-width: 230px;">
+                                                    <img onclick="$ID('{{this.id}}-button').click()"
+                                                         src="{{this.image}}" class="card-img-top" width="100%"
+                                                         height="100%" alt="">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center" id="name">{{this.name}}</h5>
+                                                        <p class="card-text">{{this.description}}</p>
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <button type="button" id="{{this.id}}-button"
+                                                                    onclick="{{this.more}}"
+                                                                    class="btn btn-sm btn-outline-secondary"
+                                                                    data-bs-toggle="offcanvas" data-bs-target="#more">
+                                                                Learn more!
+                                                            </button>
+                                                            <div style="{{this.color}}">
+                                                                <!--Make responsive; two cards will make the text look weird-->
+                                                                <svg width="16" height="16" fill="currentColor"
+                                                                     class="bi bi-activity text-dark"
+                                                                     viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd"
+                                                                          d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2"/>
+                                                                </svg>
+                                                                <a>{{this.curRate}}%</a>
+                                                                <a style="font-size:25px;" id="{{this.id}}-arrow"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {{/each}}
+
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <script>
+                renderPartials()
+
+                const template = Handlebars.compile($ID("shop_item_template").innerHTML);
+                const allCoins = getCoins();
+                const buy_modal_template = $ID("buy_modal_template");
+                const buy_modal_hb = $ID("buy_modal_hb");
+                const more_template = $ID("more_template");
+                const more = $ID("more");
+
+
+                const renderShop = (coins) => {
+                    json = []
+                    let index = 0
+                    coins.map(function (obj) {
+                        json.push({
+                            ...obj,
+                            color: obj.curRate > 0 ? "color:green;" : "color:red;",
+                            buy: "buyFunc(" + obj.id + ")",
+                            more: "moreFunc(" + obj.id + ")",
+                        });
+                    })
+                    $ID("items").innerHTML = template({res: json});
+
+                    for (const coin of coins) {
+                        $ID(coin.id + "-arrow").innerHTML = coin.curRate >= 0 ? "&uarr;" : "&darr;";
+                    }
+                };
+
+                function addToCart(id) {
+                    var amount = parseInt(cart_count.value)
+                    if (!amount || amount <= 0) {
+                        amount = 1;
+                        cart_count.value = "1";
+                    }
+
+                    addOrder({"id": id, "amount": amount})
+                    bootstrap.Offcanvas.getInstance(more).hide();
+                }
+
+                const moreFunc = (id) => {
+                    var coin = allCoins[id];
+                    coin.colorDay = coin.curRate > 0 ? "color:green;" : "color:red;";
+                    coin.monthRate = round(coin.value[0].value / coin.value[30].value * 100 - 100, 4);
+                    coin.colorMonth = coin.monthRate > 0 ? "color:green;" : "color:red;";
+                    coin.yearRate = round(coin.value[0].value / coin.value[363].value * 100 - 100, 4);
+                    coin.colorYear = coin.yearRate > 0 ? "color:green;" : "color:red;";
+
+                    render(more_template, more, coin)
+                    cart_count.addEventListener("change", () => {
+                        if (parseFloat(cart_count.value) <= 0) {
+                            cart_count.value = "1";
+                        }
+                    });
+                    cart_count.addEventListener("keydown", (event) => {
+                        if (event.key === 'Enter') {
+                            addToCart(id);
+                        }
+                    });
+                    cart_buy_button.addEventListener("click", () => {
+                        addToCart(id);
+                    });
+                    $ID("offcanvas-24-arrow").innerHTML = coin.curRate >= 0 ? "&uarr;" : "&darr;";
+                    $ID("offcanvas-30-arrow").innerHTML = coin.monthRate >= 0 ? "&uarr;" : "&darr;";
+                    $ID("offcanvas-1-arrow").innerHTML = coin.yearRate >= 0 ? "&uarr;" : "&darr;";
+                    new Chart($ID("more_chart"), toChartData(id, 20));
+                }
+
+                const sortShop = (asc, val) => {
+                    const filter = search_bar.value;
+
+                    coins = [];
+                    for (const coin of allCoins)
+                        if (coin.name.toLowerCase().includes(filter.toLowerCase()))
+                            coins.push(coin);
+
+                    coins.sort((a, b) => (val(a) < val(b)) ^ asc ? -1 : 1);
+                    renderShop(coins);
+                };
+
+                search_button.addEventListener("click", () => sortShop(0, (c) => c.name));
+                search_bar.addEventListener("keydown", (event) => {
+                    if (event.key === 'Enter') {
+                        sortShop(0, (c) => c.name);
+                    }
+                });
+                sortShop(0, (c) => c.name);
             </script>
-      
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-
-<script>
-  renderPartials()
-
-  const template = Handlebars.compile($ID("shop_item_template").innerHTML);
-  const allCoins = getCoins();
-  const buy_modal_template = $ID("buy_modal_template");
-  const buy_modal_hb = $ID("buy_modal_hb");
-  const more_template = $ID("more_template");
-  const more = $ID("more");
-  
-
-  const renderShop = (coins) => {
-    json = []
-    let index = 0
-    coins.map(function(obj){
-      json.push({
-          ...obj, 
-          color: obj.curRate > 0 ? "color:green;" : "color:red;", 
-          buy: "buyFunc(" + obj.id + ")",
-          more: "moreFunc(" + obj.id + ")",
-        });
-    })
-    $ID("items").innerHTML = template({res: json});
-
-    for (const coin of coins){
-      $ID(coin.id + "-arrow").innerHTML = coin.curRate >= 0 ? "&uarr;" : "&darr;";
-    }
-  };
-
-  function addToCart(id) {
-    var amount = parseInt(cart_count.value)
-      if (!amount || amount <= 0){
-        amount = 1;
-        cart_count.value = "1";
-      }
-
-      addOrder({"id": id, "amount": amount})
-      bootstrap.Offcanvas.getInstance(more).hide();
-  }
-
-  const moreFunc = (id) => {
-    var coin = allCoins[id];
-    coin.colorDay = coin.curRate > 0 ? "color:green;" : "color:red;";
-    coin.monthRate = round(coin.value[0].value / coin.value[30].value * 100 - 100, 4);
-    coin.colorMonth = coin.monthRate > 0 ? "color:green;" : "color:red;";
-    coin.yearRate = round(coin.value[0].value / coin.value[363].value * 100 - 100, 4);
-    coin.colorYear = coin.yearRate > 0 ? "color:green;" : "color:red;";
-
-    render(more_template, more, coin)
-    cart_count.addEventListener("change", () => {
-      if(parseFloat(cart_count.value) <= 0){
-        cart_count.value = "1";
-      }
-    });
-    cart_count.addEventListener("keydown", (event) => {
-      if(event.key === 'Enter'){
-        addToCart(id);
-      }
-    });
-    cart_buy_button.addEventListener("click", () => {
-      addToCart(id);
-    });
-    $ID("offcanvas-24-arrow").innerHTML = coin.curRate >= 0 ? "&uarr;" : "&darr;";
-    $ID("offcanvas-30-arrow").innerHTML = coin.monthRate >= 0 ? "&uarr;" : "&darr;";
-    $ID("offcanvas-1-arrow").innerHTML = coin.yearRate >= 0 ? "&uarr;" : "&darr;";
-    new Chart($ID("more_chart"), toChartData(id, 20));
-  }
-
-  const sortShop = (asc, val) => {
-    const filter = search_bar.value;
-
-    coins = [];
-    for(const coin of allCoins)
-      if (coin.name.toLowerCase().includes(filter.toLowerCase()))
-        coins.push(coin);
-
-    coins.sort((a, b) => (val(a) < val(b)) ^ asc ? -1 : 1);
-    renderShop(coins);
-  };
-
-  search_button.addEventListener("click", () => sortShop(0,(c)=>c.name));
-  search_bar.addEventListener("keydown", (event) => {
-    if(event.key === 'Enter'){
-      sortShop(0,(c)=>c.name);
-    }
-  });
-  sortShop(0,(c)=>c.name);
-</script>
 
 </main>
 <script id="footer-template" type="text/x-handlebars-template">
-      	  {{#> footer}}
-  
-      	  {{/footer}}
-        </script>
-	<div id="footer"></div>
+    {{#> footer}}
 
-    <script src="dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    {{/footer}}
+        </script>
+<div id="footer"></div>
+
+<script src="dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
