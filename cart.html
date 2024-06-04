@@ -207,6 +207,8 @@
     }
 
     function buy_items() {
+        if ($ID("item_count").innerText === "0") return;
+
         updateDiscount(null, true)
         window.location.href = "checkout.html"
     }
