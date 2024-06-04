@@ -168,6 +168,7 @@ function addOrder(order) {
 
 function getOrders() {
   let orders = JSON.parse(localStorage.getItem("orders"))
+  if (!orders) return {ord: []};
   new_orders = []
   orders.forEach((order) => {
     const coin = getCoinByID(order.id)
