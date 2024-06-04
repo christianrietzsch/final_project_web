@@ -275,8 +275,6 @@ function render(template_obj, dest_obj, data){
 
 function getDiscountValue(discount) {
   const value = loadDiscounts().values[discount]
-  console.log(discount);
-  console.log(value);
   if (Number.isInteger(value)) {
     return value
   } else {
