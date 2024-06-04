@@ -13,11 +13,71 @@
     <link href="dist/css/custom.css" rel="stylesheet">
     <script src="dist/js/handlebars.min-v4.7.8.js"></script>
     <script src="dist/js/vanilla.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+        $(document).ready(function() {
+            console.log($('a[href="#openModal"]')[0]);
+            $('a[href="#openModal"]')[0].click();
+        })</script>
+
+    <style>
+        .modalDialog {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 99999;
+            opacity: 0;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            pointer-events: none;
+        }
+
+        .modalDialog:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modalDialog > div {
+            width: 400px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 10px;
+            background: #fff;
+        }
+        a.one{
+            display: block;
+            width: 150px;
+            position: relative;
+            margin: 10px auto;
+            text-align: center;
+            background-color: #0f72e5;
+            border-radius: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 0;
+        }
+    </style>
 </head>
 
 <body>
 
+<a href="#openModal"></a>
 
+<div id="openModal" class="modalDialog">
+    <div>
+
+        <h2 style="padding: 20px">Policies</h2>
+        <p>
+            I agree to Coincidence Inc.'s <a class="two" href= "terms.html"> Terms and Conditions</a>, <a class="two" href="privacy.html"> Privacy Policy </a> and <a class="two" href="cookies.html"> Cookie Policy </a>.
+        </p>
+
+        <a class="one" href="#">Agree</a>
+
+    </div>
+</div>
 <script id="navbar-template" type="text/x-handlebars-template">
     {{#> navbar Home='active'}}
 
@@ -102,7 +162,7 @@
                 </svg>
 
                 <h2 class="fw-normal">Crypto Quest</h2>
-                <p>Ready for an adventure? Join us on a quest to uncover hidden gems and unlock trading treasures.</p>
+                <p>Ready for an adventure? Join us on a quest to uncover hidden gems and unlock trading treasures. There might even be a surprise waiting for you.</p>
                 <p><a class="btn btn-secondary" href="#Adventure">Start the Quest &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
@@ -171,7 +231,7 @@
                 <p><a class="btn btn-secondary" href="shop.html">Shop Now &raquo;</a></p>
             </div>
             <div class="col-md-5 order-md-1">
-                <img src="images/coins.jpg" alt="Icon" width="100%"">
+                <img src="images/coins.jpg" alt="Icon" width="100%">
 
             </div>
         </div>
@@ -217,7 +277,7 @@
                 </h2>
                 <p class="lead">We are proud to say that this month we are celebrating 10 years of successful trading in
                     cryptocurrency. To show how grateful we are for the support of our customers and in hopes of many
-                    more years of great business, we present to you the <u>0.1% discount code</u>: <b>HAPPY10</b> </p>
+                    more years of great business, we present to you the <u>0.1% discount code</u>: <b>HAPPY10</b></p>
             </div>
             <div class="col-md-5">
                 <img src="images/celebrate2.jpg" alt="Icon" width="100%">
@@ -240,7 +300,12 @@
     reloadAPI(getCoins());
     renderPartials()
 </script>
+<script type="text/javascript">
 
+    document.querySelector(".one").addEventListener("click", function(){
+        document.querySelector(".popup").style.display = "none";
+    });
+</script>
 <script src="dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
