@@ -272,3 +272,14 @@ function render(template_obj, dest_obj, data){
   const template = Handlebars.compile(template_obj.innerHTML);
   dest_obj.innerHTML = template(data)
 }
+
+function getDiscountValue(discount) {
+  const value = loadDiscounts().values[discount]
+  console.log(discount);
+  console.log(value);
+  if (Number.isInteger(value)) {
+    return value
+  } else {
+    return (Number.parseFloat(value.slice(0, value.length - 1)) / 100) * Number.parseFloat($ID("total").innerText.substring(2))
+  }
+}

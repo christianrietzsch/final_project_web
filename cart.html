@@ -186,16 +186,6 @@
 
     }
 
-    function getDiscountValue(discount) {
-        const value = discounts.values[discount]
-        if (Number.isInteger(value)) {
-            return value
-        } else {
-            return (Number.parseFloat(value.slice(0, value.length - 1)) / 100) * Number.parseFloat($ID("total").innerText.substring(2))
-        }
-
-    }
-
     function updateDiscount(discount, used) {
         if (used) {
             discounts.available.splice(discounts.available.indexOf(discounts.current))
@@ -209,7 +199,6 @@
     function buy_items() {
         if ($ID("item_count").innerText === "0") return;
 
-        updateDiscount(null, true)
         window.location.href = "checkout.html"
     }
 
@@ -218,12 +207,13 @@
         //else set to red
         const discount = $ID("discount_field").value
         if (checkDiscount(discount)) {
+            $ID("discount_code").innerText = discount;
             $ID("discount").innerText = "-$" + round(getDiscountValue(discount), 2)
             updateTotalPrice()
             updateDiscount(discount, false)
             return true
         } else {
-
+            $ID("discount_code").innerText = "";
             $ID("discount").innerText = "-$ " + 0
             updateTotalPrice()
             return false

@@ -203,11 +203,13 @@
         render(cart_item_template, cart_hb, {ord: order})
         const end_price = JSON.parse(localStorage.getItem("order_total"));
         total.innerText = "$ " + end_price
+        const discount = JSON.parse(localStorage.getItem("discounts")).current;
+        $ID("discount_code").innerText = discount;
+        $ID("discount").innerText = "-$" + round(getDiscountValue(discount), 2)
 
         var address = JSON.parse(localStorage.getItem("address"));
         if (!address)
             address = {};
-
         render(address_template, $ID("form_input"), address)
 
         Array.prototype.forEach.call($ALL('input[type=radio][name="paymentMethod"]'), (r) => {
@@ -227,7 +229,7 @@
                 }
             });
         })
-
+        
         function buyNow() {
             const address = {
                 firstName: $ID("firstName").value,
@@ -263,6 +265,7 @@
         $ID("form_input").addEventListener("submit", function (event) {
             event.preventDefault();
             if (this.checkValidity() === true) {
+                updateDiscount(null, true)
                 buyNow();
             }
             this.classList.add("was-validated"); // Add 'was-validated' class to enable Bootstrap's styling
