@@ -205,7 +205,7 @@
         total.innerText = "$ " + end_price
         const discount = JSON.parse(localStorage.getItem("discounts")).current;
         $ID("discount_code").innerText = discount;
-        $ID("discount").innerText = "-$" + round(getDiscountValue(discount), 2)
+        $ID("discount").innerText = "-$ " + round(getDiscountValue(discount), 2)
 
         var address = JSON.parse(localStorage.getItem("address"));
         if (!address)

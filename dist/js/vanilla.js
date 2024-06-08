@@ -19,11 +19,13 @@ function renderPartials() {
 }
 
 function loadDiscounts() {
-    const discounts = localStorage.getItem("discounts");
+    var discounts = localStorage.getItem("discounts");
     if(discounts) {
-	return JSON.parse(discounts)
+	    return JSON.parse(discounts)
     } else {
-  	return {current: null, available: ["Michi10", "HAPPY10"], values: {"Michi10": 10, "HAPPY10": "0.1%"}}
+      discounts = {current: null, available: ["Michi10", "HAPPY10"], values: {"Michi10": 10, "HAPPY10": "0.1%"}}
+      localStorage.setItem("discounts", JSON.stringify(discounts))
+  	  return discounts
     }
 
 }
@@ -274,6 +276,8 @@ function render(template_obj, dest_obj, data){
 }
 
 function getDiscountValue(discount) {
+  if (discount == null)
+    return 0
   const value = loadDiscounts().values[discount]
   if (Number.isInteger(value)) {
     return value
