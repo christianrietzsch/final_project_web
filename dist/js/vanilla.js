@@ -285,3 +285,13 @@ function getDiscountValue(discount) {
     return (Number.parseFloat(value.slice(0, value.length - 1)) / 100) * Number.parseFloat($ID("total").innerText.substring(2))
   }
 }
+
+function updateDiscount(discount, used) {
+  const discounts = loadDiscounts()
+  if (used) {
+      discounts.available.splice(discounts.available.indexOf(discounts.current))
+  }
+  discounts.current = discount
+  discounts.available.splice(discounts.available.indexOf(discount))
+  writeDiscounts(discounts)
+}

@@ -186,16 +186,6 @@
 
     }
 
-    function updateDiscount(discount, used) {
-        if (used) {
-            discounts.available.splice(discounts.available.indexOf(discounts.current))
-        }
-        discounts.current = discount
-        discounts.available.splice(discounts.available.indexOf(discount))
-        writeDiscounts(discounts)
-
-    }
-
     function buy_items() {
         if ($ID("item_count").innerText === "0") return;
 
