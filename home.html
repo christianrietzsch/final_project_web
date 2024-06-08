@@ -305,8 +305,12 @@
 
 
 <script>
-    //reload API Data
-    reloadAPI(getCoins());
+    //reload API
+    const coins = getCoins(); 
+    if (coins.length == 0)
+        jsonData().then((coins) => resetCoins(coins));
+    else
+        reloadAPI(getCoins());
     renderPartials()
 </script>
 <script type="text/javascript">
