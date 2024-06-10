@@ -18,22 +18,6 @@ function renderPartials() {
 	renderPartial("footer")
 }
 
-function loadDiscounts() {
-    var discounts = localStorage.getItem("discounts");
-    if(discounts) {
-	    return JSON.parse(discounts)
-    } else {
-      discounts = {current: null, available: ["Michi10", "HAPPY10"], values: {"Michi10": 10, "HAPPY10": "0.1%"}}
-      localStorage.setItem("discounts", JSON.stringify(discounts))
-  	  return discounts
-    }
-
-}
-
-function writeDiscounts(discounts) {
-    localStorage.setItem("discounts", JSON.stringify(discounts))
-}
-
 async function loadPartial(name) {
   const code = await fetch("partials/"+name+".html").then(response => response.text())
   Handlebars.registerPartial(name, code)

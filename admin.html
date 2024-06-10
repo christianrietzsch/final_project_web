@@ -13,6 +13,7 @@
     <link href="dist/css/custom.css" rel="stylesheet">
     <script src="dist/js/handlebars.min-v4.7.8.js"></script>
     <script src="dist/js/vanilla.js"></script>
+    <script src="dist/js/jsonData.js"></script>
 
 </head>
 
@@ -120,31 +121,6 @@
     renderPartials()
 
     var currentCoin = 0;
-
-    const load_json = () => {
-        jsonData().then((coins) => resetCoins(coins)).then(() => window.location.reload());
-    };
-
-    const add_new = () => {
-        location.href = "edit.html?selected=-1";
-    }
-    const update = (id) => {
-        return () => {
-            location.href = "edit.html?selected=" + id;
-        };
-    }
-    const del = (id) => {
-        return () => {
-            currentCoin = id;
-            modal_text.innerHTML = "Are you sure, you want to delete " + getCoinByID(id).name + "?";
-        };
-    }
-
-    function remove() {
-        var coins = getCoins();
-        coins.splice(currentCoin, 1);
-        resetCoins(coins).then(() => window.location.reload());
-    }
 
     const coins = getCoins();
     jcoins = []
