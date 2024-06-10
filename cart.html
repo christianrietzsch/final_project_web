@@ -193,8 +193,6 @@
     }
 
     function addDiscount() {
-        //validate field if discount can be used
-        //else set to red
         const discount = $ID("discount_field").value
         if (checkDiscount(discount)) {
             $ID("discount_code").innerText = discount;
@@ -203,6 +201,7 @@
             updateDiscount(discount, false)
             return true
         } else {
+            $ID("discount_field").value = "";
             $ID("discount_code").innerText = "";
             $ID("discount").innerText = "-$ " + 0
             updateTotalPrice()
