@@ -1,4 +1,5 @@
-    function addCartListeners(id) {
+//add listeners to the cart buttons    
+function addCartListeners(id) {
         $ID(id + "_rm_button").addEventListener("click", () => {
             currentCoin = id;
             modal_text.innerHTML = "Are you sure, you want to remove " + getCoinByID(id).name + " from the cart?";
@@ -14,6 +15,7 @@
         });
     }
 
+//initialises cart items and renders them
     function init_cart_items(orders) {
         render($ID("cart_item_template"), $ID("cart"), orders)
         let id_list = []
@@ -22,6 +24,7 @@
         $ID("item_count").innerText = id_list.length
     }
 
+// removes the current coin and updates the cart
 function remove() {
         $ID(currentCoin + "").remove()
         let count = $ID("item_count")
@@ -35,12 +38,14 @@ function remove() {
         updateOrder(currentCoin, -1)
     }
 
+// refers user to the checkout page
     function buy_items() {
         if ($ID("item_count").innerText === "0") return;
 
         window.location.href = "checkout.html"
     }
 
+// updates the price if new orders are added to the cart
 function changeCount(input_box, id) {
         return function () {
             amount = parseFloat(input_box.value)
@@ -56,6 +61,7 @@ function changeCount(input_box, id) {
         }
     }
 
+//updates the total price depending on the orders and the discount
     function updateTotalPrice() {
         const elements = document.getElementsByClassName("item_total")
         let total = 0

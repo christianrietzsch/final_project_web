@@ -1,3 +1,4 @@
+// renders the shop items with the given coins
                   function renderShop(coins) {
                     json = []
                     let index = 0
@@ -16,6 +17,7 @@
                     }
                 };
 
+// adds an item to the cart by placing an order
                 function addToCart(id) {
                     var amount = parseInt(cart_count.value)
                     if (!amount || amount <= 0) {
@@ -27,6 +29,7 @@
                     bootstrap.Offcanvas.getInstance(more).hide();
                 }
 
+// renders more data about a given coin
                   function moreFunc(id) {
                     var coin = allCoins[id];
                     coin.colorDay = coin.curRate > 0 ? "color:green;" : "color:red;";
@@ -55,6 +58,7 @@
                     new Chart($ID("more_chart"), toChartData(id, 20));
                 }
 
+//sorts the items after a given filter
                   function sortShop(as, val) {
                     const filter = search_bar.value;
 

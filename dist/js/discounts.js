@@ -1,8 +1,10 @@
-    function checkDiscount(discount) {
+//checks if a given discount is available    
+function checkDiscount(discount) {
         return discounts.available.includes(discount) || discounts.current === discount
 
     }
 
+// validates the discount written in the input field and adds the discount value to the price
     function addDiscount() {
         const discount = $ID("discount_field").value
         if (checkDiscount(discount) && ($ID("item_count").innerText != "0")) {
@@ -20,6 +22,7 @@
         }
     }
 
+// loads all discounts and their value from the local storage
 function loadDiscounts() {
     var discounts = localStorage.getItem("discounts");
     if(discounts) {
@@ -32,6 +35,7 @@ function loadDiscounts() {
 
 }
 
+// wirtes the discounts to the local storage
 function writeDiscounts(discounts) {
     localStorage.setItem("discounts", JSON.stringify(discounts))
 }

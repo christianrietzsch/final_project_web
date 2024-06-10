@@ -6,28 +6,32 @@ function $ALL (param) {
   return document.querySelectorAll(param);
 }
 
+// fetches json data
 async function jsonData(){
-  const response = await fetch("daten.json", {cache: "no-store"}); 
-  // cache disabled for debugging purposes 
+  const response = await fetch("daten.json"); 
   const data = await response.json();
   return data;
 }
 
+//renders navigation bar and the footer
 function renderPartials() {
 	renderPartial("navbar")
 	renderPartial("footer")
 }
 
+//loads a partial by a given name
 async function loadPartial(name) {
   const code = await fetch("partials/"+name+".html").then(response => response.text())
   Handlebars.registerPartial(name, code)
 }
 
+//renders a partial by a given name
 async function renderPartial(name) {
   await loadPartial(name)
   render($ID(name+"-template"),$ID(name),{})
 }
 
+// get all coins from the local storage
 function getCoins() {
   const coins = localStorage.getItem("coins");
   if (!coins)
@@ -35,6 +39,8 @@ function getCoins() {
   else
     return JSON.parse(coins);
 }
+
+//resets coins
 async function resetCoins(coins){
   return Promise.all([...Array(coins.length).keys()].map(async (i) => {
     coins[i].id = parseInt(i);
@@ -63,6 +69,7 @@ async function resetCoins(coins){
   );
 }
 
+//reloads api for updating the coin data 
 async function reloadAPI(coins){
   return Promise.all([...Array(coins.length).keys()].map(async (i) => {
     coins[i].id = parseInt(i);
@@ -94,6 +101,7 @@ function round(val, amount){
   return Math.round(val * Math.pow(10, amount)) / Math.pow(10, amount);
 }
 
+//removes an order by given id from the local storage 
 function removeFromOrdersByID(id) {
   const orders = JSON.parse(localStorage.getItem("orders"))
   let new_orders = []
@@ -105,6 +113,7 @@ function removeFromOrdersByID(id) {
   localStorage.setItem("orders", JSON.stringify(new_orders))
 }
 
+//changes the amount of an order by given id
 function changeOrderAmount(id, amount) {
   const orders = JSON.parse(localStorage.getItem("orders"))
   let new_orders = []
@@ -135,6 +144,7 @@ function contains_order(orders, id) {
   return -1;
 }
 
+//adds an order to the local storage
 function addOrder(order) {
   const orders = JSON.parse(localStorage.getItem("orders"))
   if(orders) {
@@ -152,6 +162,7 @@ function addOrder(order) {
   localStorage.setItem("orders", JSON.stringify(new_orders))
 }
 
+// loads orders from the local storage
 function getOrders() {
   let orders = JSON.parse(localStorage.getItem("orders"))
   if (!orders) return {ord: []};
@@ -165,6 +176,7 @@ function getOrders() {
   return {ord: new_orders}
 }
 
+//adds an order to the order history per local storage
 function addToOrderHistory(newOrder){
   let orderHist = JSON.parse(localStorage.getItem("orderHist"));
   if (!orderHist)
@@ -172,10 +184,10 @@ function addToOrderHistory(newOrder){
   else
     orderHist.push(newOrder);
 
-  console.log(orderHist);
   localStorage.setItem("orderHist", JSON.stringify(orderHist));
 }
 
+//returns time stamp of current date
 function getTimestamp(){
   const d = new Date();
   return {
@@ -188,6 +200,7 @@ function getTimestamp(){
   }
 }
 
+//returns a coin by given id
 function getCoinByID(id) {
   const coins = getCoins();
   if (id >= coins.length) return {};
@@ -195,6 +208,7 @@ function getCoinByID(id) {
   else return coins[id];
 }
 
+//returns fetched api data of a given coin id
 async function getAPIData(cid){
   return fetch(url = "https://api.coincap.io/v2/assets/" + cid + "/history?interval=d1").then(response => {
     if (!response.ok) {
@@ -204,6 +218,7 @@ async function getAPIData(cid){
   })
 }
 
+//returns advanced fetched api data of a given coin id
 async function getAPIAdvancedData(cid){
   return fetch(url = "https://api.coincap.io/v2/assets/" + cid).then(response => {
     if (!response.ok) {
@@ -213,10 +228,12 @@ async function getAPIAdvancedData(cid){
   })
 }
 
+//returns the parsed string value of a given date
 function toDate(date) {
   return date.slice(8, 10) + "." + date.slice(5, 7) + "." + date.slice(0, 4);
 }
 
+//maps the data of a coin with given id to a chart
 function toChartData(id, amount){
   const coin = getCoinByID(id);
   labels = [];
@@ -254,11 +271,13 @@ function toChartData(id, amount){
   }
 }
 
+//renders handlebars template objects
 function render(template_obj, dest_obj, data){
   const template = Handlebars.compile(template_obj.innerHTML);
   dest_obj.innerHTML = template(data)
 }
 
+//returns the discount value of a given discount
 function getDiscountValue(discount) {
   if (discount == null)
     return 0
@@ -270,6 +289,7 @@ function getDiscountValue(discount) {
   }
 }
 
+//updates current discount and removes current one if used
 function updateDiscount(discount, used) {
   const discounts = loadDiscounts()
   if (used) {
