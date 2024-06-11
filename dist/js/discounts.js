@@ -22,19 +22,6 @@ function addDiscount() {
     }
 }
 
-// loads all discounts and their value from the local storage
-function loadDiscounts() {
-var discounts = localStorage.getItem("discounts");
-if(discounts) {
-    return JSON.parse(discounts)
-} else {
-  discounts = {current: null, available: ["Michi10", "HAPPY10"], values: {"Michi10": 10, "HAPPY10": "0.1%"}}
-  localStorage.setItem("discounts", JSON.stringify(discounts))
-    return discounts
-}
-
-}
-
 // wirtes the discounts to the local storage
 function writeDiscounts(discounts) {
 localStorage.setItem("discounts", JSON.stringify(discounts))
