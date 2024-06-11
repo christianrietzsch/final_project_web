@@ -26,32 +26,35 @@
 <div id="navbar"></div>
 
 <main>
-    <div class="bg" style="background-image: url('images/background4.jpg'); background-size: repeat; background-position: top;">
+    <div class="bg"
+         style="background-image: url('images/background4.jpg'); background-size: repeat; background-position: top;">
         <div class="container padded">
             <div class="row pt-5">
                 <div class="col d-none d-md-block"></div>
                 <div class="col-lg-6">
                     <ul class="list-group pb-5">
-                        <li class="list-group-item">  
+                        <li class="list-group-item">
                             <h4 class="d-flex justify-content-between align-items-center my-3">
                                 <span class="text-primary">Your cart</span>
                                 <span class="badge bg-primary rounded-pill" id="item_count">0</span>
                             </h4>
-    
+
                             <ul class="list-group mb-3" id="cart"></ul>
-    
+
                             <div class="card p-2">
                                 <form id="form_input" class="needs-validaton" novalidate>
                                     <div class="input-group">
-                                        <input type="text" id="discount_field" class="form-control" placeholder="Promo code"
-                                            required>
-                                        <button type="submit" id="sub_discount" class="btn btn-secondary">Redeem</button>
+                                        <input type="text" id="discount_field" class="form-control"
+                                               placeholder="Promo code"
+                                               required>
+                                        <button type="submit" id="sub_discount" class="btn btn-secondary">Redeem
+                                        </button>
                                         <!--<button type="submit" id="sub_discount" onclick="addDiscount()"class="btn btn-secondary">Redeem</button>-->
-    
+
                                     </div>
                                 </form>
                             </div>
-    
+
                             <div class="py-3">
                                 <div class="card input-group p-2">
                                     <a type="button" onclick="buy_items()" class="btn btn-primary">Buy</a>
@@ -71,7 +74,8 @@
         <li class="list-group-item d-flex justify-content-between lh-sm" id="{{this.id}}">
             <div class="row no-gutters">
                 <div class="col-md-4">
-                    <img src="{{image}}" onclick="(window.location.href='details.html?selected={{id}}')" class="card-img" alt="...">
+                    <img src="{{image}}" onclick="(window.location.href='details.html?selected={{id}}')"
+                    class="card-img" alt="...">
                 </div>
                 <div class="col-md-8 my-2" style="margin-top: auto; margin-bottom: auto;">
                     <div class="card-body row">
@@ -89,7 +93,8 @@
                                 <button type="button" class="btn btn-sm btn-outline-danger" id="{{this.id}}_-_button">
                                     -
                                 </button>
-                                <input type="text" pattern="[0,9]*" inputmode="numeric" class="form-control" aria-label="Amount" value="{{this.amount}}"
+                                <input type="text" pattern="[0,9]*" inputmode="numeric" class="form-control"
+                                       aria-label="Amount" value="{{this.amount}}"
                                        id="{{this.id}}_count_input">
                                 <button type="button" class="btn btn-sm btn-outline-success" id="{{this.id}}_+_button">
                                     +

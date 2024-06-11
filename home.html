@@ -16,10 +16,10 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
         $(document).ready(function () {
-        let popup = sessionStorage.getItem("c")
+            let popup = sessionStorage.getItem("c")
             $('a[href="#openModal"]')[0];
             $('a[href="#openModal"]')[0].click();
-            if(popup) {
+            if (popup) {
                 document.querySelector(".one").click()
             }
         })</script>
@@ -306,7 +306,7 @@
 
 <script>
     //reload API
-    const coins = getCoins(); 
+    const coins = getCoins();
     if (coins.length == 0)
         jsonData().then((coins) => resetCoins(coins));
     else
@@ -314,7 +314,7 @@
     renderPartials()
 </script>
 <script type="text/javascript">
-    
+
     document.querySelector(".one").addEventListener("click", function () {
         sessionStorage.setItem("c", "true")
     });
