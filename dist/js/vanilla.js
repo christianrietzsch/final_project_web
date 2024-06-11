@@ -312,3 +312,8 @@ function loadDiscounts() {
   }
   
 }
+
+// wirtes the discounts to the local storage
+function writeDiscounts(discounts) {
+  localStorage.setItem("discounts", JSON.stringify(discounts))
+}
