@@ -59,7 +59,7 @@
                 }
 
 //sorts the items after a given filter
-                  function sortShop(as, val) {
+                  function sortShop(asc, val) {
                     const filter = search_bar.value;
 
                     coins = [];

@@ -135,6 +135,7 @@ function updateOrder(id, amount) {
   }
 }
 
+//returns the index if the order is in the given array
 function contains_order(orders, id) {
   for(let i = 0; i< orders.length; i++) {
     if(orders[i].id === id) {
